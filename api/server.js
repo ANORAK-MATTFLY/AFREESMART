@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 9100;
 
-
+// server setups
 const auth = jwt({
 	secret: process.env.JWT_SECRET,
 	algorithms: ['HS256'],
