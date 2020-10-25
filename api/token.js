@@ -1,0 +1,2 @@
+let JwtToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzgsImVtYWlsIjoiYmVuQGdtYWlsLmNvbSIsImlhdCI6MTYwMzYyNTIwNCwiZXhwIjoxNjM1MTgyODA0fQ.pHRo4rwQcUs60YOzjE-dxCizXOfTC7T3uejM6Hu-Grw";
+module.exports=JwtToken;
