@@ -4,7 +4,7 @@ import Link from 'next/link'
 const LoginBoutton = () => {
     return (
         <div>
-            <Link href='/test_queries'>
+            <Link href='/submit_project'>
                 <a>
                     <div className={stl.loginButton}> Connexion</div>
                 </a>

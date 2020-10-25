@@ -11,7 +11,7 @@ $black: rgb(53, 53, 53);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100rem;
+    height: 110rem;
     width: 100%;
     background: linear-gradient(to right, #000046, #1cb5e0);
 }
@@ -20,7 +20,7 @@ $black: rgb(53, 53, 53);
 .form {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-direction: column;
     padding: 5%;
     padding-top: 6%;
@@ -30,7 +30,14 @@ $black: rgb(53, 53, 53);
     max-width: 100%;
     background: white;
     border-radius: 5px;
-
+    section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // justify-content: center;
+        // padding: 3%;
+        // border: 1px blue solid;
+    }
     h2 {
         font-family: $font;
         color: $black;
@@ -45,8 +52,18 @@ $black: rgb(53, 53, 53);
         display: inline-block;
         margin-bottom: 0.8rem;
         margin-top: 0.3rem;
+        padding-left: 1rem;
+        font-size: 1.0rem;
+        font-family: $font;
     }
-
+    .bigField{
+        outline: none;
+        display: inline-block;
+        border: 0.8px rgb(90, 169, 189) solid;
+        padding: 18px;
+        border-radius: 5px;
+        margin-bottom: 1.1rem;
+    }
     .input {
         outline: none;
         display: inline-block;
@@ -67,7 +84,25 @@ $black: rgb(53, 53, 53);
     .select{
         width: 200px;
         height: 30px;
-        border-radius: 20px rgb(90, 169, 189) solid;
+        margin-top: 0.9rem;
+        margin-left: 3.3rem;
+        margin-bottom: 2rem;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: 0;
+        background-color: transparent;
+        font: inherit;
+        border-radius: 0;
+        border: 0.8px rgb(90, 169, 189) solid;
+        border-radius: 4px;
+        padding-left: 2rem;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMwMDAiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTAgMGw1IDUgNS01eiIvPjxwYXRoIGQ9Ik0tNy0xMGgyNHYyNEgtN3oiLz48L2c+PC9zdmc+');
+        background-repeat: no-repeat;
+        background-position: top 50% right .75rem, 0 0;
+    }
+    select::-ms-expand {
+        display: none;
     }
 
     .btn {

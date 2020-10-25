@@ -51,11 +51,9 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-app.on('listen', () => {
-	console.log(`The server is running on port `);
-})
-
 db.sequelize.sync().then(() => {
-	app.listen(PORT);
+	app.listen(PORT, () => {
+		console.log(`server running on port http://localhost:${PORT}/graphql`);
+	});
 });
 
