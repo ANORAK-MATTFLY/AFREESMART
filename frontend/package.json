@@ -1,0 +1,38 @@
+{
+  "name": "front-end",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.2.5",
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-regular-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
+    "apollo-server-express": "^2.18.2",
+    "apollo-server-micro": "^2.18.2",
+    "dotenv": "^8.2.0",
+    "framer-motion": "^2.6.16-alpha.4",
+    "graphql": "^15.3.0",
+    "include-media": "^1.4.9",
+    "install": "^0.13.0",
+    "next": "9.5.3",
+    "node-localstorage": "^2.1.6",
+    "node-sass": "^4.14.1",
+    "nodemon": "^2.0.6",
+    "postcss-preset-env": "^6.7.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-hook-form": "^6.8.6",
+    "react-lottie": "^1.2.3",
+    "react-scroll": "^1.8.1",
+    "tailwindcss": "^1.9.5",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "devDependencies": {}
+}
