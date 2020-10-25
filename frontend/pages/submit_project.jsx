@@ -71,7 +71,7 @@ export default function Registration() {
                     <div>
                         <div>
                             <label className={stl.label} htmlFor="employeesNumber">
-                                La société est formellement enregistré au guichet unique
+                                Est-vous enregistré au guichet unique ?
           </label>
                         </div>
                         <select className={stl.select}>
@@ -83,7 +83,7 @@ export default function Registration() {
                     <div>
                         <div>
                             <label className={stl.label} htmlFor="passwordConfirm">
-                                La société est formellement enregistré au guichet unique
+                                votre equipes est-elle basé dans un ou plusieurs pays africain ?
           </label>
                         </div>
                         <select className={stl.select}>
@@ -95,7 +95,7 @@ export default function Registration() {
                     <div>
                         <div>
                             <label className={stl.label} htmlFor="passwordConfirm">
-                                La société est formellement enregistré au guichet unique
+                                Avez-vous des membres dans votre equipe aillant une nationalité africaine ?
           </label>
                         </div>
                         <select className={stl.select}>
