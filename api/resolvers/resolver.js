@@ -1,6 +1,7 @@
 const { User, Project } = require('../models');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
+const Joi = require('@hapi/joi');
 const fs = require('fs');
 require('dotenv').config();
 var mkdirp = require('mkdirp');
@@ -9,7 +10,6 @@ const getDirName = require('path').dirname;
 function writeFile(path, contents, cb) {
 	mkdirp(getDirName(path), function (err) {
 		if (err) return err;
-
 		fs.writeFile(path, contents, (err, data) => {
 			console.log(data)
 		});
@@ -31,10 +31,10 @@ const resolvers = {
 	},
 
 	Mutation: {
-		async register(_, { name, last_name, email, password },) {
+		async register(_, { name, lastName, email, password },) {
 			const user = await User.create({
 				name,
-				last_name,
+				lastName,
 				email,
 				password: await bcrypt.hash(password, 10),
 			});
