@@ -2,6 +2,7 @@ import { useState } from "react";
 import stl from "../styles/form.module.scss";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
+import Link from 'next/link';
 import GobackBtn from "../components/buttons/go_back_btn";
 
 
@@ -28,7 +29,7 @@ export default function Registration() {
       >
         <div>
           <GobackBtn />
-          <h2>Veuillez prendre soins de remplire ce fomulair</h2>
+          <h2>Veuillez vous enregistrer</h2>
           <label className={stl.label} htmlFor="name">
             Votre nom
           </label>
@@ -42,6 +43,21 @@ export default function Registration() {
           />
           {errors.name && errors.name.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
           {errors.name && errors.name.type == "pattern" && <p>Veulliez verifier format de votre nom</p>}
+        </div>
+        <div>
+          <label className={stl.label} htmlFor="last_name">
+            Prenom
+          </label>
+          <input
+            className={stl.input}
+            type="text"
+            name="last_name"
+            placeholder="Prenom"
+            id="last_name"
+            ref={register({ required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
+          />
+          {errors.last_name && errors.last_name.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
+          {errors.last_name && errors.last_name.type == "pattern" && <p>Le format de l'adresse enter est invalide</p>}
         </div>
         <div>
           <label className={stl.label} htmlFor="email">
@@ -91,55 +107,9 @@ export default function Registration() {
           {errors.passwordConfirm && errors.passwordConfirm.type === "pattern" && <p>Votre mot de passe doit avoir au moins 8 charactaires une lettre et un nombre</p>}
           {errors.passwordConfirm && errors.passwordConfirm.type === "validate" && <p>Le mot de passe ne corespond pas</p>}
         </div>
-        <button type="submit" disabled={submitting} className={stl.btn}>submit</button>
-        {/* <div>
-          <div>
-            <label className={stl.label} htmlFor="passwordConfirm">
-              Question 1
-          </label>
-          </div>
-          <select className={stl.select}>
-            <option>Oui</option>
-            <option>non</option>
-            <option>Peut-etre</option>
-          </select>
-        </div> */}
-        {/* <div>
-          <div>
-            <label className={stl.label} htmlFor="passwordConfirm">
-              Question 2
-          </label>
-          </div>
-          <select className={stl.select}>
-            <option>Oui</option>
-            <option>non</option>
-            <option>Peut-etre</option>
-          </select>
-        </div> */}
-        {/* <div>
-          <div>
-            <label className={stl.label} htmlFor="passwordConfirm">
-              Question 3
-          </label>
-          </div>
-          <select className={stl.select}>
-            <option>Oui</option>
-            <option>non</option>
-            <option>Peut-etre</option>
-          </select>
-        </div> */}
-        {/* <div>
-          <div>
-            <label className={stl.label} htmlFor="passwordConfirm">
-              Question 4
-          </label>
-          </div>
-          <select className={stl.select}>
-            <option>Oui</option>
-            <option>non</option>
-            <option>Peut-etre</option>
-          </select>
-        </div> */}
+        <Link href="/submit_project">
+          <button type="submit" disabled={submitting} className={stl.btn}>submit</button>
+        </Link>
       </motion.form>
     </div>
   );

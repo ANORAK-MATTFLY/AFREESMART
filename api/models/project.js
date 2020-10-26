@@ -24,7 +24,17 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Project.init(
 		{
+			companyName: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				unique: true,
+			},
 			projectsName: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				unique: true,
+			},
+			webSiteLink: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},

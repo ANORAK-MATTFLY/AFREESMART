@@ -1,5 +1,5 @@
 import { useState } from "react";
-import stl from "../styles/form.module.scss";
+import stl from "../styles/prjsub.module.scss";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import GobackBtn from "../components/buttons/go_back_btn";
@@ -39,7 +39,7 @@ export default function Registration() {
                         name="company"
                         placeholder="Entreprise"
                         id="company"
-                        ref={register({ required: true, pattern: /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/ })}
+                        ref={register({ required: true })}
                     />
                     {errors.company && errors.company.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
                     {errors.company && errors.company.type == "pattern" && <p>Veulliez verifier format de votre nom</p>}
@@ -53,71 +53,117 @@ export default function Registration() {
                         type="text"
                         name="project"
                         placeholder="Nom du projet"
-                        id="projet"
-                        ref={register({ required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
+                        id="project"
+                        ref={register({ required: true })}
                     />
                     {errors.project && errors.project.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
                     {errors.project && errors.project.type == "pattern" && <p>Le format de l'adresse enter est invalide</p>}
                 </div>
                 <div>
-                    <label className={stl.label} htmlFor="password">
-                        Decrivez votre projet en quelques mots
+                    <label className={stl.label} htmlFor="website">
+                        Le lien de votre site web
           </label>
-                    <textarea className={stl.bigField} rows="10" cols="40"></textarea>
-                    {errors.password && errors.password.type === "required" && <p>Ce champ ne peut pas etre vide</p>}
-                    {errors.password && errors.password.type === "pattern" && <p>Votre mot de passe doit avoir au moins 8 charactaires une lettre et un nombre</p>}
+                    <input
+                        className={stl.input}
+                        type="text"
+                        name="website"
+                        placeholder="Votre site web"
+                        id="website"
+                        ref={register({ required: true })}
+                    />
+                    {errors.website && errors.website.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
+                    {errors.website && errors.website.type == "pattern" && <p>Le format de l'adresse enter est invalide</p>}
+                </div>
+                <div>
+                    <label className={stl.label} htmlFor="password">
+                        Décrivez votre projet en quelques mots
+          </label>
+                    <textarea className={stl.bigField} name="description" rows="10" cols="40" ref={register({ required: true })}>
+
+                    </textarea>
+                    {errors.description && errors.description.type === "required" && <p>Ce champ ne peut pas etre vide</p>}
+                    {errors.description && errors.description.type === "pattern" && <p>Votre mot de passe doit avoir au moins 8 charactaires une lettre et un nombre</p>}
+
                 </div>
                 <section>
                     <div>
                         <div>
                             <label className={stl.label} htmlFor="employeesNumber">
-                                Est-vous enregistré au guichet unique ?
+                                Êtes-vous enregistré au guichet unique ?
           </label>
                         </div>
-                        <select className={stl.select}>
-                            <option>1-15</option>
-                            <option>15-30</option>
-                            <option>30-50</option>
+                        <select name="employeesNumber" ref={register({ required: true })} name="select" className={stl.select}>
+                            <option value="none" selected disabled hidden>
+                                Faites un choix
+                            </option>
+                            <option>Oui</option>
+                            <option>Nom</option>
+                            <option>Pas encore</option>
                         </select>
+                        {errors.select && errors.select.type === "required" && <p>Ce champ ne peut pas etre vide</p>}
+                        {errors.select && errors.select.type === "pattern" && <p>Votre mot de passe doit avoir au moins 8 charactaires une lettre et un nombre</p>}
                     </div>
                     <div>
                         <div>
-                            <label className={stl.label} htmlFor="passwordConfirm">
-                                votre equipes est-elle basé dans un ou plusieurs pays africain ?
+                            <label className={stl.label} htmlFor="how_many_africans">
+                                Votre entreprise est-elle basée dans un ou plusieurs pays africains ?
           </label>
                         </div>
-                        <select className={stl.select}>
+                        <select name="select_how_many_africans" ref={register({ required: true })} className={stl.select}>
+                            <option value="none" selected disabled hidden>
+                                Faites un choix
+                            </option>
                             <option>Oui</option>
                             <option>non</option>
-                            <option>Pas-encore</option>
+                            <option>Pas encore</option>
                         </select>
                     </div>
                     <div>
                         <div>
-                            <label className={stl.label} htmlFor="passwordConfirm">
-                                Avez-vous des membres dans votre equipe aillant une nationalité africaine ?
+                            <label className={stl.label} htmlFor="nationality">
+                                Avez-vous des membres dans votre équipe aillant une nationalité africaine ?
           </label>
                         </div>
-                        <select className={stl.select}>
+                        <select name="select_nationality" ref={register({ required: true })} className={stl.select}>
+                            <option value="none" selected disabled hidden>
+                                Faites un choix
+                            </option>
                             <option>Oui</option>
                             <option>non</option>
-                            <option>Peut-etre</option>
+                            <option>Pas encore</option>
                         </select>
                     </div>
                     <div>
                         <div>
-                            <label className={stl.label} htmlFor="passwordConfirm">
-                                La société est formellement enregistré au guichet unique
+                            <label className={stl.label} htmlFor="profit">
+                                Le but de l’entreprise est-il de faire du profit ?
           </label>
                         </div>
-                        <select className={stl.select}>
+                        <select name="select_profit" ref={register({ required: true })} className={stl.select}>
+                            <option value="none" selected disabled hidden>
+                                Faites un choix
+                            </option>
+                            <option>Oui</option>
+                            <option>non</option>
+                            <option>Pas encore</option>
+                        </select>
+                    </div>
+                    <div>
+                        <div>
+                            <label className={stl.label} htmlFor="simplified">
+                                Êtes-vous une société par actions simplifiée ?
+          </label>
+                        </div>
+                        <select name="select_simplified" ref={register({ required: true })} className={stl.select}>
+                            <option value="none" selected disabled hidden>
+                                Faites un choix
+                            </option>
                             <option>Oui</option>
                             <option>non</option>
                             <option>Peut-etre</option>
                         </select>
                     </div>
                 </section>
-
 
 
                 <br />
