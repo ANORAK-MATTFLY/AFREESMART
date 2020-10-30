@@ -18,7 +18,7 @@ function writeFile(path, contents, cb) {
 
 const resolvers = {
 	Query: {
-		async current(_, args, { user }) {
+		async current(_, args, {user}) {
 			if (user) {
 				return await User.findOne({
 					where: {
@@ -48,7 +48,7 @@ const resolvers = {
 					expiresIn: '1y',
 				}
 			);
-			await writeFile('./token.js', "let JwtToken=" + `"${toReturnToken}"` + ";" + "\nmodule.exports=JwtToken;");
+			// await writeFile('./token.js', "let JwtToken=" + `"${toReturnToken}"` + ";" + "\nmodule.exports=JwtToken;");
 			return toReturnToken;
 		},
 

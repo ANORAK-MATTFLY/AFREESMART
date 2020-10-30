@@ -37,12 +37,9 @@ const server = new ApolloServer({
 		endpoint: '/graphql',
 	},
 	context: (({ req, res }) => {
-		const JwtToken = require('./token');
-
 		const tokenWithBearer = req.headers.authorization || "";
-
 		let token = tokenWithBearer.split(" ")[1];
-		token = JwtToken;
+		token = process.env.JWT_TOKEN;
 		const user = getUser(token);
 		res = res.req.headers.authorization
 		return { user, res };

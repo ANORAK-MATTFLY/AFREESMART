@@ -1,15 +1,36 @@
 import { useQuery, useMutation, gql } from "@apollo/client";
-const MyMutation = gql`
-mutation{
-    register(name:"ben", last_name:"Matt", email:"benmatt@gmail.com", password:"12345" )
+const MyQuery = gql`
+query{
+current{
+    id
+	name
+	lastName
+}
 }
 `;
 
+
+axios({
+    url: 'http://localhost:3000/api/graphql',
+    method: 'post',
+    data: {
+        query: `
+      query CurrentQuery {
+        current{
+            id
+            name
+            lastName
+        }
+      }
+      `
+    }
+}).then((result) => {
+    console.log(result.data)
+});
+
 const QueryTest = () => {
-    const { data, error, loading } = useMutation(MyMutation);
+    const { data, loading } = useQuery(MyQuery);
     console.log(data);
-    if (loading) return <p> {loading} </p>
-    if (error) return <p>{error}</p>
     return (
         <pre>
             {JSON.stringify(data)}
