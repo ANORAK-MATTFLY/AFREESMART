@@ -1,5 +1,7 @@
 import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { useMemo } from 'react';
+// import {useQuery} from 'react-query';
+
 
 let apolloClient;
 

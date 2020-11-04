@@ -42,9 +42,29 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
+			hasAfricans: {
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
+			},
+		isCompany: {
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
+			},
+			isBasedInAfrica: {
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
+			},
+			generatesMoney: {
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
+			},
+			isSimplifiedActionCompany: {
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
+			},
 			isValid: {
-				type: DataTypes.STRING,
-				allowNull: false,
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
 			}
 		},
 		{

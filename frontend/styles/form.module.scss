@@ -19,12 +19,12 @@ $black: rgb(53, 53, 53);
 .form {
     display: flex;
     align-items: center;
-    // justify-content: space-between;
+    justify-content: space-between;
     flex-direction: column;
     padding: 5%;
-    padding-top: 6%;
-    margin: 2rem;
-    height: 50%;
+    padding-top: 4%;
+    margin: 1rem;
+    height: 80%;
     width: 28rem;
     max-width: 100%;
     background: white;
@@ -33,9 +33,9 @@ $black: rgb(53, 53, 53);
         display: flex;
         flex-direction: column;
         align-items: center;
-        // justify-content: center;
-        // padding: 3%;
-        // border: 1px blue solid;
+        justify-content: center;
+        padding: 3%;
+        border: 1px blue solid;
     }
     h2 {
         font-family: $font;
@@ -123,23 +123,6 @@ $black: rgb(53, 53, 53);
         font-family: $font;
     }
 
-
-    .questionContainer {
-        width: 21rem;
-        margin-top: 5rem;
-        flex-basis: start;
-
-        input {
-            margin-left: 1.5rem;
-            cursor: pointer;
-            margin-bottom: 3rem;
-        }
-
-        label {
-            cursor: pointer;
-            margin-left: 10px;
-        }
-    }
 }
 
 .goBackBtn {

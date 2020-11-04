@@ -39,7 +39,6 @@ const server = new ApolloServer({
 	context: (({ req, res }) => {
 		const tokenWithBearer = req.headers.authorization || "";
 		let token = tokenWithBearer.split(" ")[1];
-		token = process.env.JWT_TOKEN;
 		const user = getUser(token);
 		res = res.req.headers.authorization
 		return { user, res };
@@ -53,4 +52,3 @@ db.sequelize.sync().then(() => {
 		console.log(`server running on port http://localhost:${PORT}/graphql`);
 	});
 });
-

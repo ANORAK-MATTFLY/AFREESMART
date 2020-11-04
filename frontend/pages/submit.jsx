@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import GobackBtn from "../components/buttons/go_back_btn";
 
 
-
-
 export default function Registration() {
     const [loginInfo, setLoginInfo] = useState();
     const [submitting, setSubmitting] = useState(false);
@@ -15,7 +13,6 @@ export default function Registration() {
         setSubmitting(true);
         console.log(data);
         setSubmitting(false);
-
     }
     return (
         <div className={stl.container}>

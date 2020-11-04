@@ -1,2 +1,0 @@
-let JwtToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODMsImVtYWlsIjoibWljQGdtYWlsLmNvbSIsImlhdCI6MTYwMzcwNDgwNywiZXhwIjoxNjM1MjYyNDA3fQ.i-EW0eUKZiTpdcZHNvvW8t0CCIi6dSbor-zOpCEKrlI";
-module.exports=JwtToken;

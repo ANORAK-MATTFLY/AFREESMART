@@ -4,17 +4,7 @@ const jsonwebtoken = require('jsonwebtoken');
 const Joi = require('@hapi/joi');
 const fs = require('fs');
 require('dotenv').config();
-var mkdirp = require('mkdirp');
-const getDirName = require('path').dirname;
 
-function writeFile(path, contents, cb) {
-	mkdirp(getDirName(path), function (err) {
-		if (err) return err;
-		fs.writeFile(path, contents, (err, data) => {
-			console.log(data)
-		});
-	});
-}
 
 const resolvers = {
 	Query: {
@@ -48,7 +38,6 @@ const resolvers = {
 					expiresIn: '1y',
 				}
 			);
-			// await writeFile('./token.js', "let JwtToken=" + `"${toReturnToken}"` + ";" + "\nmodule.exports=JwtToken;");
 			return toReturnToken;
 		},
 
@@ -92,7 +81,7 @@ const resolvers = {
 				return "Your project has been created";
 			}
 			throw new Error("Something wrong happened...")
-		}
+		},
 	},
 };
 

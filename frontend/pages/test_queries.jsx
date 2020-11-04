@@ -1,41 +1,49 @@
-import { useQuery, useMutation, gql } from "@apollo/client";
-const MyQuery = gql`
-query{
-current{
-    id
-	name
-	lastName
-}
-}
-`;
-
-
-axios({
-    url: 'http://localhost:3000/api/graphql',
-    method: 'post',
-    data: {
-        query: `
-      query CurrentQuery {
-        current{
-            id
-            name
-            lastName
-        }
-      }
-      `
-    }
-}).then((result) => {
-    console.log(result.data)
-});
+import {useEffect, useState, useMemo} from 'react';
+import axios from 'axios';
 
 const QueryTest = () => {
-    const { data, loading } = useQuery(MyQuery);
-    console.log(data);
-    return (
-        <pre>
-            {JSON.stringify(data)}
-        </pre>
-    );
+
+	const [user, setUser] = useState([]);
+	// const disf = useMemo(()=>{
+	//   return componentDidMount();
+	// }, [setUser]);
+	useEffect(() => {
+		getUser()
+	}, [setUser]);
+
+	async function getUser() {
+		let res = await axios({
+			url: 'http://localhost:9100/graphql',
+			method: 'post',
+			data: {
+				query: `
+             query CurrentQuery {
+             current(id:78){
+                 id
+                 name
+                 lastName
+                 email
+             }
+           }
+           `
+			}
+		})
+		let usr = res.data;
+		setUser(usr);
+	}
+	const arr = [];
+	if (user.data) {
+		if (arr.length == 0) {
+			arr.push(user.data.current);
+
+		}
+		var {
+			id,
+			name
+		} = arr[0]
+	}
+	console.log(user)
+	return (<>{}</>);
 }
 
 export default QueryTest;

@@ -14,6 +14,7 @@ export default function Home() {
         className={stl.form}
       >
         <div>
+          <GobackBtn />
           <label className={stl.label} htmlFor="name">
             Email
           </label>
@@ -49,7 +50,7 @@ export default function Home() {
           <input type="checkbox" name="terms" id="terms" />
         </div>
       </motion.form>
-      <GobackBtn />
+
     </div>
   );
 }
