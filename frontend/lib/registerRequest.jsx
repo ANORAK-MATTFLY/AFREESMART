@@ -11,11 +11,9 @@ async function userRegister(arg_name, arg_lastName, arg_email, arg_password){
          `
        }
    })
-   let acessToken = await req.data;
-	 if(acessToken){
-		 localStorage.setItem('afreesmartAcessToken', acessToken.data.register);
-	 }
-   return acessToken;
+   if(req.data == null){
+     return null;
+   }
 }
 
 export default userRegister;

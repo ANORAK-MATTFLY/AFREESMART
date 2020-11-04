@@ -22,23 +22,26 @@ const resolvers = {
 
 	Mutation: {
 		async register(_, { name, lastName, email, password },) {
-			const user = await User.create({
+			 const user = await User.create({
 				name,
 				lastName,
 				email,
 				password: await bcrypt.hash(password, 10),
 			});
-			const toReturnToken = await jsonwebtoken.sign(
-				{
-					id: user.id,
-					email: user.email,
-				},
-				process.env.JWT_SECRET,
-				{
-					expiresIn: '1y',
-				}
-			);
-			return toReturnToken;
+			 User.update(
+				{ acessToken: await jsonwebtoken.sign(
+					{
+						id: user.id,
+						email: user.email,
+					},
+					process.env.JWT_SECRET,
+					{
+						expiresIn: '1y',
+					}
+				)},
+        { where: { id: user.id } }
+			)
+			return 	"Success";
 		},
 
 		async login(_, { email, password }) {
@@ -58,29 +61,165 @@ const resolvers = {
 				throw new Error('Your password is incorrect!');
 			}
 
-			return jsonwebtoken.sign(
-				{
-					id: user.id,
-					email: user.email,
-				},
-				process.env.JWT_SECRET,
-				{
-					expiresIn: '1y',
-				}
-			);
+			return user.acessToken;
 		},
-		async addProject(_, { projectsName, projectsDescription }, { user }) {
+		async addProjectName(_, {projectsName}, {user}){
+			if(!user){
+				throw new Error("Sorry you're not an authenticated user...")
+			}
 			const project = await Project.create({
 				projectsName,
-				projectsDescription,
 				projectCategoryId: await 1,
 				projectStatusId: await 1,
-				userId: await user.id
+				userId: user.id
 			})
 			if (project) {
 				return "Your project has been created";
 			}
 			throw new Error("Something wrong happened...")
+		},
+		async updateToProjectDescrption(_, {projectsDescription}, {user}){
+			if(!user){
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if(user){
+				await Project.update(
+				 { projectsDescription: await projectsDescription},
+				 { where: { userId: user.id } }
+			 	)
+			}else{
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateToCompanyName(_, {companyName}, {user}){
+			if(!user){
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if(user){
+				await Project.update(
+				 { companyName: await companyName},
+				 { where: { userId: user.id } }
+			 	)
+			}else{
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateToWebSiteLink(_, {webSiteLink}, {user}){
+			if(!user){
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if(user){
+				await Project.update(
+				 { webSiteLink: await webSiteLink},
+				 { where: { userId: user.id } }
+			 	)
+			}else{
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateToHasAfricans(_, {hasAfricans}, {user}){
+			if(!user){
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if(user){
+				await Project.update(
+				 { hasAfricans: await hasAfricans},
+				 { where: { userId: user.id } }
+			 	)
+			}else{
+				throw new Error("Something wrong happened...");
+			}
+			if(hasAfricans === false){
+				await Project.update(
+				 { isValid: await false},
+				 { where: { userId: user.id } }
+			 	)
+			}
+			return "Success";
+		},
+		async updateToIsRegistredCompany(_, {isRegistredCompany}, {user}){
+			if(!user){
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if(user){
+				await Project.update(
+				 { isRegistredCompany: await isRegistredCompany},
+				 { where: { userId: user.id } }
+			 	)
+			}else{
+				throw new Error("Something wrong happened...");
+			}
+			if(isRegistredCompany === false){
+				await Project.update(
+				 { isValid: await false},
+				 { where: { userId: user.id } }
+			 	)
+			}
+			return "Success";
+		},
+		async updateToIsBasedInAfrica(_, {isBasedInAfrica}, {user}){
+			if(!user){
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if(user){
+				await Project.update(
+				 { isBasedInAfrica: await isBasedInAfrica},
+				 { where: { userId: user.id } }
+			 	)
+			}else{
+				throw new Error("Something wrong happened...");
+			}
+			if(isBasedInAfrica === false){
+				await Project.update(
+				 { isValid: await false},
+				 { where: { userId: user.id } }
+			 	)
+			}
+			return "Success";
+		},
+		async updateToGeneratesMoney(_, {generatesMoney}, {user}){
+			if(!user){
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if(user){
+				await Project.update(
+				 { generatesMoney: await generatesMoney},
+				 { where: { userId: user.id } }
+			 	)
+			}else{
+				throw new Error("Something wrong happened...");
+			}
+
+			if(generatesMoney === false){
+				await Project.update(
+				 { isValid: await false},
+				 { where: { userId: user.id } }
+			 	)
+			}
+			return "Success";
+		},
+		async updateToisSimplifiedActionCompany(_, {isSimplifiedActionCompany}, {user}){
+			if(!user){
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if(user){
+				await Project.update(
+				 { isSimplifiedActionCompany: await isSimplifiedActionCompany},
+				 { where: { userId: user.id } }
+			 	)
+			}else{
+				throw new Error("Something wrong happened...");
+			}
+			if(isSimplifiedActionCompany === false){
+				await Project.update(
+				 { isValid: await false},
+				 { where: { userId: user.id } }
+			 	)
+			}
+			return "Seccess";
 		},
 	},
 };

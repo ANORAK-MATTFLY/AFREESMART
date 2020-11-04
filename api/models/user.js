@@ -39,6 +39,12 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				unique: true,
 			},
+			acessToken: {
+				type: DataTypes.STRING,
+				allowNull: true,
+				defaultValue:null,
+				unique: true,
+			},
 		},
 		{
 			sequelize,

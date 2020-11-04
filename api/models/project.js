@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			companyName: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 				unique: true,
 			},
 			projectsName: {
@@ -36,17 +36,17 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			webSiteLink: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 			projectsDescription: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 			hasAfricans: {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,
 			},
-		isCompany: {
+		isRegistredCompany: {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,
 			},
@@ -65,6 +65,7 @@ module.exports = (sequelize, DataTypes) => {
 			isValid: {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,
+				defaultValue: 1,
 			}
 		},
 		{

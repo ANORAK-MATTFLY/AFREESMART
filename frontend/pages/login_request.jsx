@@ -32,10 +32,3 @@ const QueryTest = () => {
 }
 
 export default QueryTest;
-
-
-// setToken(res);
-// if(res.data){
-//    var acessToken = await res.data.login;
-// }
-// await localStorage.setItem('acessToken', acessToken);
