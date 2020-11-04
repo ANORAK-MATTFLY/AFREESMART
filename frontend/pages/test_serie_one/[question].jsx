@@ -9,14 +9,6 @@ const questions = [
 export default function Details() {
 	const router = useRouter();
     return <div>
-        {questions.map(q => (
-					<>
-            <h2>{q.question}</h2>
-						<button onClick={()=>{router.push({
-          pathname: `/test_serie_one/[question]`,
-          query: { pid: q.id },
-        })}} >Next question is question {q.id}</button>
-						</>
-        ))}
+        
     </div>
 }
