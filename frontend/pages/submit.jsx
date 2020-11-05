@@ -44,7 +44,7 @@ export default function Registration() {
                 <div>
                     <label className={stl.label} htmlFor="project">
                         Nom du projet
-          </label>
+            </label>
                     <input
                         className={stl.input}
                         type="text"
@@ -59,7 +59,7 @@ export default function Registration() {
                 <div>
                     <label className={stl.label} htmlFor="website">
                         Le lien de votre site web
-          </label>
+            </label>
                     <input
                         className={stl.input}
                         type="text"
@@ -74,7 +74,7 @@ export default function Registration() {
                 <div>
                     <label className={stl.label} htmlFor="password">
                         Décrivez votre projet en quelques mots
-          </label>
+            </label>
                     <textarea className={stl.bigField} name="description" rows="10" cols="40" ref={register({ required: true })}>
 
                     </textarea>
@@ -87,7 +87,7 @@ export default function Registration() {
                         <div>
                             <label className={stl.label} htmlFor="employeesNumber">
                                 Êtes-vous enregistré au guichet unique ?
-          </label>
+            </label>
                         </div>
                         <select name="employeesNumber" ref={register({ required: true })} name="select" className={stl.select}>
                             <option value="none" selected disabled hidden>
@@ -104,7 +104,7 @@ export default function Registration() {
                         <div>
                             <label className={stl.label} htmlFor="how_many_africans">
                                 Votre entreprise est-elle basée dans un ou plusieurs pays africains ?
-          </label>
+            </label>
                         </div>
                         <select name="select_how_many_africans" ref={register({ required: true })} className={stl.select}>
                             <option value="none" selected disabled hidden>
@@ -119,7 +119,7 @@ export default function Registration() {
                         <div>
                             <label className={stl.label} htmlFor="nationality">
                                 Avez-vous des membres dans votre équipe aillant une nationalité africaine ?
-          </label>
+            </label>
                         </div>
                         <select name="select_nationality" ref={register({ required: true })} className={stl.select}>
                             <option value="none" selected disabled hidden>
@@ -134,7 +134,7 @@ export default function Registration() {
                         <div>
                             <label className={stl.label} htmlFor="profit">
                                 Le but de l’entreprise est-il de faire du profit ?
-          </label>
+            </label>
                         </div>
                         <select name="select_profit" ref={register({ required: true })} className={stl.select}>
                             <option value="none" selected disabled hidden>
@@ -149,7 +149,7 @@ export default function Registration() {
                         <div>
                             <label className={stl.label} htmlFor="simplified">
                                 Êtes-vous une société par actions simplifiée ?
-          </label>
+            </label>
                         </div>
                         <select name="select_simplified" ref={register({ required: true })} className={stl.select}>
                             <option value="none" selected disabled hidden>

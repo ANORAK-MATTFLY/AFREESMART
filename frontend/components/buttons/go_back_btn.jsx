@@ -1,15 +1,12 @@
-import Link from "next/link";
+import { useRouter } from 'next/router';
 import stl from '../../styles/form.module.scss'
 
 const GobackBtn = () => {
+    const router = useRouter();
     return (
-        <>
-            <Link href="/">
-                <a>
-                    <div className={stl.goBackBtn}>Retour</div>
-                </a>
-            </Link>
-        </>
+        <div>
+            <div onClick={() => { router.back() }} className={stl.goBackBtn}>Retour</div>
+        </div>
     );
 }
 

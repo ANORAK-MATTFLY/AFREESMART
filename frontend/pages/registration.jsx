@@ -2,19 +2,15 @@ import { useState } from "react";
 import stl from "../styles/form.module.scss";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import Link from 'next/link';
 import GobackBtn from "../components/buttons/go_back_btn";
 import userRegister from '../lib/registerRequest.jsx';
 import loginRequest from '../lib/loginRequest.jsx';
 import { useRouter } from 'next/router'
-import axios from 'axios';
-import {useQuery} from 'react-query';
 
 
 
 export default function Registration() {
   const router = useRouter();
-  const [loginInfo, setLoginInfo] = useState();
   const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, watch, errors } = useForm();
 
@@ -22,9 +18,9 @@ export default function Registration() {
     await setSubmitting(true);
     await userRegister(userInfo.name, userInfo.lastName, userInfo.email, userInfo.password)
     await setSubmitting(false);
-    if(userRegister){
+    if (userRegister) {
       loginRequest(userInfo.email, userInfo.password)
-      router.push('/submit')
+      router.push('/test1/Q1')
     }
   }
   return (
@@ -65,7 +61,7 @@ export default function Registration() {
             id="lastName"
             ref={register({ required: true, pattern: /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/ })}
           />
-        {errors.lastName && errors.lastName.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
+          {errors.lastName && errors.lastName.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
           {errors.lastName && errors.lastName.type == "pattern" && <p>Le format du prenom enter est invalide</p>}
         </div>
         <div>
@@ -80,7 +76,7 @@ export default function Registration() {
             id="email"
             ref={register({ required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
           />
-        {errors.email && errors.email.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
+          {errors.email && errors.email.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
           {errors.email && errors.email.type == "pattern" && <p>Le format de l'adresse enter est invalide</p>}
         </div>
         <div>
@@ -116,7 +112,7 @@ export default function Registration() {
           {errors.passwordConfirm && errors.passwordConfirm.type === "pattern" && <p>Votre mot de passe doit avoir au moins 8 charactaires une lettre et un nombre</p>}
           {errors.passwordConfirm && errors.passwordConfirm.type === "validate" && <p>Le mot de passe ne corespond pas</p>}
         </div>
-          <button type="submit" disabled={submitting} className={stl.btn}>submit</button>
+        <button type="submit" disabled={submitting} className={stl.btn}>submit</button>
       </motion.form>
     </div>
   );
