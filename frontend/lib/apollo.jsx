@@ -5,9 +5,6 @@ import { useMemo } from 'react';
 
 let apolloClient;
 
-
-
-
 function createIsomorphLink() {
     if (typeof window === 'undefined') {
         const { SchemaLink } = require('@apollo/client/link/schema')
