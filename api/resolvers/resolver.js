@@ -1,14 +1,13 @@
 const { User, Project } = require('../models');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
-const Joi = require('@hapi/joi');
 const fs = require('fs');
 require('dotenv').config();
 
 
 const resolvers = {
 	Query: {
-		async current(_, args, { user }) {
+		async current(parent, args, { user }) {
 			if (user) {
 				return await User.findOne({
 					where: {
@@ -17,7 +16,15 @@ const resolvers = {
 				});
 			}
 			throw new Error("Sorry, you're not an authenticated user!");
+
 		},
+		async project(parent, args, { user }) {
+			return Project.findOne({
+				where: {
+					userId: user.id
+				},
+			});
+		}
 	},
 
 	Mutation: {
@@ -26,6 +33,7 @@ const resolvers = {
 				name,
 				lastName,
 				email,
+				roleId: await 1,
 				password: await bcrypt.hash(password, 10),
 			});
 			User.update(
@@ -78,7 +86,7 @@ const resolvers = {
 			if (project) {
 				await User.update(
 					{ projectId: await project.id },
-					{ where: { projectId: user.id } }
+					{ where: { email: user.email } }
 				)
 			} else {
 				throw new Error("Something wrong happened...");

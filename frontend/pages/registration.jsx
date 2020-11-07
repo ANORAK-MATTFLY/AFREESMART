@@ -19,8 +19,8 @@ export default function Registration() {
     await userRegister(userInfo.name, userInfo.lastName, userInfo.email, userInfo.password)
     await setSubmitting(false);
     if (userRegister) {
-      loginRequest(userInfo.email, userInfo.password)
-      router.push('/test1/Q1')
+      await loginRequest(userInfo.email, userInfo.password);
+      await router.push('/test1/Q1');
     }
   }
   return (
