@@ -24,7 +24,6 @@
 		"include-media": "^1.4.9",
 		"install": "^0.13.0",
 		"next": "9.5.3",
-		"node-localstorage": "^2.1.6",
 		"node-sass": "^4.14.1",
 		"nodemon": "^2.0.6",
 		"postcss-preset-env": "^6.7.0",
