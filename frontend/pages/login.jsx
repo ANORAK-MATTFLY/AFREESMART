@@ -1,10 +1,26 @@
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import stl from "../styles/form.module.scss";
+import stl from "../styles/login.module.scss";
 import { motion } from "framer-motion";
 import GobackBtn from '../components/buttons/go_back_btn'
+import loginRequest from '../lib/loginRequest';
+import { useRouter } from 'next/router'
+
+
 
 export default function Home() {
+  const router = useRouter();
+  const { register, handleSubmit, watch, errors } = useForm();
+  const [submitting, setSubmitting] = useState(false);
+  const onSubmit = async userInfo => {
+    await setSubmitting(true);
+    await loginRequest(userInfo.email, userInfo.password);
+    await setSubmitting(false);
+    if (loginRequest) {
+      await loginRequest(userInfo.email, userInfo.password);
+      await router.push('./user_session/homepage');
+    }
+  }
   return (
     <div className={stl.container}>
       <motion.form
@@ -12,6 +28,7 @@ export default function Home() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9 }}
         className={stl.form}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div>
           <GobackBtn />
@@ -22,9 +39,12 @@ export default function Home() {
             className={stl.input}
             type="text"
             name="email"
-            placeholder="Email"
+            placeholder="email"
             id="email"
+            ref={register({ required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
           />
+          {errors.email && errors.email.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
+          {errors.email && errors.email.type == "pattern" && <p>Le format de l'adresse enter est invalide</p>}
         </div>
         <div>
           <label className={stl.label} htmlFor="name">
@@ -36,18 +56,16 @@ export default function Home() {
             name="password"
             placeholder="Password"
             id="password"
+            ref={register({
+              required: true,
+              pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+            })}
           />
+          {errors.password && errors.password.type === "required" && <p>Ce champ ne peut pas etre vide</p>}
+          {errors.password && errors.password.type === "pattern" && <p>Votre mot de passe doit avoir au moins 8 charactaires une lettre et un nombre</p>}
         </div>
         <div>
-          <button className={stl.btn} type="submit">
-            Connexion
-          </button>
-        </div>
-        <div>
-          <label className={stl.terms} className={stl.label} htmlFor="name">
-            Terms
-          </label>
-          <input type="checkbox" name="terms" id="terms" />
+          <button type="submit" disabled={submitting} className={stl.btn}>Conexion</button>
         </div>
       </motion.form>
 

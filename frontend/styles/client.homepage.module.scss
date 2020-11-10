@@ -16,7 +16,6 @@ $black: rgb(26, 25, 25);
 	margin: 0 0 0 0;
 	height: 100vh;
 	background: linear-gradient(to right, #00005c, #1cb5e0);
-	// background-color: #e9e9e9;
 
 }
 
@@ -54,9 +53,9 @@ $black: rgb(26, 25, 25);
 				height: 60%;
 				width: 23%;
 				margin:2% 0% 0% 2%;
-				color: #ffffff;
+				color: $black;
 				border-radius: 360%;
-				background-color: #2740608f;
+				background: linear-gradient(to right, #c5570ec2, #e08611c5);
 			}
 			.badgeTag{
 				display: grid;
@@ -67,9 +66,7 @@ $black: rgb(26, 25, 25);
 				width: 9rem;
 				font-family: $font;
 				color: white;
-				background: linear-gradient(to right, #2740608f, #1cb5e0);
-
-				// background-color: #1B2845;
+				background: linear-gradient(to right, #1293aac5, #27a6c9);
 				border-radius: $border;
 			}
 		}
@@ -99,7 +96,7 @@ $black: rgb(26, 25, 25);
 				align-items: center;
 				height: 15%;
 				width:90%;
-				background: linear-gradient(to right, #2740608f, #1cb5e0cb);
+				background: linear-gradient(to right, #1293aac5, #27a6c9);
 				border-radius: 7px;
 				p{
 					font-family: $font;
@@ -112,15 +109,17 @@ $black: rgb(26, 25, 25);
 				height: 42%;
 				width: 50%;
 				margin:2% 0% 0% 2%;
-				color: #ffffff;
+				color: $black;
 				border-radius: 360%;
-				background-color: #2740608f;
+				background: linear-gradient(to right, #c5570ec2, #e08611c5);
 			}
 		}
 	}
 }
 .rightSection{
 	display: flex;
+	height: 36.5rem;
+	width: 20rem;
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
@@ -128,6 +127,7 @@ $black: rgb(26, 25, 25);
 	grid-row: 1/3;
 	background-color: #ffffff;
 	border-radius: 7px;
+	font-family: $font;
 	.rightHead{
 		display: grid;
 		place-items: center;
@@ -135,7 +135,7 @@ $black: rgb(26, 25, 25);
 		width: 100%;
 		border-bottom: 0.5px rgb(36, 4, 33) solid;
 		h1{
-			font-family: $font;
+			
 			color: $black;
 		}
 	}

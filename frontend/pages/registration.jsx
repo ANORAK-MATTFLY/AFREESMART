@@ -6,10 +6,18 @@ import GobackBtn from "../components/buttons/go_back_btn";
 import userRegister from '../lib/registerRequest.jsx';
 import loginRequest from '../lib/loginRequest.jsx';
 import { useRouter } from 'next/router'
-
-
+import LottieSuperObj from '../components/buttons/lottieFingerprint';
+import fingerPrint from '../media/fingerprint.json'
 
 export default function Registration() {
+  const obj = {
+    loop: true,
+    autoplay: true,
+    animationData: fingerPrint,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, watch, errors } = useForm();
@@ -25,6 +33,9 @@ export default function Registration() {
   }
   return (
     <div className={stl.container}>
+      <div className={stl.fingerPrintIllustration}>
+        <LottieSuperObj objectProps={obj} />
+      </div>
       <motion.form
         initial={{ opacity: 0, x: 300 }}
         animate={{ opacity: 1, x: 0 }}
@@ -114,6 +125,7 @@ export default function Registration() {
         </div>
         <button type="submit" disabled={submitting} className={stl.btn}>submit</button>
       </motion.form>
+      <div className={stl.rocket}></div>
     </div>
   );
 }

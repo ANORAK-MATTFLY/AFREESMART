@@ -12,15 +12,14 @@ const Details = () => {
             <div className={stl.detailBox}>
                 <GobackBtn />
                 <h1>
-                    {data.tasks_title}
+                    {data.tack_title}
                 </h1>
-                <p>{data.details}</p>
+                <p>{data.detail}</p>
                 <div className={stl.deadLine}>
                     Echeance: 12/7/2021
                 </div>
                 <div className={stl.btsSection}>
-                    <button className={stl.btn}><a href={`mailto:benmatanda354@gmail.com?subject=Documents de l'entreprise`}>Envoyer</a></button>
-                    <div className={stl.btn}>Valider</div>
+                    <div className={stl.btn}>Suprimer</div>
                 </div>
             </div>
         </div>

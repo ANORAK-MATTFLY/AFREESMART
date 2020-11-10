@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
-import stl from '../../../styles/details.page.module.scss';
-import GobackBtn from '../../../components/buttons/go_back_btn';
+import stl from '../../styles/details.page.module.scss';
+import GobackBtn from '../../components/buttons/go_back_btn';
 
-
-const Details = () => {
+const projectDetails = () => {
     const router = useRouter();
     const data = router.query;
     console.log(data)
@@ -12,19 +11,18 @@ const Details = () => {
             <div className={stl.detailBox}>
                 <GobackBtn />
                 <h1>
-                    {data.tasks_title}
+                    {data.projectsName}
                 </h1>
-                <p>{data.details}</p>
+                <p>{data.projectDescription}</p>
                 <div className={stl.deadLine}>
                     Echeance: 12/7/2021
                 </div>
                 <div className={stl.btsSection}>
-                    <button className={stl.btn}><a href={`mailto:benmatanda354@gmail.com?subject=Documents de l'entreprise`}>Envoyer</a></button>
-                    <div className={stl.btn}>Valider</div>
+                    <div className={stl.btn}>Suprimer</div>
                 </div>
             </div>
         </div>
     );
 }
 
-export default Details;
+export default projectDetails;
