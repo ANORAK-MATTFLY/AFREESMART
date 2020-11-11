@@ -11,11 +11,11 @@ import GobackBtn from "../../components/buttons/go_back_btn";
 const Question8 = () => {
     const router = useRouter();
     const [submitting, setSubmitting] = useState(false);
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit } = useForm();
     const onSubmit = data => {
         setSubmitting(true);
         updateToisSimplifiedActionCompany(data.simplified);
-        router.reload();
+        router.push('../user_session/homepage');
         setSubmitting(false);
     }
     return (

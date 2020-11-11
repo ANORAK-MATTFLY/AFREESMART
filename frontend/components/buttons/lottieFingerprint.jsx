@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Lottie from 'react-lottie'
 
 const LottieSuperObj = ({ objectProps }) => {
@@ -10,4 +9,4 @@ const LottieSuperObj = ({ objectProps }) => {
     )
 }
 
-export default LottieSuperObj
+export default LottieSuperObj;

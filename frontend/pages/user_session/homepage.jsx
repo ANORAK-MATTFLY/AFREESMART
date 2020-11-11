@@ -33,30 +33,30 @@ const HomePage = () => {
                 </div>
                 <div className={stl.dropSection}>
                     <div className={stl.dropZone}>
-                        <h2>Document XXXX</h2>
+                        <h2>Phase une analyse</h2>
                         <div className={stl.dropZoneIcon}>
                             <FontAwesomeIcon icon={faFileUpload} />
                         </div>
                         <div className={stl.dropZoneCadre}>
-                            <p>Poser votre document ici !</p>
+                            <p>Details</p>
                         </div>
                     </div>
                     <div className={stl.dropZone}>
-                        <h2>Document XXXX</h2>
+                        <h2>Phase deux gouvernance</h2>
                         <div className={stl.dropZoneIcon}>
                             <FontAwesomeIcon icon={faFileUpload} />
                         </div>
                         <div className={stl.dropZoneCadre}>
-                            <p>Poser votre document ici !</p>
+                            <p>Details</p>
                         </div>
                     </div>
                     <div className={stl.dropZone}>
-                        <h2>Document XXXX</h2>
+                        <h2>Phase trois production</h2>
                         <div className={stl.dropZoneIcon}>
                             <FontAwesomeIcon icon={faFileUpload} />
                         </div>
                         <div className={stl.dropZoneCadre}>
-                            <p>Poser votre document ici !</p>
+                            <p>Details</p>
                         </div>
                     </div>
                 </div>
