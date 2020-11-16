@@ -1,51 +1,47 @@
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import stl from "../../styles/questionForm.module.scss";
+import stl from "../../styles/quizUI.module.scss";
 import updateToWebSiteLink from '../../lib/updateToWebSiteLink';
 import MainLayout from '../../components/questionsLayout/layout';
 import { motion } from "framer-motion";
-import GobackBtn from "../../components/buttons/go_back_btn";
-
+import LottieSuperObj from '../../components/buttons/lottieFingerprint';
+import quizIllustration from '../../lotties/layout place holder.json'
 
 const Question3 = () => {
-    const router = useRouter();
-    const [submitting, setSubmitting] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    const onSubmit = data => {
-        setSubmitting(true);
-        updateToWebSiteLink(data.website);
-        router.push('./Q4')
-        setSubmitting(false);
-    }
+    const obj = {
+        loop: true,
+        autoplay: true,
+        animationData: quizIllustration,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     return (
-        <MainLayout>
-            <motion.form
+        <div className={stl.container}>
+            <motion.div
                 initial={{ opacity: 0, x: 300 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1 }}
-                className={stl.form}
-                onSubmit={handleSubmit(onSubmit)}
+                className={stl.quizContainer}
             >
-                <GobackBtn />
                 <div>
-                    <label className={stl.label} htmlFor="website">
-                        Avez-vous un site internet ?
-            </label>
-                    <input
-                        className={stl.input}
-                        type="text"
-                        name="website"
-                        placeholder="Lien du site web"
-                        id="website"
-                        ref={register({ required: true })}
-                    />
-                    {errors.website && errors.website.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
-                    {errors.website && errors.website.type == "pattern" && <p>Le format de l'adresse enter est invalide</p>}
+                    <button className={stl.btn}>Retour</button>
                 </div>
-                <button type="submit" disabled={submitting} className={stl.btn}>Suivant</button>
-            </motion.form>
-        </MainLayout>
+                <div className={stl.mainSection}>
+                    <div className={stl.rocketIllustration}>
+                        <LottieSuperObj objectProps={obj} />
+                    </div>
+                    <div className={stl.quizText}>
+                        <h1>Avez-vous un site internet ?</h1>
+                    </div>
+                    <div className={stl.btnSection}>
+                        <button className={stl.yesBtn}>Oui</button>
+                        <button className={stl.noBtn}>Non</button>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
     );
 }
 

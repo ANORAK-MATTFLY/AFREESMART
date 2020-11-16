@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import './includeMedia.scss';
+$font: 'Open Sans', sans-serif;
+$white: rgb(252, 252, 252);
+$border: 10px;
+$black: #414040;
+
+
+
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin: 0 0 0 0;
+	height: 100vh;
+	font-family: $font;
+	color: $black;
+	background: linear-gradient(to right, #000046, #1cb5e0);
+	h2{
+	font-size: clamp(1em, 5vw, 1em);
+
+	}
+	p{
+		font-weight: bolder;
+	}
+}
+
+.box{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	height: 90%;
+	width: 70%;
+	padding: 3px;
+	background: #ffffff;
+	// flex-grow: auto;
+	border-radius: 10px;
+	.cardAnim{
+		height: 15rem;
+		width: 10rem;
+	}
+	.cardsSection{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		height: 100%;
+		width: 100%;
+		.card{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 95%;
+			width: 40%;
+			cursor: pointer;
+			border-radius: 10px;
+			border: 0.2px rgb(235, 235, 235) solid;
+			box-shadow: 1px 1px 3px 1px rgba(204, 204, 204, 0.363);
+			.cardIllustration{
+				height: 50%;
+				width: 40%;
+			}
+		}
+		.card:hover{
+			background-color: rgba(71, 174, 221, 0.103);
+			box-shadow: 1px 1px 10px 5px rgba(204, 204, 204, 0.363);
+			border: 1px rgb(0, 238, 255) solid;
+		}
+	}
+}

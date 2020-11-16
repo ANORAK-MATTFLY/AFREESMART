@@ -3,7 +3,7 @@ import { faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 import stl from '../../styles/admin.dashboard.module.scss';
 import Link from 'next/link';
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
-import projectIllustration from '../../media/23803-projectmanagement.json'
+import projectIllustration from '../../media/14571-search-loading-animation.json'
 
 const projects = [
     { projectName: "Recycling", id: 1, projectDescription: "God called lone; I will make him a helper as his partner,God called lone; I will make him a helper as his partner.God called lone; I will make him a helper as his partner. God called lone; I will make him a helper as his partner,God called lone; I will make him a helper as his partner.God called lone; I will make him a helper as his partner. God called lone; I will make him a helper as his partner,God called lone; I will make him a helper as his partner.God called lone; I will make him a helper as his partner." },

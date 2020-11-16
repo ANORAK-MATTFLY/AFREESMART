@@ -1,51 +1,47 @@
 import { useState } from 'react';
-import { useForm } from "react-hook-form";
-import stl from "../../styles/questionForm.module.scss";
+import stl from "../../styles/quizUI.module.scss";
 import { useRouter } from 'next/router'
 import updateToisSimplifiedActionCompany from '../../lib/updateToisSimplifiedActionCompany'
-import MainLayout from '../../components/questionsLayout/layout';
 import { motion } from "framer-motion";
-import GobackBtn from "../../components/buttons/go_back_btn";
+import LottieSuperObj from '../../components/buttons/lottieFingerprint';
+import quizIllustration from '../../lotties/business-plan-or-chart-presentation.json'
 
 
 const Question8 = () => {
+    const obj = {
+        loop: true,
+        autoplay: true,
+        animationData: quizIllustration,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     const router = useRouter();
-    const [submitting, setSubmitting] = useState(false);
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data => {
-        setSubmitting(true);
-        updateToisSimplifiedActionCompany(data.simplified);
-        router.push('../user_session/homepage');
-        setSubmitting(false);
-    }
     return (
-        <MainLayout>
-            <motion.form
+        <div className={stl.container}>
+            <motion.div
                 initial={{ opacity: 0, x: 300 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1 }}
-                className={stl.form}
-                onSubmit={handleSubmit(onSubmit)}
+                className={stl.quizContainer}
             >
-                <GobackBtn />
                 <div>
-                    <div>
-                        <label className={stl.label} htmlFor="simplified">
-                            Êtes-vous une société par actions simplifiée ?
-            </label>
-                    </div>
-                    <select name="simplified" ref={register({ required: true })} className={stl.select}>
-                        <option value={false} selected disabled hidden>
-                            Faites un choix
-                            </option>
-                        <option value={true}>Oui</option>
-                        <option value={false}>non</option>
-                        <option value={false}>Peut-etre</option>
-                    </select>
+                    <button className={stl.btn}>Retour</button>
                 </div>
-                <button type="submit" disabled={submitting} className={stl.btn}>Suivant</button>
-            </motion.form>
-        </MainLayout>
+                <div className={stl.mainSection}>
+                    <div className={stl.rocketIllustration}>
+                        <LottieSuperObj objectProps={obj} />
+                    </div>
+                    <div className={stl.quizText}>
+                        <h1>Êtes-vous une société par actions simplifiée ?</h1>
+                    </div>
+                    <div className={stl.btnSection}>
+                        <button className={stl.yesBtn}>Oui</button>
+                        <button className={stl.noBtn}>Non</button>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
     );
 }
 
