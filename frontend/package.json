@@ -17,6 +17,7 @@
 		"apollo-server-express": "^2.18.2",
 		"apollo-server-micro": "^2.18.2",
 		"axios": "^0.21.0",
+		"cookie": "^0.4.1",
 		"dotenv": "^8.2.0",
 		"framer-motion": "^2.6.16-alpha.4",
 		"fs": "^0.0.1-security",

@@ -17,12 +17,10 @@ async function test1Redirection() {
          `
         }
     })
-    const { data } = await req.data;
+    const res = await req.data;
+    const { data } = res;
     const { project } = data;
     const { isValid } = project;
-    if (req.data == null) {
-        return null;
-    }
     return isValid;
 }
 

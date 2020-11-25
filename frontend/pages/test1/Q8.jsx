@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import stl from "../../styles/quizUI.module.scss";
 import { useRouter } from 'next/router'
 import updateToisSimplifiedActionCompany from '../../lib/updateToisSimplifiedActionCompany';
@@ -8,25 +9,53 @@ import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import quizIllustration from '../../lotties/business-plan-or-chart-presentation.json'
 
 
+
+
+
+
 const Question8 = () => {
+    const [isValidProject, setIsValidProject] = useState('');
+    const componentDidMount = async () => {
+        const token = localStorage.getItem('afreesmartAcessToken') || '';
+        let req = await axios({
+            url: 'http://localhost:9100/graphql',
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            data: {
+                query: `
+                              query{
+                              project{
+                                isValid
+                              }
+                              }
+                  `
+            }
+        })
+        let res = await req.data;
+        const { data } = res;
+        const { project } = data;
+        const { isValid } = project
+        setIsValidProject(isValid)
+    }
+    componentDidMount();
     const router = useRouter();
     const [myBoolean, setMyBoolean] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
-    const onClickHandler = x => {
-        setIsClicked(true);
+    const onClickHandler = async (x) => {
+        await setIsClicked(true);
         if (isClicked) {
-            setMyBoolean(x)
+            await setMyBoolean(x)
             if (myBoolean == true || myBoolean == false) {
-                if (myBoolean == true) {
-                    updateToisSimplifiedActionCompany(myBoolean);
-                    router.push('./choise')
+                await updateToisSimplifiedActionCompany(myBoolean);
+                if (isValidProject == true) {
+                    await router.push('./choise')
                 }
-                if (myBoolean == false) {
-                    updateToisSimplifiedActionCompany(myBoolean);
-                    router.push('./sorry');
+                if (isValidProject == false) {
+                    await router.push('./sorry');
                 }
             }
-
         }
     }
     useEffect(() => {
