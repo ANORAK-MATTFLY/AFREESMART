@@ -1,5 +1,5 @@
 const {
-	gql
+  gql
 } = require("apollo-server-express");
 
 const typeDefs = gql`
@@ -19,11 +19,13 @@ const typeDefs = gql`
     projectsName: String!
     projectsDescription: String!
     webSiteLink: String!
+    companyName: String!
     hasAfricans: Boolean!
     isRegistredCompany: Boolean!
     isBasedInAfrica: Boolean!
     generatesMoney: Boolean!
     isSimplifiedActionCompany: Boolean!
+    isValid: Boolean!
     projectCategoryId: Int
     projectStatusId: Int
     userId: Int!
@@ -45,7 +47,7 @@ const typeDefs = gql`
     addProjectName(projectsName: String!): String!
     updateToProjectDescrption(projectsDescription: String!): String!
     updateToCompanyName(companyName: String!): String!
-    updateToWebSiteLink(webSiteLink: String!): String!
+    updateToWebSiteLink(webSiteLink: Boolean!): String!
     updateToHasAfricans(hasAfricans: Boolean!): String!
     updateToIsRegistredCompany(isRegistredCompany: Boolean!): String!
     updateToIsBasedInAfrica(isBasedInAfrica: Boolean!): String!

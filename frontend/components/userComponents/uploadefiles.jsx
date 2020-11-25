@@ -1,12 +1,12 @@
-import businessMindIllustration from '../../lotties/business-team.json';
+import filesUpload from '../../lotties/23803-projectmanagement.json';
 import LottieSuperObj from '../buttons/lottieFingerprint';
 
 
-const BusinessComponent = () => {
+const FilesUpload = () => {
     const obj = {
         loop: true,
         autoplay: true,
-        animationData: businessMindIllustration,
+        animationData: filesUpload,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -16,4 +16,4 @@ const BusinessComponent = () => {
     );
 }
 
-export default BusinessComponent;
+export default FilesUpload;

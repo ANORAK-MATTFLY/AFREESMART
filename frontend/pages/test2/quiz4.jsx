@@ -1,4 +1,5 @@
 import stl from '../../styles/quizUI.module.scss';
+import Link from 'next/link';
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import team from '../../lotties/10073-credit-card-error.json'
 
@@ -18,20 +19,24 @@ const Test2Quiz4 = () => {
                 <div className={stl.illustrationCard}>
                     <LottieSuperObj objectProps={obj} />
                 </div>
-                <h3>Quel est votre pourcentage de chiffre d'affaire enregistre en bank ?</h3>
+                <h3>Quel est le pourcentage de votre chiffre d'affaire enregistre en bank ?</h3>
                 <div className={stl.buttonSection}>
-                    <button className={stl.selectBtn}>
-                        50%
+                    <Link href={'./quiz5'}>
+                        <button className={stl.selectBtn}>
+                            50%
                     </button>
-                    <button className={stl.selectBtn}>
-                        90%
+                    </Link>
+                    <Link href={'./quiz5'}>
+                        <button className={stl.selectBtn}>
+                            90%
                     </button>
-                    <button className={stl.selectBtn}>
-                        Moins que ca
+                    </Link>
+                    <Link href={'./quiz5'}>
+                        <button className={stl.selectBtn}>
+                            Moins que ca
                     </button>
+                    </Link>
                 </div>
-
-
             </div>
         </div>
     );

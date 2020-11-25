@@ -1,7 +1,7 @@
 import axios from 'axios';
 async function updateToWebSiteLink(webSiteLink) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
-    if (webSiteLink) {
+    if (webSiteLink !== null) {
         await axios({
             url: 'http://localhost:9100/graphql',
             method: 'post',
@@ -10,14 +10,13 @@ async function updateToWebSiteLink(webSiteLink) {
             },
             data: {
                 query: `
-            mutation{
-                updateToWebSiteLink(webSiteLink:"${webSiteLink}")
-            }
-        `
+                mutation{
+                    updateToWebSiteLink(webSiteLink:${webSiteLink})
+                }
+            `
             }
         })
     }
-    return null;
 }
 
 export default updateToWebSiteLink;

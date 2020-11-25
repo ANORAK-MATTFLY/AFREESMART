@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import Link from 'next/link';
 import stl from "../../styles/quizUI.module.scss";
 import updateToWebSiteLink from '../../lib/updateToWebSiteLink';
 import MainLayout from '../../components/questionsLayout/layout';
@@ -36,8 +37,12 @@ const Test2Quiz5 = () => {
                         <h1>Avez-vous un plant de communication ?</h1>
                     </div>
                     <div className={stl.btnSection}>
-                        <button className={stl.yesBtn}>Oui</button>
-                        <button className={stl.noBtn}>Non</button>
+                        <Link href={'../home/mindset'}>
+                            <button className={stl.yesBtn}>Oui</button>
+                        </Link>
+                        <Link href={'../home/mindset'}>
+                            <button className={stl.noBtn}>Non</button>
+                        </Link>
                     </div>
                 </div>
             </motion.div>

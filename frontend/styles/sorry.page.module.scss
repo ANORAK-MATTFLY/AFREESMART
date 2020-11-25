@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import './includeMedia.scss';
+$font: 'Open Sans', sans-serif;
+$white: rgb(252, 252, 252);
+$border: 10px;
+$black: #414040;
+
+
+
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+    margin: 0 0 0 0;
+	height: 100vh;
+	font-family: $font;
+	color: $black;
+	background: linear-gradient(to right, #000046, #1cb5e0);
+	h2{
+	font-size: clamp(1em, 5vw, 1em);
+
+	}
+	p{
+        font-weight: bolder;
+        font-size: large;
+	}
+}
+
+
+.box{
+    display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 90%;
+	width: 70%;
+	padding: 3%;
+	background: #ffffff;
+    border-radius: 10px;
+    .illustrationBox{
+        width: 40%;
+        border-radius: 10px;
+    }
+}

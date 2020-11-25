@@ -1,7 +1,7 @@
 import axios from 'axios';
 async function updateToIsRegistredCompany(isRegistredCompany) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
-    if (isRegistredCompany) {
+    if (isRegistredCompany !== null) {
         await axios({
             url: 'http://localhost:9100/graphql',
             method: 'post',
@@ -10,14 +10,14 @@ async function updateToIsRegistredCompany(isRegistredCompany) {
             },
             data: {
                 query: `
-            mutation{
-                updateToIsRegistredCompany(isRegistredCompany:${isRegistredCompany})
-            }
-        `
+                mutation{
+                    updateToIsRegistredCompany(isRegistredCompany:${isRegistredCompany})
+                }
+            `
             }
         })
     }
-    return null;
 }
+
 
 export default updateToIsRegistredCompany;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 async function updateToGeneratesMoney(generatesMoney) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
-    if (generatesMoney) {
+    if (generatesMoney !== null) {
         await axios({
             url: 'http://localhost:9100/graphql',
             method: 'post',
@@ -10,14 +10,14 @@ async function updateToGeneratesMoney(generatesMoney) {
             },
             data: {
                 query: `
-                mutation{
-                    updateToGeneratesMoney(generatesMoney:${generatesMoney})
-                }
-        `
+                    mutation{
+                        updateToGeneratesMoney(generatesMoney:${generatesMoney})
+                    }
+            `
             }
         })
     }
-    return null;
 }
+
 
 export default updateToGeneratesMoney;

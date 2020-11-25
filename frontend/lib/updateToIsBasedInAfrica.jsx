@@ -1,7 +1,7 @@
 import axios from 'axios';
 async function updateToIsBasedInAfrica(isBasedInAfrica) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
-    if (isBasedInAfrica) {
+    if (isBasedInAfrica !== null) {
         await axios({
             url: 'http://localhost:9100/graphql',
             method: 'post',
@@ -10,14 +10,13 @@ async function updateToIsBasedInAfrica(isBasedInAfrica) {
             },
             data: {
                 query: `
-            mutation{
-                updateToIsBasedInAfrica(isBasedInAfrica:${isBasedInAfrica})
-            }
-        `
+                mutation{
+                    updateToIsBasedInAfrica(isBasedInAfrica:${isBasedInAfrica})
+                }
+            `
             }
         })
     }
-    return null;
 }
 
 export default updateToIsBasedInAfrica;

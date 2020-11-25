@@ -1,4 +1,5 @@
 import stl from '../../styles/quizUI.module.scss';
+import Link from 'next/link';
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import youngBusinessMan from '../../lotties/9886-growth.json'
 
@@ -20,18 +21,22 @@ const Test2Quiz3 = () => {
                 </div>
                 <h3>Quel est la somme que vous souhaitez lever en suivant notre programme ?</h3>
                 <div className={stl.buttonSection}>
-                    <button className={stl.selectBtn}>
-                        25.000$ - 100.000$
+                    <Link href={'./quiz4'}>
+                        <button className={stl.selectBtn}>
+                            25.000$ - 100.000$
                     </button>
-                    <button className={stl.selectBtn}>
-                        100.000$ - 300.000$
+                    </Link>
+                    <Link href={'./quiz4'}>
+                        <button className={stl.selectBtn}>
+                            100.000$ - 300.000$
                     </button>
-                    <button className={stl.selectBtn}>
-                        Moins que ca
+                    </Link>
+                    <Link href={'./quiz4'}>
+                        <button className={stl.selectBtn}>
+                            Moins que ca
                     </button>
+                    </Link>
                 </div>
-
-
             </div>
         </div>
     );

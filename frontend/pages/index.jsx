@@ -31,14 +31,12 @@ export default function Home() {
       <nav className={stl.headOfThePage}>
         <div className={stl.welcomeTextSection}>
           <motion.h1 className={stl.WelcomeText} initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }}>
-            Bienvenue chez AFREESMART ! <br />
-            La plateforme qui transforme
-            <br />
-            les entrepreneurs en leaders.
+
+
+            Nous investissons,<br /> accompagnons et créons les entreprises
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.4 }}>
-            Nous formons et finançons les entreprises les plus <br /> brillantes
-            et prometteuses,
+            Nous créons un écosystème qui permet de briser les barrières à la réussite entrepreneuriale : l’accès au financement et à une équipe expérimentée.
             <br /> vous pouvez vous inscrire dès maintenant !
           </motion.p>
           <RegisterButton />
@@ -78,11 +76,9 @@ export default function Home() {
             <div className={stl.roundCircle}>
               <FontAwesomeIcon icon={faUsers} />
             </div>
-            <h3>Notre strategie</h3>
+            <h3>Booster votre entreprise</h3>
             <p>
-              Nous vous connectont a notre large reseaux de serials
-              entrepreneurs, de chef d’entreprise et de spécialistes
-              multidisciplinaire en stratégie.
+              Booster votre entreprise : grâce à une procédure en ligne nous sélectionnons les ventures les plus prometteuse qui recevront un financement et un accompagnement.
             </p>
           </div>
 
@@ -92,9 +88,7 @@ export default function Home() {
             </div>
             <h3>Notre vision</h3>
             <p>
-              Notre Vision est de créer de la richesse sur le continent africain
-              en créant un écosystème industrialisé pour créer des synergies
-              entrepreneuriales.
+              Nous croyons que l'inclusion de l’entreprenariat est la clé au développement économique africain.
             </p>
           </div>
 

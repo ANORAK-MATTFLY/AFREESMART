@@ -1,7 +1,7 @@
 import axios from 'axios';
 async function updateToisSimplifiedActionCompany(isSimplifiedActionCompany) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
-    if (isSimplifiedActionCompany) {
+    if (isSimplifiedActionCompany !== null) {
         await axios({
             url: 'http://localhost:9100/graphql',
             method: 'post',
@@ -10,14 +10,13 @@ async function updateToisSimplifiedActionCompany(isSimplifiedActionCompany) {
             },
             data: {
                 query: `
-            mutation{
-                updateToisSimplifiedActionCompany(isSimplifiedActionCompany:${isSimplifiedActionCompany})
-            }
-        `
+                mutation{
+                    updateToisSimplifiedActionCompany(isSimplifiedActionCompany:${isSimplifiedActionCompany})
+                }
+            `
             }
         })
     }
-    return null;
 }
 
 export default updateToisSimplifiedActionCompany;

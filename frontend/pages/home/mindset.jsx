@@ -1,3 +1,4 @@
+import stl from '../../styles/client.homepage.module.scss'
 import MindSet from '../../components/userComponents/mindSetComponent';
 import HomePageLayout from '../../components/userComponents/homePageLayout';
 import TitleSection from '../../components/userComponents/titleSection';
@@ -7,7 +8,6 @@ import education from '../../lotties/education.json';
 import achievement from '../../lotties/achievement.json';
 import motivation from '../../lotties/motivation.json';
 import power from '../../lotties/youth-power.json'
-import stl from '../../styles/client.homepage.module.scss'
 
 
 

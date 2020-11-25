@@ -1,7 +1,7 @@
 import axios from 'axios';
 async function loginRequest(projectsName) {
-    const token = localStorage.getItem('afreesmartAcessToken') || '';
-    let req = await axios({
+    const token = localStorage.getItem('afreesmartAcessToken') || "";
+    await axios({
         url: 'http://localhost:9100/graphql',
         method: 'post',
         headers: {
@@ -15,7 +15,6 @@ async function loginRequest(projectsName) {
         `
         }
     })
-    let acessToken = await req.data;
 }
 
 export default loginRequest;

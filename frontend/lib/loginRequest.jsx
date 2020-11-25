@@ -11,9 +11,9 @@ async function loginRequest(email, password) {
         `
     }
   })
-  let acessToken = await req.data;
+  let acessToken = await req.data || "";
   if (acessToken) {
-    localStorage.setItem('afreesmartAcessToken', acessToken.data.login);
+    localStorage.setItem('afreesmartAcessToken', acessToken.data.login || "");
   }
   return acessToken;
 }

@@ -136,6 +136,12 @@ const resolvers = {
 			} else {
 				throw new Error("Something wrong happened...");
 			}
+			if (webSiteLink === false) {
+				await Project.update(
+					{ isValid: await false },
+					{ where: { userId: user.id } }
+				)
+			}
 			return "Success";
 		},
 		async updateToHasAfricans(_, { hasAfricans }, { user }) {
