@@ -243,8 +243,93 @@ const resolvers = {
 					{ where: { userId: user.id } }
 				)
 			}
-			return "Seccess";
+			return "Success";
 		},
+		async updateCompanyType(_, { typeId }, { user }) {
+			if (!user) {
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if (user) {
+				await Project.update(
+					{ typeId: await typeId },
+					{ where: { userId: user.id } }
+				)
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateExpectedTurnover(_, { previousTurnover }, { user }) {
+			if (!user) {
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if (user) {
+				await Project.update(
+					{ previousTurnover: await previousTurnover },
+					{ where: { userId: user.id } }
+				)
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateActualTurnover(_, { actualTurnover }, { user }) {
+			if (!user) {
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if (user) {
+				await Project.update(
+					{ actualTurnover: await actualTurnover },
+					{ where: { userId: user.id } }
+				)
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateDailyPeopleInvolved(_, { dailyPeopleInvolved }, { user }) {
+			if (!user) {
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if (user) {
+				await Project.update(
+					{ dailyPeopleInvolved: await dailyPeopleInvolved },
+					{ where: { userId: user.id } }
+				)
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateFundRaiseExpectation(_, { fundRaiseExpectation }, { user }) {
+			if (!user) {
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if (user) {
+				await Project.update(
+					{ fundRaiseExpectation: await fundRaiseExpectation },
+					{ where: { userId: user.id } }
+				)
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateHasCampaign(_, { hasCampaign }, { user }) {
+			if (!user) {
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if (user) {
+				await Project.update(
+					{ hasCampaign: await hasCampaign },
+					{ where: { userId: user.id } }
+				)
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+
 	},
 };
 

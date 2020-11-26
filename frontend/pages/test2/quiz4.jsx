@@ -1,10 +1,28 @@
 import stl from '../../styles/quizUI.module.scss';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import team from '../../lotties/10073-credit-card-error.json'
-
+import updateToActualTurnover from '../../lib/updateActualTurnover';
 
 const Test2Quiz4 = () => {
+    const router = useRouter();
+    const [choice, setChoice] = useState(null)
+    const [isClicked, setIsClicked] = useState(false);
+    const onClickHandler = async (x) => {
+        setIsClicked(true);
+        if (isClicked) {
+            await setChoice(x)
+            if (choice) {
+                await updateToActualTurnover(choice);
+                router.push('./quiz5');
+            }
+        }
+    }
+    useEffect(() => {
+        onClickHandler()
+    }, [choice])
     const obj = {
         loop: true,
         autoplay: true,
@@ -21,21 +39,22 @@ const Test2Quiz4 = () => {
                 </div>
                 <h3>Quel est le pourcentage de votre chiffre d'affaire enregistre en bank ?</h3>
                 <div className={stl.buttonSection}>
-                    <Link href={'./quiz5'}>
-                        <button className={stl.selectBtn}>
-                            50%
+
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("50% - 60%")}>
+                        50% - 60%
                     </button>
-                    </Link>
-                    <Link href={'./quiz5'}>
-                        <button className={stl.selectBtn}>
-                            90%
+
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("60% - 70%")}>
+                        60% - 70%
                     </button>
-                    </Link>
-                    <Link href={'./quiz5'}>
-                        <button className={stl.selectBtn}>
-                            Moins que ca
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("70% - 80%")}>
+                        70% - 80%
                     </button>
-                    </Link>
+
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("90% - 100%")}>
+                        90% - 100%
+                    </button>
+
                 </div>
             </div>
         </div>

@@ -34,12 +34,37 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				unique: true,
 			},
-			webSiteLink: {
+			previousTurnover: {
 				type: DataTypes.STRING,
+				defaultValue: "",
+				allowNull: true,
+
+			},
+			actualTurnover: {
+				type: DataTypes.STRING,
+				defaultValue: "",
+				allowNull: true,
+			},
+			dailyPeopleInvolved: {
+				type: DataTypes.STRING,
+				defaultValue: "",
+				allowNull: true,
+			},
+			fundRaiseExpectation: {
+				type: DataTypes.STRING,
+				defaultValue: "",
+				allowNull: true,
+			},
+			hasCampaign: {
+				type: DataTypes.BOOLEAN,
+			 	allowNull: true,
+			},
+			webSiteLink: {
+				type: DataTypes.BOOLEAN,
 				allowNull: true,
 			},
 			projectsDescription: {
-				type: DataTypes.BOOLEAN,
+				type: DataTypes.STRING,
 				allowNull: true,
 			},
 			hasAfricans: {

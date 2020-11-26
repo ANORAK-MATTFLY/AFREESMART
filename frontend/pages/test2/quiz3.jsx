@@ -1,10 +1,30 @@
 import stl from '../../styles/quizUI.module.scss';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import youngBusinessMan from '../../lotties/9886-growth.json'
+import updateFundRaise from '../../lib/updateFund';
 
 
 const Test2Quiz3 = () => {
+    const router = useRouter();
+    const [choice, setChoice] = useState(null)
+    const [isClicked, setIsClicked] = useState(false);
+    const onClickHandler = async (x) => {
+        setIsClicked(true);
+        if (isClicked) {
+            await setChoice(x)
+            if (choice) {
+                await updateFundRaise(choice);
+                console.log(choice);
+                router.push('./quiz4');
+            }
+        }
+    }
+    useEffect(() => {
+        onClickHandler()
+    }, [choice])
     const obj = {
         loop: true,
         autoplay: true,
@@ -21,21 +41,21 @@ const Test2Quiz3 = () => {
                 </div>
                 <h3>Quel est la somme que vous souhaitez lever en suivant notre programme ?</h3>
                 <div className={stl.buttonSection}>
-                    <Link href={'./quiz4'}>
-                        <button className={stl.selectBtn}>
-                            25.000$ - 100.000$
+
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("25.000$ - 100.000$")}>
+                        25.000$ - 100.000$
                     </button>
-                    </Link>
-                    <Link href={'./quiz4'}>
-                        <button className={stl.selectBtn}>
-                            100.000$ - 300.000$
+
+
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("100.000$ - 300.000$")}>
+                        100.000$ - 300.000$
                     </button>
-                    </Link>
-                    <Link href={'./quiz4'}>
-                        <button className={stl.selectBtn}>
-                            Moins que ca
+
+
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("Moins de 25K Dollar")}>
+                        Moins que ca
                     </button>
-                    </Link>
+
                 </div>
             </div>
         </div>

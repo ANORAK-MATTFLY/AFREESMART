@@ -16,10 +16,16 @@ const typeDefs = gql`
   }
   	type Project {
     id: Int!
+    typeId: Int!
     projectsName: String!
     projectsDescription: String!
     webSiteLink: String!
     companyName: String!
+    previousTurnover: String!
+    actualTurnover: String!
+    dailyPeopleInvolved: String!
+    fundRaiseExpectation: String!
+    hasCampaign: Boolean!
     hasAfricans: Boolean!
     isRegistredCompany: Boolean!
     isBasedInAfrica: Boolean!
@@ -52,9 +58,13 @@ const typeDefs = gql`
     updateToIsRegistredCompany(isRegistredCompany: Boolean!): String!
     updateToIsBasedInAfrica(isBasedInAfrica: Boolean!): String!
     updateToGeneratesMoney(generatesMoney: Boolean!): String!
-    updateToisSimplifiedActionCompany(
-      isSimplifiedActionCompany: Boolean!
-    ): String!
+    updateToisSimplifiedActionCompany(isSimplifiedActionCompany: Boolean!): String!
+    updateCompanyType(typeId: Int!): String!
+    updateExpectedTurnover(previousTurnover: String!): String!
+    updateActualTurnover(actualTurnover: String!): String!
+    updateDailyPeopleInvolved(dailyPeopleInvolved: String!): String!
+    updateFundRaiseExpectation(fundRaiseExpectation: String!): String!
+    updateHasCampaign(hasCampaign: Boolean!): String!
   }
 `;
 
