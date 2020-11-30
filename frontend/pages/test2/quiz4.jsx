@@ -33,6 +33,9 @@ const Test2Quiz4 = () => {
     };
     return (
         <div className={stl.container}>
+            <div className={stl.progressBar}>
+                <div className={stl.liquid7}></div>
+            </div>
             <div className={stl.quizBox}>
                 <div className={stl.illustrationCard}>
                     <LottieSuperObj objectProps={obj} />
@@ -40,15 +43,15 @@ const Test2Quiz4 = () => {
                 <h3>Quel est le pourcentage de votre chiffre d'affaire enregistre en bank ?</h3>
                 <div className={stl.buttonSection}>
 
-                    <button className={stl.selectBtn} onClick={() => onClickHandler("50% - 60%")}>
-                        50% - 60%
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("10% - 30%")}>
+                        10% - 30%
                     </button>
 
-                    <button className={stl.selectBtn} onClick={() => onClickHandler("60% - 70%")}>
-                        60% - 70%
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("50% - 70%")}>
+                        50% - 70%
                     </button>
-                    <button className={stl.selectBtn} onClick={() => onClickHandler("70% - 80%")}>
-                        70% - 80%
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("70% - 90%")}>
+                        70% - 90%
                     </button>
 
                     <button className={stl.selectBtn} onClick={() => onClickHandler("90% - 100%")}>

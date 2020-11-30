@@ -22,15 +22,20 @@ const Question1 = () => {
     }
     return (
         <MainLayout>
+            <div className={stl.progressBar}>
+                <div className={stl.liquid1}></div>
+            </div>
             <motion.form
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 300 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 className={stl.form}
                 onSubmit={handleSubmit(onSubmit)}
             >
-                <GobackBtn />
-                <div>
+                <div className={stl.formLeftSide}>
+                    <GobackBtn />
+                </div>
+                <div className={stl.formRightSide}>
                     <label className={stl.label} htmlFor="projectName">
                         Quel est le nom de votre projet ?
 					</label>
@@ -44,8 +49,8 @@ const Question1 = () => {
                     />
                     {errors.projectName && errors.projectName.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
                     {errors.projectName && errors.projectName.type == "pattern" && <p>Le format de l'adresse enter est invalide</p>}
+                    <button type="submit" disabled={submitting} className={stl.btn}>Suivant</button>
                 </div>
-                <button type="submit" disabled={submitting} className={stl.btn}>Suivant</button>
             </motion.form>
         </MainLayout>
     );

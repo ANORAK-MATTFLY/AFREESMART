@@ -8,8 +8,8 @@ $black: rgb(65, 64, 64);
 
 .container {
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: space-evenly;
 	align-items: center;
 	margin: 0 0 0 0;
 	height: 100vh;
@@ -21,6 +21,106 @@ $black: rgb(65, 64, 64);
 	}
 	p{
 		font-weight: bolder;
+    }
+}
+
+.progressBar{
+    height: 3rem;
+    width: 50%;
+    border-radius: 3rem;
+    border: 2px rgba(81, 218, 218, 0.795) solid;
+}
+.progressBar > div{
+    height: 100%;
+    float: left;
+    border-radius: 3rem;
+    background: linear-gradient(to right, #35c2c2, #941378);;
+}
+.liquid1{
+    width: 20%;
+    animation: liquid1 3s;
+}
+@keyframes liquid1{
+    0%{
+        width:0;
+    }
+    100%{
+        width:20%
+    }
+}
+
+.liquid4{
+    width: 44%;
+    animation: liquid4 3s;
+}
+@keyframes liquid4{
+    0%{
+        width:0;
+    }
+    100%{
+        width:44%
+    }
+}
+
+.liquid5{
+    width: 55%;
+    animation: liquid5 3s;
+}
+@keyframes liquid5{
+    0%{
+        width:0;
+    }
+    100%{
+        width:55%
+    }
+}
+.liquid6{
+    width: 66%;
+    animation: liquid6 3s;
+}
+@keyframes liquid6{
+    0%{
+        width:0;
+    }
+    100%{
+        width:66%
+    }
+}
+.liquid7{
+    width: 77%;
+    animation: liquid7 3s;
+}
+@keyframes liquid7{
+    0%{
+        width:0;
+    }
+    100%{
+        width:77%
+    }
+}
+
+.liquid8{
+    width: 88%;
+    animation: liquid8 3s;
+}
+@keyframes liquid8{
+    0%{
+        width:0;
+    }
+    100%{
+        width:88%
+    }
+}
+.liquid9{
+    width: 100%;
+    animation: liquid9 3s;
+}
+@keyframes liquid9{
+    0%{
+        width:0%;
+    }
+    100%{
+        width:100%
     }
 }
 

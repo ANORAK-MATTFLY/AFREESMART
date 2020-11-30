@@ -14,7 +14,7 @@ const typeDefs = gql`
     projectId: Int
     roleId: Int
   }
-  	type Project {
+  type Project {
     id: Int!
     typeId: Int!
     projectsName: String!
@@ -37,12 +37,47 @@ const typeDefs = gql`
     userId: Int!
     }
 
+    type Mindset{
+      id: Int!
+      motivations: String
+      family: String
+      education: String
+      ethic: String
+      philosophies: String
+      diploma: String
+      strength: String
+      weaknesses: String
+      ambitions: String
+      achievements: String
+    }
+    type AbilityToMakeMoney{
+      id: Int!
+      moneyInBank: String
+      debt: String
+    }
+
+    type BusinessMind{
+      idol: String
+      careerAchievement: String
+      companyCreatedPreviously: String
+      failuresAsEntrepreneur: String
+      numberOfEmployeesManaged: String
+    }
+
   type Query {
     current: User
     project: Project
+    mindSet: Mindset
+    businessMind: BusinessMind
+    moneyMaker: AbilityToMakeMoney
+    getAllUsers: [User!]
+    getAllProject: [Project!]
+    getProjectById(id:ID): Project!
+    getMindSetById(id:ID): Mindset!
   }
 
   type Mutation {
+    # Auth related mutations start here.
     register(
       name: String!
       lastName: String!
@@ -50,6 +85,7 @@ const typeDefs = gql`
       password: String!
     ): String!
     login(email: String!, password: String!): String!
+    # Project related mutations stat here.
     addProjectName(projectsName: String!): String!
     updateToProjectDescrption(projectsDescription: String!): String!
     updateToCompanyName(companyName: String!): String!
@@ -65,6 +101,20 @@ const typeDefs = gql`
     updateDailyPeopleInvolved(dailyPeopleInvolved: String!): String!
     updateFundRaiseExpectation(fundRaiseExpectation: String!): String!
     updateHasCampaign(hasCampaign: Boolean!): String!
+    updateProjectStatus(projectStatusId: Int!, id:ID): String!
+    # Project related mutations ends here.
+    # Mindset related mutations start here.
+    updateMindset(motivations: String, family: String, education: String, ethic: String, philosophies: String, diploma: String, strength: String, weaknesses: String, ambitions: String, achievements: String): String!
+    # AbilityToMakeMoney related mutations start here.
+    updateBusinessMind(
+      idol: String
+      careerAchievement: String
+      companyCreatedPreviously: String
+      failuresAsEntrepreneur: String
+      numberOfEmployeesManaged: String
+    ): String!
+    updateAbilityToMakeMoney(moneyInBank: String, debt: String): String!
+    # specific queries
   }
 `;
 

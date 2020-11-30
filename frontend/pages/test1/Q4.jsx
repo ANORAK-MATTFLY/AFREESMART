@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import stl from "../../styles/quizUI.module.scss";
 import updateToIsRegistredCompany from '../../lib/updateToIsRegistredCompany'
-import MainLayout from '../../components/questionsLayout/layout';
 import { motion } from "framer-motion";
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import quizIllustration from '../../lotties/legal.json'
@@ -36,9 +35,12 @@ const Question4 = () => {
 
     return (
         <div className={stl.container}>
+            <div className={stl.progressBar}>
+                <div className={stl.liquid5}></div>
+            </div>
             <motion.div
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 300 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 className={stl.quizContainer}
             >

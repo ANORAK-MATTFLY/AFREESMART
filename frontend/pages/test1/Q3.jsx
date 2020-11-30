@@ -34,9 +34,12 @@ const Question3 = () => {
     };
     return (
         <div className={stl.container}>
+            <div className={stl.progressBar}>
+                <div className={stl.liquid4}></div>
+            </div>
             <motion.div
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 300 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 className={stl.quizContainer}
             >

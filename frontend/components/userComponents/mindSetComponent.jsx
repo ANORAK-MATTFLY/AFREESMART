@@ -1,5 +1,4 @@
-import TitleSection from './titleSection';
-import MindSetIllustration from '../../lotties/MindSet.json';
+import MindSetIllustration from '../../lotties/mindset.json';
 import LottieSuperObj from '../buttons/lottieFingerprint';
 
 

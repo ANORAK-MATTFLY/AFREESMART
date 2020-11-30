@@ -20,15 +20,20 @@ const Question2 = () => {
     }
     return (
         <MainLayout>
+            <div className={stl.progressBar}>
+                <div className={stl.liquid3}></div>
+            </div>
             <motion.form
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 300 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 className={stl.form}
                 onSubmit={handleSubmit(onSubmit)}
             >
-                <GobackBtn />
-                <div>
+                <div className={stl.formLeftSide}>
+                    <GobackBtn />
+                </div>
+                <div className={stl.formRightSide}>
                     <label className={stl.label} htmlFor="description">
                         Décrivez votre projet en quelques mots
                     </label>
@@ -41,8 +46,8 @@ const Question2 = () => {
                         ref={register({ required: true })}
                     />
                     {errors.company && errors.company.type == "required" && <p>Ce champ ne peut pas etre vide</p>}
+                    <button type="submit" disabled={submitting} className={stl.btn}>Suivant</button>
                 </div>
-                <button type="submit" disabled={submitting} className={stl.btn}>Suivant</button>
             </motion.form>
         </MainLayout>
     );

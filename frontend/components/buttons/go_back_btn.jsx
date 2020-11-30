@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import stl from '../../styles/form.module.scss'
+import stl from '../../styles/questionForm.module.scss'
 
 const GobackBtn = () => {
     const router = useRouter();

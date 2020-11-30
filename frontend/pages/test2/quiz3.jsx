@@ -35,6 +35,9 @@ const Test2Quiz3 = () => {
     };
     return (
         <div className={stl.container}>
+            <div className={stl.progressBar}>
+                <div className={stl.liquid5}></div>
+            </div>
             <div className={stl.quizBox}>
                 <div className={stl.illustrationCard}>
                     <LottieSuperObj objectProps={obj} />

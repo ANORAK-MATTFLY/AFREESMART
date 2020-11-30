@@ -16,7 +16,9 @@ import quizIllustration from '../../lotties/business-plan-or-chart-presentation.
 const Question8 = () => {
     const [isValidProject, setIsValidProject] = useState('');
     const componentDidMount = async () => {
-        const token = localStorage.getItem('afreesmartAcessToken') || '';
+        if(typeof window !== "undefined"){
+            var token = localStorage.getItem('afreesmartAcessToken') || '';
+        }
         let req = await axios({
             url: 'http://localhost:9100/graphql',
             method: 'post',
@@ -36,8 +38,10 @@ const Question8 = () => {
         let res = await req.data;
         const { data } = res;
         const { project } = data;
-        const { isValid } = project
-        setIsValidProject(isValid)
+        if (project !== null) {
+            const { isValid } = project
+            setIsValidProject(isValid)
+        }
     }
     componentDidMount();
     const router = useRouter();
@@ -71,9 +75,12 @@ const Question8 = () => {
     };
     return (
         <div className={stl.container}>
+            <div className={stl.progressBar}>
+                <div className={stl.liquid9}></div>
+            </div>
             <motion.div
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 300 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 className={stl.quizContainer}
             >

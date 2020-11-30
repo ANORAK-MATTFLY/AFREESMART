@@ -1,4 +1,4 @@
-const { User, Project } = require('../models');
+const { User, Project, Mindset, BusinessMind, AbilityToManageMoney } = require('../models');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const fs = require('fs');
@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const resolvers = {
 	Query: {
-		async current(parent, args, { user }) {
+		async current(_, args, { user }) {
 			if (user) {
 				return await User.findOne({
 					where: {
@@ -16,9 +16,66 @@ const resolvers = {
 				});
 			}
 			throw new Error("Sorry, you're not an authenticated user!");
+		},
+		async mindSet(_, args, { user }) {
+			if (user) {
+				return await Mindset.findOne({
+					where: {
+						id: user.id
+					},
+				});
+			}
+			throw new Error("Sorry, you're not an authenticated user!");
+		},
+		async getAllProject(_, args, ctx) {
+			return await Project.findAll();
+		},
+		async getProjectById(_, { id }, ctx) {
+			const project = await Project.findOne({
+				where: {
+					id: id,
+				}
+			});
+			if (!project) {
+				throw new Error("Sorry there's no project with that id")
+			}
+			return project;
+		},
+
+		async getAllUsers(_, args, ctx) {
+			return await User.findAll();
+		},
+
+		async getMindSetById(_, { id }, ctx) {
+			return await Mindset.findOne({
+				where: {
+					id: id
+				},
+			});
+		},
+		async businessMind(_, args, { user }) {
+			if (user) {
+				return await BusinessMind.findOne({
+					where: {
+						id: user.id
+					},
+				});
+			}
+			throw new Error("Sorry, you're not an authenticated user!");
 
 		},
-		async project(parent, args, { user }) {
+		async moneyMaker(_, args, { user }) {
+			if (user) {
+				return await AbilityToManageMoney.findOne({
+					where: {
+						id: user.id
+					},
+				});
+			}
+			throw new Error("Sorry, you're not an authenticated user!");
+
+		},
+		async project(_, args, { user }) {
 			return Project.findOne({
 				where: {
 					userId: user.id
@@ -36,6 +93,15 @@ const resolvers = {
 				roleId: await 1,
 				password: await bcrypt.hash(password, 10),
 			});
+			const mindset = await Mindset.create({
+				id: await user.id
+			})
+			const businessMind = await BusinessMind.create({
+				id: await user.id
+			})
+			const moneyMaker = await AbilityToManageMoney.create({
+				id: await user.id
+			})
 			User.update(
 				{
 					acessToken: await jsonwebtoken.sign(
@@ -47,7 +113,18 @@ const resolvers = {
 						{
 							expiresIn: '1y',
 						}
-					)
+					),
+					mindsetId: await mindset.id,
+					businessMindId: await businessMind.id,
+					AbilityId: await moneyMaker.id
+
+				},
+				{ where: { id: user.id } }
+			)
+
+			await User.update(
+				{
+					mindsetId: mindset.id
 				},
 				{ where: { id: user.id } }
 			)
@@ -287,6 +364,17 @@ const resolvers = {
 			}
 			return "Success";
 		},
+		async updateProjectStatus(_, { projectStatusId, id }, ctx) {
+			const updatedProject = await Project.update(
+				{ projectStatusId: await projectStatusId },
+				{ where: { id } }
+			);
+			if (updatedProject) {
+				return `"${updatedProject}"`;
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+		},
 		async updateDailyPeopleInvolved(_, { dailyPeopleInvolved }, { user }) {
 			if (!user) {
 				throw new Error("Sorry you're not an authenticated user...")
@@ -329,7 +417,68 @@ const resolvers = {
 			}
 			return "Success";
 		},
-
+		async updateMindset(_, { motivations, family, education, ethic, philosophies, diploma, strength, weaknesses, ambitions, achievements }, { user }) {
+			if (!user) {
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if (user) {
+				await Mindset.update(
+					{
+						motivations,
+						family,
+						education,
+						ethic,
+						philosophies,
+						diploma,
+						strength,
+						weaknesses,
+						ambitions,
+						achievements
+					},
+					{ where: { id: user.id } }
+				)
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateBusinessMind(_, { idol, careerAchievement, companyCreatedPreviously, failuresAsEntrepreneur, numberOfEmployeesManaged }, { user }) {
+			if (!user) {
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if (user) {
+				await BusinessMind.update(
+					{
+						idol,
+						careerAchievement,
+						companyCreatedPreviously,
+						failuresAsEntrepreneur,
+						numberOfEmployeesManaged
+					},
+					{ where: { id: user.id } }
+				)
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateAbilityToMakeMoney(_, { moneyInBank, debt }, { user }) {
+			if (!user) {
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if (user) {
+				await AbilityToManageMoney.update(
+					{
+						moneyInBank,
+						debt
+					},
+					{ where: { id: user.id } }
+				)
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
 	},
 };
 
