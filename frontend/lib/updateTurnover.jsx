@@ -10,7 +10,7 @@ async function updateExpectedTurnover(str) {
         data: {
             query: `
                     mutation{
-                        updateExpectedTurnover(previousTurnover:"${str}")
+                        updateProject(previousTurnover:"${str}")
                     }
             `
         }

@@ -11,7 +11,7 @@ async function updateToHasAfricans(hasAfricans) {
             data: {
                 query: `
                     mutation{
-                        updateToHasAfricans(hasAfricans:${hasAfricans})
+                        updateProject(hasAfricans:${hasAfricans})
                     }
             `
             }

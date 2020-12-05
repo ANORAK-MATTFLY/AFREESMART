@@ -11,7 +11,7 @@ async function updateToisSimplifiedActionCompany(isSimplifiedActionCompany) {
             data: {
                 query: `
                 mutation{
-                    updateToisSimplifiedActionCompany(isSimplifiedActionCompany:${isSimplifiedActionCompany})
+                    updateProject(isSimplifiedActionCompany:${isSimplifiedActionCompany})
                 }
             `
             }

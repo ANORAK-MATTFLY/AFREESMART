@@ -11,7 +11,7 @@ async function updateToGeneratesMoney(generatesMoney) {
             data: {
                 query: `
                     mutation{
-                        updateToGeneratesMoney(generatesMoney:${generatesMoney})
+                        updateProject(generatesMoney:${generatesMoney})
                     }
             `
             }

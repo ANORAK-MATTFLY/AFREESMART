@@ -1,14 +1,62 @@
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import stl from '../../styles/admin.dashboard.module.scss';
+import { useRouter } from 'next/router';
+import FileUploadSection from '../../components/admincmt/fileuploadesection';
+
 
 const AdminHomePage = ({ projects }) => {
+    const [role, setRole] = useState(null);
+    const router = useRouter();
+    const handelLogout = () => {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('afreesmartAcessToken');
+        }
+        router.push('/login')
+    }
+
+    const getRole = async () => {
+        if (typeof window !== 'undefined') {
+            var token = localStorage.getItem('afreesmartAcessToken') || '';
+        }
+        const req = await axios({
+            url: 'http://localhost:9100/graphql',
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            data: {
+                query: `
+                    query{
+                        current{
+                            roleId
+                        }
+                    }
+                `
+            }
+        })
+        if (req.data.data.current !== null) {
+            var res = await req.data.data.current.roleId;
+        }
+        setRole(res);
+    }
+    getRole()
+
+
+    if ((role !== null) || typeof window !== 'undefined') {
+        const token = localStorage.getItem('afreesmartAcessToken');
+        if ((!token) || (role == 1)) {
+            router.push('/login');
+        }
+    }
+
 
     return (
         <div className={stl.container}>
             <div className={stl.navBar}>
                 <h1>Tableau de bord AFREESMART</h1>
-                <button className={stl.btn}>Deconexion</button>
+                <button className={stl.btn} onClick={() => handelLogout()}>Deconexion</button>
             </div>
             <div className={stl.tableSquare}>
                 <table className={stl.table}>
@@ -37,7 +85,10 @@ const AdminHomePage = ({ projects }) => {
                         ))}
                     </tbody>
                 </table>
+                <FileUploadSection />
             </div>
+
+
         </div>
     );
 }

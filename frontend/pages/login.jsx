@@ -2,10 +2,10 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import stl from "../styles/login.module.scss";
 import { motion } from "framer-motion";
-import GobackBtn from '../components/buttons/go_back_btn'
+import btn from '../styles/questionForm.module.scss';
 import loginRequest from '../lib/loginRequest';
 import { useRouter } from 'next/router'
-
+import Link from 'next/link';
 
 
 export default function Home() {
@@ -16,10 +16,10 @@ export default function Home() {
     await setSubmitting(true);
     await loginRequest(userInfo.email, userInfo.password);
     await setSubmitting(false);
-    if (loginRequest) {
-      await loginRequest(userInfo.email, userInfo.password);
-      await router.push('./user_session/homepage');
-    }
+
+    await loginRequest(userInfo.email, userInfo.password);
+    await router.push('./loginrouter');
+
   }
   return (
     <div className={stl.container}>
@@ -31,7 +31,10 @@ export default function Home() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div>
-          <GobackBtn />
+          <Link href={'/'}>
+            <div className={btn.goBackBtn}>Retour</div>
+          </Link>
+
           <label className={stl.label} htmlFor="name">
             Email
           </label>

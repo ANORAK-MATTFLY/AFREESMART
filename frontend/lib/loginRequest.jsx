@@ -1,5 +1,9 @@
 import axios from 'axios';
 async function loginRequest(email, password) {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('afreesmartAcessToken')
+  }
+
   let req = await axios({
     url: 'http://localhost:9100/graphql',
     method: 'post',

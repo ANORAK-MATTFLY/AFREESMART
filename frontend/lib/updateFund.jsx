@@ -10,7 +10,7 @@ async function updateFundRaise(str) {
         data: {
             query: `
                     mutation{
-                        updateFundRaiseExpectation(fundRaiseExpectation:"${str}")
+                        updateProject(fundRaiseExpectation:"${str}")
                     }
             `
         }

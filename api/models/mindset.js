@@ -10,16 +10,6 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Mindset.hasOne(models.User, {
-                as: 'Mindsets',
-                foreignKey: 'mindsetId',
-                allowNull: false,
-            });
-            models.User.belongsTo(Mindset, {
-                foreignKey: 'mindsetId',
-                allowNull: false,
-            });
-            models.User.sync();
         }
     }
     Mindset.init(

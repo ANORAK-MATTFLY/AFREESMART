@@ -11,7 +11,7 @@ async function updateToIsBasedInAfrica(isBasedInAfrica) {
             data: {
                 query: `
                 mutation{
-                    updateToIsBasedInAfrica(isBasedInAfrica:${isBasedInAfrica})
+                    updateProject(isBasedInAfrica:${isBasedInAfrica})
                 }
             `
             }

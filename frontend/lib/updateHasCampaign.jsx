@@ -10,7 +10,7 @@ async function updateHasCampaign(bool) {
         data: {
             query: `
                 mutation{
-                    updateHasCampaign(hasCampaign:${bool})
+                    updateProject(hasCampaign:${bool})
                 }
             `
         }

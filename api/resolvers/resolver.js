@@ -1,7 +1,6 @@
-const { User, Project, Mindset, BusinessMind, AbilityToManageMoney } = require('../models');
+const { User, Project, Mindset, BusinessMind, AbilityToManageMoney, ProjectDoc, TemplateDoc } = require('../models');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
-const fs = require('fs');
 require('dotenv').config();
 
 
@@ -53,6 +52,12 @@ const resolvers = {
 				},
 			});
 		},
+		async getTemplateById(root, { id }, ctx) {
+			return await TemplateDoc.findOne({
+				where: { id }
+			});
+
+		},
 		async businessMind(_, args, { user }) {
 			if (user) {
 				return await BusinessMind.findOne({
@@ -81,7 +86,7 @@ const resolvers = {
 					userId: user.id
 				},
 			});
-		}
+		},
 	},
 
 	Mutation: {
@@ -93,16 +98,25 @@ const resolvers = {
 				roleId: await 1,
 				password: await bcrypt.hash(password, 10),
 			});
-			const mindset = await Mindset.create({
+			await Mindset.create({
 				id: await user.id
 			})
-			const businessMind = await BusinessMind.create({
+			await BusinessMind.create({
 				id: await user.id
 			})
-			const moneyMaker = await AbilityToManageMoney.create({
+			await AbilityToManageMoney.create({
 				id: await user.id
 			})
-			User.update(
+			await Project.create({
+				id: await user.id,
+				userId: await user.id
+			})
+			await ProjectDoc.create(
+				{ userId: user.id },
+			)
+
+
+			await User.update(
 				{
 					acessToken: await jsonwebtoken.sign(
 						{
@@ -113,18 +127,7 @@ const resolvers = {
 						{
 							expiresIn: '1y',
 						}
-					),
-					mindsetId: await mindset.id,
-					businessMindId: await businessMind.id,
-					AbilityId: await moneyMaker.id
-
-				},
-				{ where: { id: user.id } }
-			)
-
-			await User.update(
-				{
-					mindsetId: mindset.id
+					)
 				},
 				{ where: { id: user.id } }
 			)
@@ -150,273 +153,134 @@ const resolvers = {
 
 			return user.acessToken;
 		},
-		async addProjectName(_, { projectsName }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
+		async updateUserRole(root, { roleId, id }, ctx) {
+			const updatedUser = await User.update(
+				{ roleId },
+				{ where: { id: id } }
+			)
+			if (!updatedUser) {
+				return "Success!!"
 			}
-			const project = await Project.create({
-				projectsName,
-				projectCategoryId: await 1,
-				projectStatusId: await 1,
-				userId: user.id
+			return "Sorry something went wrong...";
+		},
+		async deleteProject(root, { id }, ctx) {
+			const deletedProject = await Project.destroy({
+				where: { id }
 			})
+			if (!deletedProject) {
+				return "Success"
+			}
+			return "Sorry something went wrong..."
+		},
+		async updateProject(root, {
+			typeId,
+			projectsName,
+			projectsDescription,
+			webSiteLink,
+			companyName,
+			previousTurnover,
+			actualTurnover,
+			dailyPeopleInvolved,
+			fundRaiseExpectation,
+			hasCampaign,
+			hasAfricans,
+			isRegistredCompany,
+			isBasedInAfrica,
+			generatesMoney,
+			isSimplifiedActionCompany,
+			projectCategoryId,
+			projectStatusId,
+			userId }, { user }) {
+			if (!user) {
+				throw new Error("Sorry you're not an authenticated user...")
+			}
+			if (user) {
+				await Project.update(
+					{
+						typeId,
+						projectsName,
+						projectsDescription,
+						webSiteLink,
+						companyName,
+						previousTurnover,
+						actualTurnover,
+						dailyPeopleInvolved,
+						fundRaiseExpectation,
+						hasCampaign,
+						hasAfricans,
+						isRegistredCompany,
+						isBasedInAfrica,
+						generatesMoney,
+						isSimplifiedActionCompany,
+						projectCategoryId,
+						projectStatusId,
+						userId
+					},
+					{ where: { userId: user.id } }
+				)
+			} else {
+				throw new Error("Something wrong happened...");
+			}
+			return "Success";
+		},
+		async updateProjectStatus(root, { projectStatusId, id }, ctx) {
+			const project = await Project.update(
+				{ projectStatusId },
+				{ where: { userId: id } }
+			)
 			if (project) {
-				await User.update(
-					{ projectId: await project.id },
-					{ where: { email: user.email } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
+				return "Success!!!"
 			}
-			if (project) {
-				return "Your project has been created";
-			}
-			throw new Error("Something wrong happened...")
+			return "Sorry something went wrong..."
 		},
-		async updateToProjectDescrption(_, { projectsDescription }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ projectsDescription: await projectsDescription },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			return "Success";
-		},
-		async updateToCompanyName(_, { companyName }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ companyName: await companyName },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			return "Success";
-		},
-		async updateToWebSiteLink(_, { webSiteLink }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ webSiteLink: await webSiteLink },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			if (webSiteLink === false) {
+		async setToInvalidateProject(root, { isValid }, { user }) {
+			const project = await Project.findOne({
+				where: {
+					userId: user.id
+				},
+			})
+			if (
+				(project.previousTurnover === 'null') ||
+				(project.actualTurnover === 'null') || (project.dailyPeopleInvolved === 'null') ||
+				(project.fundRaiseExpectation === 'null') || (project.hasCampaign === false)
+			) {
 				await Project.update(
 					{ isValid: await false },
-					{ where: { userId: user.id } }
-				)
-			}
-			return "Success";
-		},
-		async updateToHasAfricans(_, { hasAfricans }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ hasAfricans: await hasAfricans },
-					{ where: { userId: user.id } }
+					{ where: { userId: user.id } },
 				)
 			} else {
-				throw new Error("Something wrong happened...");
+				await Project.update(
+					{ isValid: await true },
+					{ where: { userId: user.id } },
+				)
 			}
-			if (hasAfricans === false) {
+			return await `The validity of the project ${project.isValid}`;
+		},
+		async invalidateProject(root, { isValid }, { user }) {
+			const project = await Project.findOne({
+				where: {
+					userId: user.id
+				},
+			})
+			if (
+				(project.webSiteLink === false) ||
+				(project.hasAfricans === false) || (project.isRegistredCompany === false) ||
+				(project.isBasedInAfrica === false) || (project.generatesMoney === false) ||
+				(project.isSimplifiedActionCompany === false)
+			) {
 				await Project.update(
 					{ isValid: await false },
-					{ where: { userId: user.id } }
-				)
-			}
-			return "Success";
-		},
-		async updateToIsRegistredCompany(_, { isRegistredCompany }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ isRegistredCompany: await isRegistredCompany },
-					{ where: { userId: user.id } }
+					{ where: { userId: user.id } },
 				)
 			} else {
-				throw new Error("Something wrong happened...");
-			}
-			if (isRegistredCompany === false) {
 				await Project.update(
-					{ isValid: await false },
-					{ where: { userId: user.id } }
+					{ isValid: await true },
+					{ where: { userId: user.id } },
 				)
 			}
-			return "Success";
+			return await `The validity of the project ${project.isValid}`;
 		},
-		async updateToIsBasedInAfrica(_, { isBasedInAfrica }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ isBasedInAfrica: await isBasedInAfrica },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			if (isBasedInAfrica === false) {
-				await Project.update(
-					{ isValid: await false },
-					{ where: { userId: user.id } }
-				)
-			}
-			return "Success";
-		},
-		async updateToGeneratesMoney(_, { generatesMoney }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ generatesMoney: await generatesMoney },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
 
-			if (generatesMoney === false) {
-				await Project.update(
-					{ isValid: await false },
-					{ where: { userId: user.id } }
-				)
-			}
-			return "Success";
-		},
-		async updateToisSimplifiedActionCompany(_, { isSimplifiedActionCompany }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ isSimplifiedActionCompany: await isSimplifiedActionCompany },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			if (isSimplifiedActionCompany === false) {
-				await Project.update(
-					{ isValid: await false },
-					{ where: { userId: user.id } }
-				)
-			}
-			return "Success";
-		},
-		async updateCompanyType(_, { typeId }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ typeId: await typeId },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			return "Success";
-		},
-		async updateExpectedTurnover(_, { previousTurnover }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ previousTurnover: await previousTurnover },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			return "Success";
-		},
-		async updateActualTurnover(_, { actualTurnover }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ actualTurnover: await actualTurnover },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			return "Success";
-		},
-		async updateProjectStatus(_, { projectStatusId, id }, ctx) {
-			const updatedProject = await Project.update(
-				{ projectStatusId: await projectStatusId },
-				{ where: { id } }
-			);
-			if (updatedProject) {
-				return `"${updatedProject}"`;
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-		},
-		async updateDailyPeopleInvolved(_, { dailyPeopleInvolved }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ dailyPeopleInvolved: await dailyPeopleInvolved },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			return "Success";
-		},
-		async updateFundRaiseExpectation(_, { fundRaiseExpectation }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ fundRaiseExpectation: await fundRaiseExpectation },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			return "Success";
-		},
-		async updateHasCampaign(_, { hasCampaign }, { user }) {
-			if (!user) {
-				throw new Error("Sorry you're not an authenticated user...")
-			}
-			if (user) {
-				await Project.update(
-					{ hasCampaign: await hasCampaign },
-					{ where: { userId: user.id } }
-				)
-			} else {
-				throw new Error("Something wrong happened...");
-			}
-			return "Success";
-		},
 		async updateMindset(_, { motivations, family, education, ethic, philosophies, diploma, strength, weaknesses, ambitions, achievements }, { user }) {
 			if (!user) {
 				throw new Error("Sorry you're not an authenticated user...")
@@ -479,7 +343,50 @@ const resolvers = {
 			}
 			return "Success";
 		},
+		async creatTemplateDoc(root, { id }, ctx) {
+			const template = await TemplateDoc.create({
+				id
+			})
+			if (template) {
+				return "Success!!";
+			}
+			return "Sorry something went wrong...";
+		},
+		async updateTemplateDoc(root, {
+			contextLink,
+			companyLink,
+			businessModelLink,
+			comercialtLink,
+			marketingtLink,
+			managementLink,
+			corporateLink,
+			businessPlanLink,
+			proofOfConceptLink,
+			planFinancierLink, }, ctx) {
+			const template = await TemplateDoc.findOne(
+				{ where: { id: 1 } }
+			)
+			await template.update({
+				contextLink,
+				companyLink,
+				businessModelLink,
+				comercialtLink,
+				marketingtLink,
+				managementLink,
+				corporateLink,
+				businessPlanLink,
+				proofOfConceptLink,
+				planFinancierLink,
+			}, { where: { id: await 1 } });
+			if (template) {
+				return "Success";
+			}
+			return "Sorry something wrong happened";
+		}
 	},
 };
+
+
+
 
 module.exports = resolvers;

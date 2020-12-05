@@ -11,13 +11,15 @@ module.exports = (sequelize, DataTypes) => {
 			// define association here
 			ProjectCategory.hasMany(models.Project, {
 				foreignKey: {
-					allowNull: false,
+					allowNull: true,
+					defaultValue: 1,
 					name: 'projectCategoryId',
 				},
 			});
 			models.Project.belongsTo(ProjectCategory, {
 				foreignKey: {
-					allowNull: false,
+					allowNull: true,
+					defaultValue: 1,
 					name: 'projectCategoryId',
 				},
 			});

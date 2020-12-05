@@ -10,16 +10,6 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            BusinessMind.hasOne(models.User, {
-                as: 'BusinessMinds',
-                foreignKey: 'businessMindId',
-                allowNull: false,
-            });
-            models.User.belongsTo(BusinessMind, {
-                foreignKey: 'businessMindId',
-                allowNull: false,
-            });
-            models.User.sync();
         }
     }
     BusinessMind.init(

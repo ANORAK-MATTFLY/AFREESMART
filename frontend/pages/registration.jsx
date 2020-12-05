@@ -24,12 +24,15 @@ export default function Registration() {
 
   const onSubmit = async userInfo => {
     await setSubmitting(true);
-    await userRegister(userInfo.name, userInfo.lastName, userInfo.email, userInfo.password)
+    await userRegister(userInfo.name, userInfo.lastName, userInfo.email, userInfo.password);
     await setSubmitting(false);
     if (userRegister) {
       await loginRequest(userInfo.email, userInfo.password);
       await router.push('/test1/Q1');
+    } else {
+      router.push('./404');
     }
+
   }
   return (
     <div className={stl.container}>

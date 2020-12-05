@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateToCompanyName(companyName) {
+async function DeleteProject(id) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,12 +10,12 @@ async function updateToCompanyName(companyName) {
         data: {
             query: `
                 mutation{
-                    updateProject(companyName:"${companyName}")
-                }
-        `
+                    deleteProject(id:"${id}")
+            }
+            `
         }
     })
 }
 
 
-export default updateToCompanyName;
+export default DeleteProject;

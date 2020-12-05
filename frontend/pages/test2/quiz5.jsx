@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import stl from "../../styles/quizUI.module.scss";
-import updateToWebSiteLink from '../../lib/updateToWebSiteLink';
-import MainLayout from '../../components/questionsLayout/layout';
 import { motion } from "framer-motion";
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import quizIllustration from '../../lotties/marketing-concept.json'
 import updateHasCampaign from '../../lib/updateHasCampaign';
+import setInvalidate from '../../utils/setInvalidate';
+
+
 
 
 
@@ -21,8 +21,8 @@ const Test2Quiz5 = () => {
             await setMyBoolean(x)
             if (myBoolean == true || myBoolean == false) {
                 await updateHasCampaign(myBoolean);
-                console.log(myBoolean);
-                router.push('/home');
+                await setInvalidate(true);
+                await router.push('./quiz6');
             }
         }
     }

@@ -17,24 +17,52 @@ const typeDefs = gql`
   type Project {
     id: Int!
     typeId: Int!
-    projectsName: String!
-    projectsDescription: String!
-    webSiteLink: String!
-    companyName: String!
-    previousTurnover: String!
-    actualTurnover: String!
-    dailyPeopleInvolved: String!
-    fundRaiseExpectation: String!
-    hasCampaign: Boolean!
-    hasAfricans: Boolean!
-    isRegistredCompany: Boolean!
-    isBasedInAfrica: Boolean!
-    generatesMoney: Boolean!
-    isSimplifiedActionCompany: Boolean!
-    isValid: Boolean!
+    projectsName: String
+    projectsDescription: String
+    webSiteLink: Boolean
+    companyName: String
+    previousTurnover: String
+    actualTurnover: String
+    dailyPeopleInvolved: String
+    fundRaiseExpectation: String
+    hasCampaign: Boolean
+    hasAfricans: Boolean
+    isRegistredCompany: Boolean
+    isBasedInAfrica: Boolean
+    generatesMoney: Boolean
+    isSimplifiedActionCompany: Boolean
+    isValid: Boolean
     projectCategoryId: Int
     projectStatusId: Int
-    userId: Int!
+    userId: Int
+    }
+
+    type ProjectDoc {
+      id: ID
+      contextLink: String
+      companyLink: String
+      businessModelLink: String
+      comercialtLink: String
+      marketingtLink: String
+      managementLink: String
+      corporateLink: String
+      businessPlanLink: String
+      proofOfConceptLink: String
+      planFinancierLink: String
+    }
+
+    type TemplateDoc {
+      id: ID
+      contextLink: String
+      companyLink: String
+      businessModelLink: String
+      comercialtLink: String
+      marketingtLink: String
+      managementLink: String
+      corporateLink: String
+      businessPlanLink: String
+      proofOfConceptLink: String
+      planFinancierLink: String
     }
 
     type Mindset{
@@ -72,6 +100,7 @@ const typeDefs = gql`
     moneyMaker: AbilityToMakeMoney
     getAllUsers: [User!]
     getAllProject: [Project!]
+    getTemplateById(id:ID): TemplateDoc!
     getProjectById(id:ID): Project!
     getMindSetById(id:ID): Mindset!
   }
@@ -86,22 +115,25 @@ const typeDefs = gql`
     ): String!
     login(email: String!, password: String!): String!
     # Project related mutations stat here.
-    addProjectName(projectsName: String!): String!
-    updateToProjectDescrption(projectsDescription: String!): String!
-    updateToCompanyName(companyName: String!): String!
-    updateToWebSiteLink(webSiteLink: Boolean!): String!
-    updateToHasAfricans(hasAfricans: Boolean!): String!
-    updateToIsRegistredCompany(isRegistredCompany: Boolean!): String!
-    updateToIsBasedInAfrica(isBasedInAfrica: Boolean!): String!
-    updateToGeneratesMoney(generatesMoney: Boolean!): String!
-    updateToisSimplifiedActionCompany(isSimplifiedActionCompany: Boolean!): String!
-    updateCompanyType(typeId: Int!): String!
-    updateExpectedTurnover(previousTurnover: String!): String!
-    updateActualTurnover(actualTurnover: String!): String!
-    updateDailyPeopleInvolved(dailyPeopleInvolved: String!): String!
-    updateFundRaiseExpectation(fundRaiseExpectation: String!): String!
-    updateHasCampaign(hasCampaign: Boolean!): String!
-    updateProjectStatus(projectStatusId: Int!, id:ID): String!
+    updateProject(
+    typeId: Int,
+    projectsName: String,
+    projectsDescription: String,
+    webSiteLink: Boolean,
+    companyName: String,
+    previousTurnover: String,
+    actualTurnover: String,
+    dailyPeopleInvolved: String,
+    fundRaiseExpectation: String,
+    hasCampaign: Boolean,
+    hasAfricans: Boolean,
+    isRegistredCompany: Boolean,
+    isBasedInAfrica: Boolean,
+    generatesMoney: Boolean,
+    isSimplifiedActionCompany: Boolean,
+    projectCategoryId: Int,
+    projectStatusId: Int,
+    userId: Int) : String!
     # Project related mutations ends here.
     # Mindset related mutations start here.
     updateMindset(motivations: String, family: String, education: String, ethic: String, philosophies: String, diploma: String, strength: String, weaknesses: String, ambitions: String, achievements: String): String!
@@ -114,7 +146,42 @@ const typeDefs = gql`
       numberOfEmployeesManaged: String
     ): String!
     updateAbilityToMakeMoney(moneyInBank: String, debt: String): String!
-    # specific queries
+    # 
+    invalidateProject(isValid: Boolean): String!
+    setToInvalidateProject(isValid: Boolean): String!
+    uploadPhoto(photo: String): String
+    # Role related mutations
+    updateUserRole(roleId: Int!, id:ID): String!
+    updateProjectStatus(projectStatusId: Int, id:ID): String!
+    deleteProject(id:ID): String!
+    # files related mutations
+    createProjectDoc(userId: String): String!
+    updateProjectDoc(
+      contextLink: String,
+      companyLink: String,
+      businessModelLink: String,
+      comercialtLink: String,
+      marketingtLink: String,
+      managementLink: String,
+      corporateLink: String,
+      businessPlanLink: String,
+      proofOfConceptLink: String,
+      planFinancierLink: String
+    ): String!
+
+    updateTemplateDoc(
+      contextLink: String,
+      companyLink: String,
+      businessModelLink: String,
+      comercialtLink: String,
+      marketingtLink: String,
+      managementLink: String,
+      corporateLink: String,
+      businessPlanLink: String,
+      proofOfConceptLink: String,
+      planFinancierLink: String
+    ): String!
+    creatTemplateDoc(id:ID): String!
   }
 `;
 

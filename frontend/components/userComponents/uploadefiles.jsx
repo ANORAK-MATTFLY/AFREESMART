@@ -1,4 +1,4 @@
-import filesUpload from '../../lotties/23803-projectmanagement.json';
+import filesUpload from '../../lotties/drop zone';
 import LottieSuperObj from '../buttons/lottieFingerprint';
 
 

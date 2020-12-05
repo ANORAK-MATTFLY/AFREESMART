@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateToCompanyName(companyName) {
+async function InvalidateProject(bool) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -9,13 +9,13 @@ async function updateToCompanyName(companyName) {
         },
         data: {
             query: `
-                mutation{
-                    updateProject(companyName:"${companyName}")
-                }
-        `
+                    mutation{
+                        invalidateProject(isValid:${bool})
+                    }
+            `
         }
     })
 }
 
 
-export default updateToCompanyName;
+export default InvalidateProject;

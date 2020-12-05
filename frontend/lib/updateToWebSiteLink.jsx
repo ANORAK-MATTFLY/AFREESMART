@@ -11,7 +11,7 @@ async function updateToWebSiteLink(webSiteLink) {
             data: {
                 query: `
                 mutation{
-                    updateToWebSiteLink(webSiteLink:${webSiteLink})
+                    updateProject(webSiteLink:${webSiteLink})
                 }
             `
             }

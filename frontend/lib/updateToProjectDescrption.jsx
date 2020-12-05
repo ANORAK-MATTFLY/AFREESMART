@@ -10,7 +10,7 @@ async function updateToProjectDescrption(projectsDescription) {
         data: {
             query: `
             mutation{
-                updateToProjectDescrption(projectsDescription:"${projectsDescription}")
+                updateProject(projectsDescription:"${projectsDescription}")
             }
         `
         }

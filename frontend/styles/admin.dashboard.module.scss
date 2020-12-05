@@ -9,8 +9,8 @@ $black: rgb(53, 53, 53);
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     height: 100vh;
     width: 100%;
     color: $black;
@@ -26,9 +26,10 @@ $black: rgb(53, 53, 53);
 }
 
 .tableSquare{
+    display: flex;
+    flex-direction: row;
     height: 80%;
-    width: 90%;
-    overflow-y: scroll;
+    width: 100%;
     ::-webkit-scrollbar {
         width: 5px;
     }
@@ -47,7 +48,7 @@ $black: rgb(53, 53, 53);
         border-collapse: collapse;
         border-radius: $border;
         font-size: 0.9rem;
-        width: 100%;
+        width: 65%;
         box-shadow: 6px 8px 40px 1px rgba(56, 56, 56, 0.363);
         border-radius: 1rem;
 
@@ -67,6 +68,46 @@ $black: rgb(53, 53, 53);
         border-bottom: 1px solid gray;
         color: #0c7fb4;
         font-weight: lighter;
+    }
+    
+    .documentBox{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        width: 35%;
+        // padding: 2%;
+        overflow-y: scroll;
+        color: $black;
+        font-family: $font;
+        .docCard{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 17rem;
+            width: 80%;
+            margin-bottom: 3%;
+            box-shadow: 6px 8px 20px 1px rgba(56, 56, 56, 0.363);
+            border-radius: $border;
+            
+            .cardContent{
+                display: grid;
+                place-items: center;
+                padding: 6%;
+                height: 80%;
+                width: 60%;
+                border-radius: $border;
+                border: 1px rgb(31, 136, 127) dashed;
+            }
+            .docName{
+                display: grid;
+                place-items: center;
+                height: 10%;
+                width: 100%;
+                
+            }
+        }
     }
     
 

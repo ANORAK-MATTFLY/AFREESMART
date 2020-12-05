@@ -1,5 +1,6 @@
 import axios from 'axios';
 async function userRegister(arg_name, arg_lastName, arg_email, arg_password) {
+
   let req = await axios({
     url: 'http://localhost:9100/graphql',
     method: 'post',
@@ -11,9 +12,8 @@ async function userRegister(arg_name, arg_lastName, arg_email, arg_password) {
          `
     }
   })
-  if (req.data == null) {
-    return null;
-  }
+  let res = await req.data;
+  console.log(res);
 }
 
 export default userRegister;

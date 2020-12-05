@@ -10,7 +10,7 @@ async function loginRequest(projectsName) {
         data: {
             query: `
         mutation{
-        addProjectName(projectsName:"${projectsName}")
+            updateProject(projectsName:"${projectsName}")
         }
         `
         }

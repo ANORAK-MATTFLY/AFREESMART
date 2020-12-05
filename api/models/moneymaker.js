@@ -10,16 +10,6 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            AbilityToManageMoney.hasOne(models.User, {
-                as: 'AbilityToManageMoneys',
-                foreignKey: 'AbilityId',
-                allowNull: false,
-            });
-            models.User.belongsTo(AbilityToManageMoney, {
-                foreignKey: 'AbilityId',
-                allowNull: false,
-            });
-            models.User.sync();
         }
     }
     AbilityToManageMoney.init(

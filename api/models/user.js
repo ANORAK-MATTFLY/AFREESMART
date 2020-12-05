@@ -18,7 +18,61 @@ module.exports = (sequelize, DataTypes) => {
 				constraints: false,
 			});
 			models.Project.sync();
+
+			//  Mindset association
+			User.hasOne(models.Mindset, {
+				foreignKey: 'userId',
+				constraints: false,
+			});
+			models.Mindset.belongsTo(User, {
+				foreignKey: 'userId',
+				constraints: false,
+			});
+			models.Mindset.sync();
+
+			// BusinessMind association
+			User.hasOne(models.BusinessMind, {
+				foreignKey: 'userId',
+				constraints: false,
+			});
+			models.BusinessMind.belongsTo(User, {
+				foreignKey: 'userId',
+				constraints: false,
+			});
+			models.BusinessMind.sync();
+
+			// Money maker association
+			User.hasOne(models.AbilityToManageMoney, {
+				foreignKey: 'userId',
+				constraints: false,
+			});
+			models.AbilityToManageMoney.belongsTo(User, {
+				foreignKey: 'userId',
+				constraints: false,
+			});
+			models.AbilityToManageMoney.sync();
+			// template doc
+			User.hasOne(models.TemplateDoc, {
+				foreignKey: 'userId',
+				constraints: false,
+			});
+			models.TemplateDoc.belongsTo(User, {
+				foreignKey: 'userId',
+				constraints: false,
+			});
+			models.TemplateDoc.sync();
+			// project doc
+			User.hasOne(models.ProjectDoc, {
+				foreignKey: 'userId',
+				constraints: false,
+			});
+			models.ProjectDoc.belongsTo(User, {
+				foreignKey: 'userId',
+				constraints: false,
+			});
+			models.ProjectDoc.sync();
 		}
+
 	}
 	User.init(
 		{
@@ -42,7 +96,7 @@ module.exports = (sequelize, DataTypes) => {
 			acessToken: {
 				type: DataTypes.STRING,
 				allowNull: true,
-				defaultValue:null,
+				defaultValue: null,
 				unique: true,
 			},
 		},

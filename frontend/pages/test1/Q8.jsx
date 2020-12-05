@@ -7,43 +7,13 @@ import test1Redirection from '../../lib/test1Redirection';
 import { motion } from "framer-motion";
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import quizIllustration from '../../lotties/business-plan-or-chart-presentation.json'
-
+import InvalidateProject from '../../lib/invalidateProject';
 
 
 
 
 
 const Question8 = () => {
-    const [isValidProject, setIsValidProject] = useState('');
-    const componentDidMount = async () => {
-        if(typeof window !== "undefined"){
-            var token = localStorage.getItem('afreesmartAcessToken') || '';
-        }
-        let req = await axios({
-            url: 'http://localhost:9100/graphql',
-            method: 'post',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-            data: {
-                query: `
-                              query{
-                              project{
-                                isValid
-                              }
-                              }
-                  `
-            }
-        })
-        let res = await req.data;
-        const { data } = res;
-        const { project } = data;
-        if (project !== null) {
-            const { isValid } = project
-            setIsValidProject(isValid)
-        }
-    }
-    componentDidMount();
     const router = useRouter();
     const [myBoolean, setMyBoolean] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
@@ -53,12 +23,8 @@ const Question8 = () => {
             await setMyBoolean(x)
             if (myBoolean == true || myBoolean == false) {
                 await updateToisSimplifiedActionCompany(myBoolean);
-                if (isValidProject == true) {
-                    await router.push('./choise')
-                }
-                if (isValidProject == false) {
-                    await router.push('./sorry');
-                }
+                await InvalidateProject(true);
+                router.push('./redirect');
             }
         }
     }
@@ -95,8 +61,8 @@ const Question8 = () => {
                         <h1>Êtes-vous une société par actions simplifiée ?</h1>
                     </div>
                     <div className={stl.btnSection}>
-                        <button className={stl.yesBtn} onClick={() => setMyBoolean(true)}>Oui</button>
-                        <button className={stl.noBtn} onClick={() => setMyBoolean(false)}>Non</button>
+                        <button className={stl.yesBtn} onClick={() => onClickHandler(true)}>Oui</button>
+                        <button className={stl.noBtn} onClick={() => onClickHandler(false)}>Non</button>
                     </div>
                 </div>
             </motion.div>

@@ -10,7 +10,7 @@ async function updateDailyPeopleInvolved(str) {
         data: {
             query: `
                     mutation{
-                        updateDailyPeopleInvolved(dailyPeopleInvolved:"${str}")
+                        updateProject(dailyPeopleInvolved:"${str}")
                     }
             `
         }

@@ -11,7 +11,7 @@ async function updateToIsRegistredCompany(isRegistredCompany) {
             data: {
                 query: `
                 mutation{
-                    updateToIsRegistredCompany(isRegistredCompany:${isRegistredCompany})
+                    updateProject(isRegistredCompany:${isRegistredCompany})
                 }
             `
             }

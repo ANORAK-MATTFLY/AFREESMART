@@ -10,16 +10,6 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-			Project.hasOne(models.User, {
-				as: 'Projects',
-				foreignKey: 'projectId',
-				allowNull: false,
-			});
-			models.User.belongsTo(Project, {
-				foreignKey: 'projectId',
-				allowNull: false,
-			});
-			models.User.sync();
 		}
 	}
 	Project.init(
@@ -27,12 +17,11 @@ module.exports = (sequelize, DataTypes) => {
 			companyName: {
 				type: DataTypes.STRING,
 				allowNull: true,
-				unique: true,
 			},
 			projectsName: {
 				type: DataTypes.STRING,
-				allowNull: false,
-				unique: true,
+				allowNull: true,
+				defaultValue: "",
 			},
 			previousTurnover: {
 				type: DataTypes.STRING,
@@ -57,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			hasCampaign: {
 				type: DataTypes.BOOLEAN,
-			 	allowNull: true,
+				allowNull: true,
 			},
 			webSiteLink: {
 				type: DataTypes.BOOLEAN,

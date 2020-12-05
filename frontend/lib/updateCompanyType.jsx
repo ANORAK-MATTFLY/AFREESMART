@@ -11,7 +11,7 @@ async function updateCompanyType(generatesMoney) {
             data: {
                 query: `
                     mutation{
-                        updateCompanyType(typeId:${generatesMoney})
+                        updateProject(typeId:${generatesMoney})
                     }
             `
             }

@@ -5,37 +5,43 @@ import stl from '../../styles/client.homepage.module.scss';
 const HomePageLayout = ({ children }) => {
     const router = useRouter();
     const handelSubmit = () => {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('afreesmartAcessToken');
+        }
         router.push('/login')
     }
     return (
         <div className={stl.container}>
             <div className={stl.sideBar}>
                 <div className={stl.logoSection}></div>
+
                 <div className={stl.homePageLinks}>
                     <Link href={'/home'}>
-                        <div className={stl.linkWrapper}><p>Management</p></div>
+                        <div className={stl.linkWrapper}><p>Gouvernance</p></div>
                     </Link>
-                    <div className={stl.linkWrapper}>
-                        <Link href={'/home/mindset'}>
+                    <Link href={'/home/mindset'}>
+                        <div className={stl.linkWrapper}>
                             <a>
                                 <p>Mindset</p>
                             </a>
-                        </Link>
-                    </div>
-                    <div className={stl.linkWrapper}>
-                        <Link href={'/home/mindbusiness'}>
+                        </div>
+                    </Link>
+                    <Link href={'/home/mindbusiness'}>
+                        <div className={stl.linkWrapper}>
                             <a>
                                 <p>Mind Business</p>
                             </a>
-                        </Link>
-                    </div>
-                    <div className={stl.linkWrapper}>
-                        <Link href={'/home/moneymaker'}>
+                        </div>
+                    </Link>
+                    <Link href={'/home/moneymaker'}>
+                        <div className={stl.linkWrapper}>
+
                             <a>
                                 <p>Money Maker</p>
                             </a>
-                        </Link>
-                    </div>
+
+                        </div>
+                    </Link>
                 </div>
             </div>
             <div className={stl.mainContent}>

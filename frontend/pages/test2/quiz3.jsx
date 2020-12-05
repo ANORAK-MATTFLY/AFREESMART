@@ -1,11 +1,10 @@
 import stl from '../../styles/quizUI.module.scss';
-import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import youngBusinessMan from '../../lotties/9886-growth.json'
 import updateFundRaise from '../../lib/updateFund';
-
+import setInvalidate from '../../utils/setInvalidate';
 
 const Test2Quiz3 = () => {
     const router = useRouter();
@@ -17,8 +16,8 @@ const Test2Quiz3 = () => {
             await setChoice(x)
             if (choice) {
                 await updateFundRaise(choice);
-                console.log(choice);
-                router.push('./quiz4');
+                await setInvalidate(true);
+                await router.push('./quiz4');
             }
         }
     }
@@ -55,7 +54,7 @@ const Test2Quiz3 = () => {
                     </button>
 
 
-                    <button className={stl.selectBtn} onClick={() => onClickHandler("Moins de 25K Dollar")}>
+                    <button className={stl.selectBtn} onClick={() => onClickHandler("null")}>
                         Moins que ca
                     </button>
 
