@@ -44,3 +44,9 @@ $black: #414040;
         border-radius: 10px;
     }
 }
+
+@include media(">=phone", "<=tablet") {
+    .box{
+		width: 100%;
+	}
+}

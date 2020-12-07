@@ -6,11 +6,12 @@ $white: rgb(231, 230, 230);
 $border: 10px;
 $black: rgb(53, 53, 53);
 
+
 .container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     margin: 0 0 0 0;
     background: linear-gradient(to right, #000046, #1cb5e0);
 }
@@ -125,6 +126,14 @@ $black: rgb(53, 53, 53);
 
 }
 
+.fingerPrintIllustration{
+    display: grid;
+    padding-top: 7%;
+    place-items: center;
+    height: 35rem;
+    align-self: flex-start;
+}
+
 .rocket{
     margin-top: 1.9%;
     margin-left: 0;
@@ -137,11 +146,12 @@ $black: rgb(53, 53, 53);
     background-position: center;
 }
 
-.fingerPrintIllustration{
-    display: grid;
-    padding-top: 7%;
-    place-items: center;
-    height: 35rem;
-    align-self: flex-start;
-}
+@include media(">=phone", "<=tablet") {
+    .fingerPrintIllustration, .rocket {
+    display: none;
+    }
+    .form{
+        margin: 0 0 0 0;
+    }
 
+}

@@ -36,7 +36,6 @@ $black: #414040;
 	width: 70%;
 	padding: 3px;
 	background: #ffffff;
-	// flex-grow: auto;
 	border-radius: 10px;
 	.cardAnim{
 		height: 15rem;
@@ -70,5 +69,11 @@ $black: #414040;
 			box-shadow: 1px 1px 10px 5px rgba(204, 204, 204, 0.363);
 			border: 1px rgb(0, 238, 255) solid;
 		}
+	}
+}
+
+@include media(">=phone", "<=tablet") {
+    .box{
+		width: 100%;
 	}
 }

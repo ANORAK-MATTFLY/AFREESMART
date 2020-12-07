@@ -240,3 +240,15 @@ $black: rgb(65, 64, 64);
         }
     }
 }
+
+
+@include media(">=phone", "<=tablet") {
+    .quizContainer{
+        height: 90%;
+        width: 100%;
+    }
+    .quizBox{
+        height: 90%;
+        width: 100%;
+    }
+}

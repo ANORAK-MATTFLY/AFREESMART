@@ -2,15 +2,22 @@ import axios from 'axios';
 import { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import stl from '../../styles/admin.dashboard.module.scss';
-import FilesUpload from '../../components/userComponents/uploadefiles';
-import updateTemplate from '../../utils//updateTemplate';
-import { useRouter } from 'next/router';
+import ContextCard from '../admincmt/templatesCoards/context';
+import CompanyTemplate from '../admincmt/templatesCoards/company';
+import BusinessModelCard from '../admincmt/templatesCoards/businessmodel';
+import CommercialCard from '../admincmt/templatesCoards/commercial';
+import MarketingCard from '../admincmt/templatesCoards/marketing';
+import ManagementCard from '../admincmt/templatesCoards/management';
+import CorporateCard from '../admincmt/templatesCoards/corporat';
+import BusinessPlanCard from '../admincmt/templatesCoards/businessplan';
+import ProofOfConceptCard from '../admincmt/templatesCoards/proof';
+import FinanceCard from '../admincmt/templatesCoards/finantial_plan';
 
 
-const FileUploadSection = (res) => {
-    const router = useRouter();
-    const [dropIndex, setDropIndex] = useState(null);
-    const [getTemplate, setGetTemplate] = useState(null);
+
+
+
+const FileUploadSection = () => {
     const onDrop = useCallback((acceptedFiles) => {
         acceptedFiles.forEach(async (acceptedFile) => {
             const formData = new FormData();
@@ -34,73 +41,19 @@ const FileUploadSection = (res) => {
         accepts: ".docx",
         multiple: false,
     });
-
-
-    const updateHandler = () => {
-        if (getTemplate !== null) {
-            if (dropIndex === 1) {
-                updateTemplate(getTemplate)
-            }
-        }
-    }
-
-
-    console.log(dropIndex);
-
-    useEffect(() => {
-        updateHandler();
-    }, [dropIndex])
     return (
         <div className={stl.documentBox}>
             <h2>Gestion de document</h2>
-            <div onMouseMove={() => setDropIndex(1)} className={stl.docCard} {...getRootProps()} >
-                <div className={stl.docName}>
-                    <p>Posez votre document</p>
-                </div>
-                <div className={stl.cardContent}>
-                    <FilesUpload />
-                </div>
-            </div>
-            <div className={stl.docCard} onMouseMove={() => setDropIndex(2)} >
-                <div className={stl.docName}>
-                    <p>Posez votre doment</p>
-                </div>
-                <div className={stl.cardContent}>
-                    <FilesUpload />
-                </div>
-            </div>
-            <div className={stl.docCard} onMouseMove={() => setDropIndex(3)}>
-                <div className={stl.docName}>
-                    <p>Posez votre document</p>
-                </div>
-                <div className={stl.cardContent}>
-                    <FilesUpload />
-                </div>
-            </div>
-            <div className={stl.docCard} onDrop={() => setDropIndex(4)}>
-                <div className={stl.docName}>
-                    <p>Posez votre document</p>
-                </div>
-                <div className={stl.cardContent}>
-                    <FilesUpload />
-                </div>
-            </div>
-            <div className={stl.docCard} onDrop={() => setDropIndex(5)}>
-                <div className={stl.docName}>
-                    <p>Posez votre document</p>
-                </div>
-                <div className={stl.cardContent}>
-                    <FilesUpload />
-                </div>
-            </div>
-            <div className={stl.docCard} onDrop={() => setDropIndex(6)}>
-                <div className={stl.docName}>
-                    <p>Posez votre document</p>
-                </div>
-                <div className={stl.cardContent}>
-                    <FilesUpload />
-                </div>
-            </div>
+            <ContextCard />
+            <CompanyTemplate />
+            <BusinessModelCard />
+            <CommercialCard />
+            <MarketingCard />
+            <ManagementCard />
+            <CorporateCard />
+            <BusinessPlanCard />
+            <ProofOfConceptCard />
+            <FinanceCard />
 
         </div>
     );

@@ -4,7 +4,7 @@ import stl from '../../styles/client.homepage.module.scss';
 
 const HomePageLayout = ({ children }) => {
     const router = useRouter();
-    const handelSubmit = () => {
+    const logOut = () => {
         if (typeof window !== 'undefined') {
             localStorage.removeItem('afreesmartAcessToken');
         }
@@ -17,7 +17,7 @@ const HomePageLayout = ({ children }) => {
 
                 <div className={stl.homePageLinks}>
                     <Link href={'/home'}>
-                        <div className={stl.linkWrapper}><p>Gouvernance</p></div>
+                        <div className={stl.linkWrapper}><p>Management</p></div>
                     </Link>
                     <Link href={'/home/mindset'}>
                         <div className={stl.linkWrapper}>
@@ -46,7 +46,34 @@ const HomePageLayout = ({ children }) => {
             </div>
             <div className={stl.mainContent}>
                 <div className={stl.navBar}>
-                    <button className={stl.btn} onClick={() => handelSubmit()}>Deconexion</button>
+
+                    <Link href={'/home'}>
+                        <div className={stl.linkWrapper}><p>Management</p></div>
+                    </Link>
+                    <Link href={'/home/mindset'}>
+                        <div className={stl.linkWrapper}>
+                            <a>
+                                <p>Mindset</p>
+                            </a>
+                        </div>
+                    </Link>
+                    <Link href={'/home/mindbusiness'}>
+                        <div className={stl.linkWrapper}>
+                            <a>
+                                <p>Mind Business</p>
+                            </a>
+                        </div>
+                    </Link>
+                    <Link href={'/home/moneymaker'}>
+                        <div className={stl.linkWrapper}>
+                            <a>
+                                <p>Money Maker</p>
+                            </a>
+
+                        </div>
+                    </Link>
+
+                    <button className={stl.logOutBtn} onClick={() => logOut()}>Deconexion</button>
                 </div>
                 {children}
             </div>

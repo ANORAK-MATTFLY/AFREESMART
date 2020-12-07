@@ -192,8 +192,6 @@ $black: rgb(53, 53, 53);
         font-size: larger;
         font-family: $font;
     }
-   
-
 }
 
 .goBackBtn {
@@ -209,4 +207,21 @@ $black: rgb(53, 53, 53);
     background: linear-gradient(to right, #1293aac5, #27a6c9);
     color: $white;
     box-shadow: 0px 2px 30px rgba(39, 39, 39, 0.308);
+}
+
+
+@include media(">=phone", "<=tablet") {
+    .form {
+        // display: flex;
+        // align-items: center;
+        // justify-content: space-between;
+        // flex-direction: column;
+        // padding: 1.5%;
+        height: 85vh;
+        // width: 45rem;
+        // max-width: 100%;
+        // background: white;
+        // border-radius: 5px;
+    }
+
 }

@@ -1,4 +1,4 @@
-import filesUpload from '../../lotties/drop zone';
+import filesUpload from '../../lotties/38287-scanning-searching-for-data.json';
 import LottieSuperObj from '../buttons/lottieFingerprint';
 
 

@@ -67,15 +67,43 @@ $black: #535353;
 	align-items: center;
 	height: 100%;
 	width: 100%;
-	// border: 1px black solid;
 	.navBar{
 		display: flex;
 		flex-direction:row;
-		justify-content: flex-end;
+		justify-content: space-around;
 		align-items: center;
 		height: 10%;
 		width: 100%;
 		box-shadow: 1px 1px 2px 3px rgba(204, 204, 204, 0.363);
+		.linkWrapper{
+			display: grid;
+			opacity: 0;
+			width: 100px;
+			place-items: center;
+			height: 50%;
+			border-radius: 2rem;
+			border: 0.3px rgb(0, 128, 128) solid;
+			background: rgba(40, 156, 177, 0.041);
+		}
+		p{
+			font-size: 0.6rem;
+			font-weight: bolder;
+		}
+		
+		.logOutBtn {
+			display: grid;
+			place-items: center;
+			height: 30px;
+			width: 100px;
+			border-radius: $border;
+			border: 1.1px rgb(228, 225, 225) solid;
+			background: linear-gradient(to right, #1293aac5, #27a6c9);
+			cursor: pointer;
+			box-shadow: 6px 8px 40px 1px rgba(56, 56, 56, 0.363);
+			color: $white;
+			font-size: small;
+			font-family: $font;
+		}
 	}
 	.MainStatement{
 		display: flex;
@@ -198,4 +226,16 @@ $black: #535353;
 	color: $white;
 	font-size: smaller;
 	font-family: $font;
+}
+
+@include media(">=phone", "<=tablet") {
+    .sideBar{
+		display: none;
+	}
+
+	.mainContent >
+		.navBar >
+			.linkWrapper{
+				opacity: 1;
+			}
 }
