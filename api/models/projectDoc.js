@@ -17,52 +17,102 @@ module.exports = (sequelize, DataTypes) => {
             contextLink: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'no',
+                defaultValue: '',
             },
             companyLink: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'no',
+                defaultValue: '',
             },
             businessModelLink: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'no',
+                defaultValue: '',
             },
             comercialtLink: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'no',
+                defaultValue: '',
             },
             marketingtLink: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'no',
+                defaultValue: '',
             },
             managementLink: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'no',
+                defaultValue: '',
             },
             corporateLink: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'no',
+                defaultValue: '',
             },
             businessPlanLink: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'no',
+                defaultValue: '',
             },
             proofOfConceptLink: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'no',
+                defaultValue: '',
             },
             planFinancierLink: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'no',
+                defaultValue: '',
+            },
+            companyManagement: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: '',
+            },
+            turnoverGrowth: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: '',
+            },
+            projectLegalAuthorizations: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: '',
+            },
+            fluxGrowth: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: '',
+            },
+            teamProfile: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: '',
+            },
+            companyVision: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: '',
+            },
+            abilityToGenerateEmployment: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: '',
+            },
+            cashFlowStatement: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: '',
+            },
+            balanceSheet: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: '',
+            },
+            cR: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: '',
             },
         },
         {

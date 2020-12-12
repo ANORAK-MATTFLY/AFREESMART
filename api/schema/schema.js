@@ -63,6 +63,16 @@ const typeDefs = gql`
       businessPlanLink: String
       proofOfConceptLink: String
       planFinancierLink: String
+      companyManagement: String
+      turnoverGrowth: String
+      projectLegalAuthorizations: String
+      fluxGrowth: String
+      teamProfile: String
+      companyVision: String
+      abilityToGenerateEmployment: String
+      cashFlowStatement: String
+      balanceSheet: String
+      cR: String
     }
 
     type Mindset{
@@ -166,7 +176,17 @@ const typeDefs = gql`
       corporateLink: String,
       businessPlanLink: String,
       proofOfConceptLink: String,
-      planFinancierLink: String
+      planFinancierLink: String,
+      companyManagement: String,
+      turnoverGrowth: String,
+      projectLegalAuthorizations: String,
+      fluxGrowth: String,
+      teamProfile: String,
+      companyVision: String,
+      abilityToGenerateEmployment: String,
+      cashFlowStatement: String,
+      balanceSheet: String,
+      cR: String,
     ): String!
 
     updateTemplateDoc(
@@ -179,7 +199,17 @@ const typeDefs = gql`
       corporateLink: String,
       businessPlanLink: String,
       proofOfConceptLink: String,
-      planFinancierLink: String
+      planFinancierLink: String,
+      companyManagement: String,
+      turnoverGrowth: String,
+      projectLegalAuthorizations: String,
+      fluxGrowth: String,
+      teamProfile: String,
+      companyVision: String,
+      abilityToGenerateEmployment: String,
+      cashFlowStatement: String,
+      balanceSheet: String,
+      cR: String,
     ): String!
     creatTemplateDoc(id:ID): String!
   }

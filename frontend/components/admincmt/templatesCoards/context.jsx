@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import stl from '../../../styles/admin.dashboard.module.scss';
 import successAnimation from '../../../lotties/validated.json';

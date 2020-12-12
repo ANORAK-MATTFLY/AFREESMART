@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { useRouter } from 'next/router';
 import stl from '../../styles/details.page.module.scss';
 
 

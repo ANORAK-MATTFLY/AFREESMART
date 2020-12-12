@@ -362,7 +362,17 @@ const resolvers = {
 			corporateLink,
 			businessPlanLink,
 			proofOfConceptLink,
-			planFinancierLink, }, ctx) {
+			planFinancierLink,
+			companyManagement,
+			turnoverGrowth,
+			projectLegalAuthorizations,
+			fluxGrowth,
+			teamProfile,
+			companyVision,
+			abilityToGenerateEmployment,
+			cashFlowStatement,
+			balanceSheet,
+			cR }, ctx) {
 			const template = await TemplateDoc.findOne(
 				{ where: { id: 1 } }
 			)
@@ -377,6 +387,16 @@ const resolvers = {
 				businessPlanLink,
 				proofOfConceptLink,
 				planFinancierLink,
+				companyManagement,
+				turnoverGrowth,
+				projectLegalAuthorizations,
+				fluxGrowth,
+				teamProfile,
+				companyVision,
+				abilityToGenerateEmployment,
+				cashFlowStatement,
+				balanceSheet,
+				cR
 			}, { where: { id: await 1 } });
 			if (template) {
 				return "Success";

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import stl from "../styles/login.module.scss";
@@ -10,16 +11,44 @@ import Link from 'next/link';
 
 export default function Home() {
   const router = useRouter();
+  const [role, setRole] = useState(null);
   const { register, handleSubmit, watch, errors } = useForm();
   const [submitting, setSubmitting] = useState(false);
   const onSubmit = async userInfo => {
     await setSubmitting(true);
     await loginRequest(userInfo.email, userInfo.password);
     await setSubmitting(false);
-
     await loginRequest(userInfo.email, userInfo.password);
-    await router.push('./loginrouter');
 
+    if (typeof window !== "undefined") {
+      var token = localStorage.getItem('afreesmartAcessToken') || '';
+    }
+    let req = await axios({
+      url: 'http://localhost:9100/graphql',
+      method: 'post',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      data: {
+        query: `
+                      query{
+                      current{
+                          roleId
+                      }
+                  }
+          `
+      }
+    })
+    if (req.data.data !== null) {
+      var res = await req.data.data.current.roleId;
+    }
+
+    setRole(res)
+    if (res == 1) {
+      router.push('./home/mindset');
+    } else {
+      router.push('/admin')
+    }
   }
   return (
     <div className={stl.container}>

@@ -1,12 +1,8 @@
-import { useEffect, useState, useMemo } from 'react';
-import { useQuery } from 'react-query';
-import { Link } from 'next/link';
+import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import stl from "../styles/prjsub.module.scss";
-import Q from '../lib/questionList.jsx';
 import MainLayout from '../components/questionsLayout/layout.jsx';
 import { motion } from "framer-motion";
-import GobackBtn from "../components/buttons/go_back_btn";
 
 
 const QuestionsIndex = () => {

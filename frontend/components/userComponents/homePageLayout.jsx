@@ -17,6 +17,9 @@ const HomePageLayout = ({ children }) => {
 
                 <div className={stl.homePageLinks}>
                     <Link href={'/home'}>
+                        <div className={stl.linkWrapper}><p>Gouvernance</p></div>
+                    </Link>
+                    <Link href={'/home/partie_management'}>
                         <div className={stl.linkWrapper}><p>Management</p></div>
                     </Link>
                     <Link href={'/home/mindset'}>
@@ -35,11 +38,9 @@ const HomePageLayout = ({ children }) => {
                     </Link>
                     <Link href={'/home/moneymaker'}>
                         <div className={stl.linkWrapper}>
-
                             <a>
                                 <p>Money Maker</p>
                             </a>
-
                         </div>
                     </Link>
                 </div>

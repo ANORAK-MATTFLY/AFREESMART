@@ -51,16 +51,6 @@ module.exports = (sequelize, DataTypes) => {
 				constraints: false,
 			});
 			models.AbilityToManageMoney.sync();
-			// template doc
-			User.hasOne(models.TemplateDoc, {
-				foreignKey: 'userId',
-				constraints: false,
-			});
-			models.TemplateDoc.belongsTo(User, {
-				foreignKey: 'userId',
-				constraints: false,
-			});
-			models.TemplateDoc.sync();
 			// project doc
 			User.hasOne(models.ProjectDoc, {
 				foreignKey: 'userId',

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import stl from '../../styles/admin.dashboard.module.scss';
 import ContextCard from '../admincmt/templatesCoards/context';
@@ -18,29 +18,6 @@ import FinanceCard from '../admincmt/templatesCoards/finantial_plan';
 
 
 const FileUploadSection = () => {
-    const onDrop = useCallback((acceptedFiles) => {
-        acceptedFiles.forEach(async (acceptedFile) => {
-            const formData = new FormData();
-            formData.append('file', acceptedFile);
-            formData.append('upload_preset', 'evofo95k')
-            const config = {
-                url: `https://api.cloudinary.com/v1_1/dbku02uef/upload`,
-                method: 'post',
-                data: formData,
-            }
-            const req = await axios(config)
-            if (req.data !== null) {
-                var res = await req.data.secure_url;
-            }
-            setGetTemplate(res)
-        });
-    }, []);
-
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-        accepts: ".docx",
-        multiple: false,
-    });
     return (
         <div className={stl.documentBox}>
             <h2>Gestion de document</h2>
@@ -54,7 +31,6 @@ const FileUploadSection = () => {
             <BusinessPlanCard />
             <ProofOfConceptCard />
             <FinanceCard />
-
         </div>
     );
 }

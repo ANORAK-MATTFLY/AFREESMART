@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { useState } from 'react';
 import stl from '../../../styles//client.homepage.module.scss';
 import Card from '../../userComponents/card';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
@@ -7,7 +5,7 @@ import doc from '../../../lotties/drop zone.json';
 import Link from 'next/link';
 
 
-const UploadMarketingCard = ({ marketingtLink }) => {
+const UploadTeamProfileCard = ({ marketingtLink }) => {
     const obj = {
         loop: true,
         autoplay: true,
@@ -19,7 +17,7 @@ const UploadMarketingCard = ({ marketingtLink }) => {
 
     return (
         <Card>
-            <h3>Marketing</h3>
+            <h3>Profile de l'equipe</h3>
             <div className={stl.cardIllustration1}>
                 <LottieSuperObj objectProps={obj} />
             </div>
@@ -35,4 +33,4 @@ const UploadMarketingCard = ({ marketingtLink }) => {
     );
 }
 
-export default UploadMarketingCard;
+export default UploadTeamProfileCard;

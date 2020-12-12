@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import stl from '../../styles/admin.dashboard.module.scss';
 import { useRouter } from 'next/router';

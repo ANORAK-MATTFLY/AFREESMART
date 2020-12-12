@@ -78,7 +78,6 @@ const DetailPage = ({ project, mindset, userRole }) => {
                         <div className={stl.illust}>
                             <LottieSuperObj objectProps={obj} />
                         </div>
-
                     </div>
                     <div className={stl.card2}>
                         <h2 className={stl.cardName}>{projectsName}</h2>
@@ -95,82 +94,63 @@ const DetailPage = ({ project, mindset, userRole }) => {
                     </div>
                 </div>
                 <div className={stl.detailsSection}>
-                    {
-                        role === 3 ?
-                            <div className={stl.description}>
-
-
-                                <h1>Gestion de document</h1>
-                                <div className={stl.criteriaCard}>
-                                    <div className={stl.docCard}>
-                                        <div className={stl.docName}>
-                                            <p>Doc 1</p>
-                                        </div>
-                                        <div className={stl.btnSection}>
-                                            <button className={stl.downloadBtn}>Download</button>
-                                            <button className={stl.uploadBtn}>Importez</button>
-                                        </div>
-                                    </div>
-                                    <div className={stl.docCard}>
-                                        <div className={stl.docName}>
-                                            <p>Doc 1</p>
-                                        </div>
-                                        <div className={stl.btnSection}>
-                                            <button className={stl.downloadBtn}>Download</button>
-                                            <button className={stl.uploadBtn}>Importez</button>
-                                        </div>
-                                    </div>
-                                    <div className={stl.docCard}>
-                                        <div className={stl.docName}>
-                                            <p>Doc 1</p>
-                                        </div>
-                                        <div className={stl.btnSection}>
-                                            <button className={stl.downloadBtn}>Download</button>
-                                            <button className={stl.uploadBtn}>Importez</button>
-                                        </div>
-                                    </div>
+                    <div className={stl.description}>
+                        <h1>Gestion de document</h1>
+                        <div className={stl.criteriaCard}>
+                            <div className={stl.docCard}>
+                                <div className={stl.docName}>
+                                    <p>Organisation de l'entreprise</p>
                                 </div>
-                                <UpdateProject id={id} />
-                            </div>
-                            : <div className={stl.description}>
-                                <h1>Critères</h1>
-                                <div className={stl.criteriaCard}>
-                                    {isBasedInAfrica ? <button className={stl.criteriaBtn}>Base en afrique</button>
-                                        : <button className={stl.criteriaBtnNegate}>Base en afrique</button>
-                                    }
-                                    {isRegistredCompany ? <button className={stl.criteriaBtn}>Eng. au giche unique</button>
-                                        : <button className={stl.criteriaBtnNegate}>Erg. au giche unique</button>
-                                    }
-                                    {isSimplifiedActionCompany ? <button className={stl.criteriaBtn}>Ese. a action simplifie</button>
-                                        : <button className={stl.criteriaBtnNegate}>Ese. a action simplifie</button>
-                                    }
-                                    {hasAfricans ? <button className={stl.criteriaBtn}>Membres afriains</button>
-                                        : <button className={stl.criteriaBtnNegate}>Ese. a action simplifie</button>
-                                    }
-                                    {hasCampaign ? <button className={stl.criteriaBtn}>Compagne en cour...</button>
-                                        : <button className={stl.criteriaBtnNegate}>Compagne en cour...</button>
-                                    }
-                                    {webSiteLink ? <button className={stl.criteriaBtn}>Site Web</button>
-                                        : <button className={stl.criteriaBtnNegate}>Site Web</button>
-                                    }
+                                <div className={stl.btnSection}>
+                                    <button className={stl.downloadBtn}>Download</button>
                                 </div>
-                                <UpdateProject id={id} />
-
                             </div>
-
-
-                    }
-                    {
-                        role === 3 ?
-                            null
-                            :
-                            <UserInfo mindset={mindset} />
-                    }
-
+                            <div className={stl.docCard}>
+                                <div className={stl.docName}>
+                                    <p>Croissance du chiffre d'affaire</p>
+                                </div>
+                                <div className={stl.btnSection}>
+                                    <button className={stl.downloadBtn}>Download</button>
+                                </div>
+                            </div>
+                            <div className={stl.docCard}>
+                                <div className={stl.docName}>
+                                    <p>Legibilite du projet et autorisations accorde</p>
+                                </div>
+                                <div className={stl.btnSection}>
+                                    <button className={stl.downloadBtn}>Download</button>
+                                </div>
+                            </div>
+                            <div className={stl.docCard}>
+                                <div className={stl.docName}>
+                                    <p>Profile de l'equipe</p>
+                                </div>
+                                <div className={stl.btnSection}>
+                                    <button className={stl.downloadBtn}>Download</button>
+                                </div>
+                            </div>
+                            <div className={stl.docCard}>
+                                <div className={stl.docName}>
+                                    <p>Business plan</p>
+                                </div>
+                                <div className={stl.btnSection}>
+                                    <button className={stl.downloadBtn}>Download</button>
+                                </div>
+                            </div>
+                            <div className={stl.docCard}>
+                                <div className={stl.docName}>
+                                    <p>Business model</p>
+                                </div>
+                                <div className={stl.btnSection}>
+                                    <button className={stl.downloadBtn}>Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        <UpdateProject id={id} />
+                    </div>
+                    <UserInfo mindset={mindset} />
                 </div>
             </div>
-
-
         </div>
     );
 }
