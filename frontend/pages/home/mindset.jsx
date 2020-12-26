@@ -3,15 +3,20 @@ import MindSet from '../../components/userComponents/mindSetComponent';
 import HomePageLayout from '../../components/userComponents/homePageLayout';
 import TitleSection from '../../components/userComponents/titleSection';
 import EducationCard from '../../components/userComponents/mindsetCards/education';
-import AchievementCard from '../../components/userComponents/mindsetCards/achievements';
+import IfWrong from '../../components/userComponents/mindsetCards/if_wrong';
 import MotivationCard from '../../components/userComponents/mindsetCards/motivation';
 import StrengthCard from '../../components/userComponents/mindsetCards/strength';
 import FamilyCard from '../../components/userComponents/mindsetCards/family';
 import EthicCard from '../../components/userComponents/mindsetCards/ethic';
 import PhilosophyCard from '../../components/userComponents/mindsetCards/philosophy';
-import DiplomaCard from '../../components/userComponents/mindsetCards/diploma';
-import AmbitionCard from '../../components/userComponents/mindsetCards/ambition';
+import FiveStrength from '../../components/userComponents/mindsetCards/five_strength';
 import WeaknessesCard from '../../components/userComponents/mindsetCards/weaknesses';
+import RelationShipWithMoney from '../../components/userComponents/mindsetCards/relationship_with_money';
+import Ent_values_Card from '../../components/userComponents/mindsetCards/ent_values';
+import EdCard from '../../components/userComponents/mindsetCards/niveau_etude';
+import IfYouGetStuck from '../../components/userComponents/mindsetCards/if_you_get_stuck';
+
+
 
 
 const MindSetComponent = () => {
@@ -26,15 +31,18 @@ const MindSetComponent = () => {
             </TitleSection>
             <div className={stl.cardsSection}>
                 <EducationCard />
-                <AchievementCard />
+                <IfWrong />
                 <MotivationCard />
                 <StrengthCard />
+                <IfYouGetStuck />
                 <FamilyCard />
                 <EthicCard />
                 <PhilosophyCard />
-                <DiplomaCard />
-                <AmbitionCard />
+                <FiveStrength />
                 <WeaknessesCard />
+                <RelationShipWithMoney />
+                <Ent_values_Card />
+                <EdCard />
             </div>
         </HomePageLayout>
     );

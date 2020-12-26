@@ -88,23 +88,40 @@ const EthicCard = () => {
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Votre sans de l'ethic</h3>
+            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLarge}>
+                <h3>Pourquoi souhaitez-vous entreprendre ?
+                </h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="ethic">Decrivez votre sans de l'ethic</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="ethic"
-                        placeholder="Ethic"
-                        id="ethic"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
+                    <div className={stl.Qbtn}>
+                        <p>Car ça vous passionne.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous sentez que vous êtes destinés à faire votre projet.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Pour impressionner mon entourage sur mon intelligence et combativité.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Par vengeance, je me suis fait humilier, je veux prouver que je suis le/la meilleur (e).</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous avez besoin d’argent pour s’occuper d’un proche.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous n’aimez pas l’autorité et souhaitez être votre propre chef.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Car vous avez vu une opportunité de mieux faire que les autres.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Le projet que vous souhaitez faire n’existe pas, vous voulez être le premier.</p>
+                    </div>
+
                 </div>
-            </form>
+            </div>
     );
 }
 

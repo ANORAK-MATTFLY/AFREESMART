@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
-import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import diplomaAnimation from '../../../lotties/diploma.json';
+import achievement from '../../../lotties/achievement.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateDiplomaUtil from '../../../utils/updateDiploma';
+import updateAchievementUtil from '../../../utils/updateAchievement';
 
 
-const DiplomaCard = () => {
-    const router = useRouter();
+const IfWrong = () => {
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
@@ -28,7 +26,7 @@ const DiplomaCard = () => {
                 query: `
                     query{
                         mindSet{
-                            diploma
+                            achievements
                         }
                     }
                 `
@@ -37,8 +35,8 @@ const DiplomaCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { diploma } = mindSet
-        if (!diploma) {
+        const { achievements } = mindSet
+        if (!achievements) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -48,15 +46,14 @@ const DiplomaCard = () => {
         componentDidMount();
     }
     const onSubmit = data => {
-        if (data.diploma) {
-            updateDiplomaUtil(data.diploma);
-            router.reload();
+        if (data.achievements) {
+            updateAchievementUtil(data.achievements);
         }
     }
     const Achieved = {
         loop: true,
         autoplay: true,
-        animationData: diplomaAnimation,
+        animationData: achievement,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -77,35 +74,37 @@ const DiplomaCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="diploma">Quel est vos diploms obtenue jusqu-ici ?</label>
+                    <label className={stl.label} htmlFor="achievements">Quel est votre niveaux d'education ?</label>
                     <input className={stl.input}
                         type="text"
-                        name="diploma"
-                        placeholder="Vos diplomes"
-                        id="diploma"
+                        name="achievements"
+                        placeholder="Accomplissements"
+                        id="achievements"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Vos Diplomes</h3>
+            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+                <h3>Si vous avez tort comment réagissez-vous ?
+                </h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={Achieved} />
                 </div>
+
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="diploma">Quel sont vos diploms obtenue jusqu-ici ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="diploma"
-                        placeholder="Vos diplomes"
-                        id="diploma"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
+                    <div className={stl.Qbtn}>
+                        <p>Vous avez rarement tort.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous prenez du recul sur ce qui s’est passé et vous trouvez une manière de réparer vos torts.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous cherchez à savoir qui ou quoi vous a induit en erreur.</p>
+                    </div>
                 </div>
-            </form>
+            </div>
     );
 }
 
-export default DiplomaCard;
+export default IfWrong;

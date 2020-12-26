@@ -89,7 +89,7 @@ const WeaknessesCard = () => {
                 </div>
             </form>
             : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Vos points failbe</h3>
+                <h3>Quels sont vos 5 faiblesses ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>

@@ -10,7 +10,6 @@ const UpdateProject = ({ id }) => {
 
     const router = useRouter();
     const [role, setRole] = useState(null);
-    const [choice, setChoice] = useState(0);
     const [projectStatus, setProjectStatus] = useState(null);
     if (!id) {
         router.back();

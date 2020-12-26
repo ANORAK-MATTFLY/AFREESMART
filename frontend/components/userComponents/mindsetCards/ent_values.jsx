@@ -9,7 +9,7 @@ import successAnimation from '../../../lotties/validated.json'
 import updateFamilyUtil from '../../../utils/updateFamily';
 
 
-const FamilyCard = () => {
+const Ent_values_Card = () => {
     const router = useRouter();
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
@@ -88,28 +88,67 @@ const FamilyCard = () => {
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
-                <h3>Quel est votre attitude face aux donneurs de leçons sur votre projet ?</h3>
+            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLargeGrid}>
+                <h3>Quels sont tes valeurs entrepreneuriales ? (4 choix maximum)</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
 
-                    <div className={stl.QbtnLong}>
-                        <p>Personne ne connait mieux que moi le projet pour me dire quoi faire.</p>
+                    <div className={stl.Qbtn}>
+                        <p>Challenge</p>
                     </div>
-                    <div className={stl.QbtnLong}>
-                        <p>J’adore les remarques et conseils car ça me permet de m’améliorer.</p>
+                    <div className={stl.Qbtn}>
+                        <p>Innovation</p>
                     </div>
-                    <div className={stl.QbtnLong}>
-                        <p>J’aime écouter les remarques seulement si je sais que j’ai tort.</p>
+                    <div className={stl.Qbtn}>
+                        <p>Sécurité</p>
                     </div>
-                    <div className={stl.QbtnLong}>
-                        <p>Ça me vexe car ça veut dire que la personne pense que je ne fais pas bien mon travail.</p>
+                    <div className={stl.Qbtn}>
+                        <p>Audace</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Audace</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Leadership</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Storytelling</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Empathie</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Honneur</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Loyauté</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Méritocratie</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Famille avant le travail</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Travail avant la famille</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Ecoute</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Esprit d'équipe</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Apprentissage continue</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Obstination</p>
                     </div>
                 </div>
             </div>
     );
 }
 
-export default FamilyCard;
+export default Ent_values_Card;

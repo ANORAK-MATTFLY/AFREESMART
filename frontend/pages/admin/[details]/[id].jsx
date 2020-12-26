@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import companyAnimation from '../../../lotties/previousCreated.json';
 import prj from '../../../lotties/34803-social-scrolling-animation.json';
 import moneyAnim from '../../../lotties/moneyMaker.json';
@@ -10,10 +11,38 @@ import UpdateProject from '../../../components/admincmt/updateproject';
 import { useRouter } from 'next/router';
 
 
+
+
+
+
+
+
+
+
 const DetailPage = ({ project, mindset, userRole }) => {
+    const [docs, setDocs] = useState({
+        turnoverGrowth: "",
+        companyManagement: "",
+        projectLegalAuthorizations: "",
+        fluxGrowth: "",
+        teamProfile: "",
+        companyVision: "",
+        abilityToGenerateEmployment: "",
+        cashFlowStatement: "",
+        balanceSheet: "",
+        contextLink: "",
+        businessModelLink: "",
+        comercialtLink: "",
+        marketingtLink: "",
+        managementLink: "",
+        corporateLink: "",
+        businessPlanLink: "",
+        proofOfConceptLink: "",
+        planFinancierLink: "",
+    });
     const router = useRouter();
     const [role, setRole] = useState(null)
-    const { projectStatusId, id, projectsName, companyName, fundRaiseExpectation, isBasedInAfrica, isRegistredCompany, isSimplifiedActionCompany, hasAfricans, hasCampaign, webSiteLink } = project;
+    const { id, projectsName, companyName, fundRaiseExpectation, userId } = project;
     const getRole = async () => {
         if (typeof window !== 'undefined') {
             var token = localStorage.getItem('afreesmartAcessToken') || '';
@@ -38,8 +67,55 @@ const DetailPage = ({ project, mindset, userRole }) => {
         setRole(res);
     }
 
+
+    const getDocs = async () => {
+        if (typeof window !== 'undefined') {
+            var token = localStorage.getItem('afreesmartAcessToken') || '';
+        };
+        const config = {
+            url: 'http://localhost:9100/graphql',
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            data: {
+                query: `
+                    query {
+                        getProjectDocByIdButForReal(id:${userId}) {
+                        contextLink
+                        companyLink
+                        businessModelLink
+                        comercialtLink
+                        marketingtLink
+                        managementLink
+                        corporateLink
+                        businessPlanLink
+                        proofOfConceptLink
+                        planFinancierLink
+                        companyManagement
+                        turnoverGrowth
+                        projectLegalAuthorizations
+                        fluxGrowth
+                        teamProfile
+                        companyVision
+                        abilityToGenerateEmployment
+                        cashFlowStatement
+                        balanceSheet
+                        }
+                    }
+                    `
+            }
+        }
+        const req = await axios(config);
+        if (req.data.data !== null) {
+            setDocs(req.data.data.getProjectDocByIdButForReal);
+            console.log(req.data.data.getProjectDocByIdButForReal);
+        }
+    }
+
     useEffect(() => {
         getRole();
+        getDocs();
     }, [role])
     if (role == 1) {
         router.push('/login')
@@ -94,60 +170,296 @@ const DetailPage = ({ project, mindset, userRole }) => {
                     </div>
                 </div>
                 <div className={stl.detailsSection}>
-                    <div className={stl.description}>
-                        <h1>Gestion de document</h1>
-                        <div className={stl.criteriaCard}>
-                            <div className={stl.docCard}>
-                                <div className={stl.docName}>
-                                    <p>Organisation de l'entreprise</p>
+                    {role == 2 ?
+                        <div className={stl.description}>
+                            <h1>Gestion de document</h1>
+                            <div className={stl.criteriaCard}>
+                                <div className={stl.docCard}>
+                                    <div className={stl.docName}>
+                                        <p>Organisation de l'entreprise</p>
+                                    </div>
+                                    <div className={stl.btnSection}>
+                                        {docs.companyManagement == '' || docs.companyManagement == null ?
+                                            <button className={stl.downloadBtn}>Download</button>
+                                            :
+                                            <Link href={`${docs.companyManagement}`}  >
+                                                <a target={"_blank"}>
+                                                    <button className={stl.downloadBtn}>Download</button>
+                                                </a>
+                                            </Link>
+                                        }
+                                    </div>
                                 </div>
-                                <div className={stl.btnSection}>
-                                    <button className={stl.downloadBtn}>Download</button>
+
+                                <div className={stl.docCard}>
+                                    <div className={stl.docName}>
+                                        <p>Croissance du chiffre d'affaire</p>
+                                    </div>
+                                    <div className={stl.btnSection}>
+                                        {docs.turnoverGrowth == '' || docs.turnoverGrowth == null ?
+                                            <button className={stl.downloadBtn}>Download</button>
+                                            :
+                                            <Link href={`${docs.turnoverGrowth}`}  >
+                                                <a target={"_blank"}>
+                                                    <button className={stl.downloadBtn}>Download</button>
+                                                </a>
+                                            </Link>
+                                        }
+                                    </div>
+                                </div>
+                                <div className={stl.docCard}>
+                                    <div className={stl.docName}>
+                                        <p>Legibilite du projet et autorisations accorde</p>
+                                    </div>
+                                    <div className={stl.btnSection}>
+                                        {docs.projectLegalAuthorizations == '' || docs.projectLegalAuthorizations == null ?
+                                            <button className={stl.downloadBtn}>Download</button>
+                                            :
+                                            <Link href={`${docs.projectLegalAuthorizations}`}  >
+                                                <a target={"_blank"}>
+                                                    <button className={stl.downloadBtn}>Download</button>
+                                                </a>
+                                            </Link>
+                                        }
+                                    </div>
+                                </div>
+                                <div className={stl.docCard}>
+                                    <div className={stl.docName}>
+                                        <p>Profile de l'equipe</p>
+                                    </div>
+                                    <div className={stl.btnSection}>
+                                        {docs.teamProfile == '' || docs.teamProfile == null ?
+                                            <button className={stl.downloadBtn}>Download</button>
+                                            :
+                                            <Link href={`${docs.teamProfile}`}  >
+                                                <a target={"_blank"}>
+                                                    <button className={stl.downloadBtn}>Download</button>
+                                                </a>
+                                            </Link>
+                                        }
+                                    </div>
+                                </div>
+                                <div className={stl.docCard}>
+                                    <div className={stl.docName}>
+                                        <p>Vision de l'entreprise</p>
+                                    </div>
+                                    <div className={stl.btnSection}>
+                                        {docs.companyVision == '' || docs.companyVision == null ?
+                                            <button className={stl.downloadBtn}>Download</button>
+                                            :
+                                            <Link href={`${docs.companyVision}`}  >
+                                                <a target={"_blank"}>
+                                                    <button className={stl.downloadBtn}>Download</button>
+                                                </a>
+                                            </Link>
+                                        }
+                                    </div>
+                                </div>
+                                <div className={stl.docCard}>
+                                    <div className={stl.docName}>
+                                        <p>Monte de flux</p>
+                                    </div>
+                                    <div className={stl.btnSection}>
+                                        {docs.cashFlowStatement == '' || docs.cashFlowStatement == null ?
+                                            <button className={stl.downloadBtn}>Download</button>
+                                            :
+                                            <Link href={`${docs.cashFlowStatement}`}  >
+                                                <a target={"_blank"}>
+                                                    <button className={stl.downloadBtn}>Download</button>
+                                                </a>
+                                            </Link>
+                                        }
+                                    </div>
+                                </div>
+                                <div className={stl.docCard}>
+                                    <div className={stl.docName}>
+                                        <p>Bilan de l'entreprise</p>
+                                    </div>
+                                    <div className={stl.btnSection}>
+                                        {docs.balanceSheet == '' || docs.balanceSheet == null ?
+                                            <button className={stl.downloadBtn}>Download</button>
+                                            :
+                                            <Link href={`${docs.balanceSheet}`}  >
+                                                <a target={"_blank"}>
+                                                    <button className={stl.downloadBtn}>Download</button>
+                                                </a>
+                                            </Link>
+                                        }
+                                    </div>
+                                </div>
+                                <div className={stl.docCard}>
+                                    <div className={stl.docName}>
+                                        <p>Capacite a generer de l'emploi</p>
+                                    </div>
+                                    <div className={stl.btnSection}>
+                                        {docs.abilityToGenerateEmployment == '' || docs.abilityToGenerateEmployment == null ?
+                                            <button className={stl.downloadBtn}>Download</button>
+                                            :
+                                            <Link href={`${docs.abilityToGenerateEmployment}`}  >
+                                                <a target={"_blank"}>
+                                                    <button className={stl.downloadBtn}>Download</button>
+                                                </a>
+                                            </Link>
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                            <div className={stl.docCard}>
-                                <div className={stl.docName}>
-                                    <p>Croissance du chiffre d'affaire</p>
-                                </div>
-                                <div className={stl.btnSection}>
-                                    <button className={stl.downloadBtn}>Download</button>
-                                </div>
-                            </div>
-                            <div className={stl.docCard}>
-                                <div className={stl.docName}>
-                                    <p>Legibilite du projet et autorisations accorde</p>
-                                </div>
-                                <div className={stl.btnSection}>
-                                    <button className={stl.downloadBtn}>Download</button>
-                                </div>
-                            </div>
-                            <div className={stl.docCard}>
-                                <div className={stl.docName}>
-                                    <p>Profile de l'equipe</p>
-                                </div>
-                                <div className={stl.btnSection}>
-                                    <button className={stl.downloadBtn}>Download</button>
-                                </div>
-                            </div>
-                            <div className={stl.docCard}>
-                                <div className={stl.docName}>
-                                    <p>Business plan</p>
-                                </div>
-                                <div className={stl.btnSection}>
-                                    <button className={stl.downloadBtn}>Download</button>
-                                </div>
-                            </div>
-                            <div className={stl.docCard}>
-                                <div className={stl.docName}>
-                                    <p>Business model</p>
-                                </div>
-                                <div className={stl.btnSection}>
-                                    <button className={stl.downloadBtn}>Download</button>
-                                </div>
-                            </div>
+                            <UpdateProject id={id} />
                         </div>
-                        <UpdateProject id={id} />
-                    </div>
+                        : role == 3 ?
+                            <div className={stl.description}>
+                                <h1>Gestion de document</h1>
+                                <div className={stl.criteriaCard}>
+                                    <div className={stl.docCard}>
+                                        <div className={stl.docName}>
+                                            <p>Context</p>
+                                        </div>
+                                        <div className={stl.btnSection}>
+                                            {docs.contextLink == '' || docs.contextLink == null ?
+                                                <button className={stl.downloadBtn}>Download</button>
+                                                :
+                                                <Link href={`${docs.contextLink}`}  >
+                                                    <a target={"_blank"}>
+                                                        <button className={stl.downloadBtn}>Download</button>
+                                                    </a>
+                                                </Link>
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div className={stl.docCard}>
+                                        <div className={stl.docName}>
+                                            <p>Entreprise</p>
+                                        </div>
+                                        <div className={stl.btnSection}>
+                                            {docs.companyLink == '' || docs.companyLink == null ?
+                                                <button className={stl.downloadBtn}>Download</button>
+                                                :
+                                                <Link href={`${docs.companyLink}`}  >
+                                                    <a target={"_blank"}>
+                                                        <button className={stl.downloadBtn}>Download</button>
+                                                    </a>
+                                                </Link>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={stl.docCard}>
+                                        <div className={stl.docName}>
+                                            <p>Business Model</p>
+                                        </div>
+                                        <div className={stl.btnSection}>
+                                            {docs.businessModelLink == '' || docs.businessModelLink == null ?
+                                                <button className={stl.downloadBtn}>Download</button>
+                                                :
+                                                <Link href={`${docs.businessModelLink}`}  >
+                                                    <a target={"_blank"}>
+                                                        <button className={stl.downloadBtn}>Download</button>
+                                                    </a>
+                                                </Link>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={stl.docCard}>
+                                        <div className={stl.docName}>
+                                            <p>Commercial</p>
+                                        </div>
+                                        <div className={stl.btnSection}>
+                                            {docs.comercialtLink == '' || docs.comercialtLink == null ?
+                                                <button className={stl.downloadBtn}>Download</button>
+                                                :
+                                                <Link href={`${docs.comercialtLink}`}  >
+                                                    <a target={"_blank"}>
+                                                        <button className={stl.downloadBtn}>Download</button>
+                                                    </a>
+                                                </Link>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={stl.docCard}>
+                                        <div className={stl.docName}>
+                                            <p>Marketing</p>
+                                        </div>
+                                        <div className={stl.btnSection}>
+                                            {docs.marketingtLink == '' || docs.marketingtLink == null ?
+                                                <button className={stl.downloadBtn}>Download</button>
+                                                :
+                                                <Link href={`${docs.marketingtLink}`}  >
+                                                    <a target={"_blank"}>
+                                                        <button className={stl.downloadBtn}>Download</button>
+                                                    </a>
+                                                </Link>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={stl.docCard}>
+                                        <div className={stl.docName}>
+                                            <p>Corporate</p>
+                                        </div>
+                                        <div className={stl.btnSection}>
+                                            {docs.corporateLink == '' || docs.corporateLink == null ?
+                                                <button className={stl.downloadBtn}>Download</button>
+                                                :
+                                                <Link href={`${docs.corporateLink}`}  >
+                                                    <a target={"_blank"}>
+                                                        <button className={stl.downloadBtn}>Download</button>
+                                                    </a>
+                                                </Link>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={stl.docCard}>
+                                        <div className={stl.docName}>
+                                            <p>Business plan</p>
+                                        </div>
+                                        <div className={stl.btnSection}>
+                                            {docs.businessPlanLink == '' || docs.businessPlanLink == null ?
+                                                <button className={stl.downloadBtn}>Download</button>
+                                                :
+                                                <Link href={`${docs.businessPlanLink}`}  >
+                                                    <a target={"_blank"}>
+                                                        <button className={stl.downloadBtn}>Download</button>
+                                                    </a>
+                                                </Link>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={stl.docCard}>
+                                        <div className={stl.docName}>
+                                            <p>Proof of concept</p>
+                                        </div>
+                                        <div className={stl.btnSection}>
+                                            {docs.proofOfConceptLink == '' || docs.proofOfConceptLink == null ?
+                                                <button className={stl.downloadBtn}>Download</button>
+                                                :
+                                                <Link href={`${docs.proofOfConceptLink}`}  >
+                                                    <a target={"_blank"}>
+                                                        <button className={stl.downloadBtn}>Download</button>
+                                                    </a>
+                                                </Link>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={stl.docCard}>
+                                        <div className={stl.docName}>
+                                            <p>Plan financier</p>
+                                        </div>
+                                        <div className={stl.btnSection}>
+                                            {docs.planFinancierLink == '' || docs.planFinancierLink == null ?
+                                                <button className={stl.downloadBtn}>Download</button>
+                                                :
+                                                <Link href={`${docs.planFinancierLink}`}  >
+                                                    <a target={"_blank"}>
+                                                        <button className={stl.downloadBtn}>Download</button>
+                                                    </a>
+                                                </Link>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <UpdateProject id={id} />
+                            </div>
+                            : null
+                    }
                     <UserInfo mindset={mindset} />
                 </div>
             </div>
@@ -176,6 +488,7 @@ export async function getServerSideProps({ query }) {
                         hasAfricans
                         hasCampaign
                         webSiteLink
+                        userId
                     }
                     getMindSetById(id:${id}){
                         motivations

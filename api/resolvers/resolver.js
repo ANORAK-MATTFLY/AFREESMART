@@ -16,6 +16,23 @@ const resolvers = {
 			}
 			throw new Error("Sorry, you're not an authenticated user!");
 		},
+		async getProjectDocById(_, args, { user }) {
+			if (user) {
+				return await ProjectDoc.findOne({
+					where: { userId: user.id }
+				})
+			}
+			throw new Error("Sorry something went wrong...");
+		},
+		async getProjectDocByIdButForReal(_, { id }, ctx) {
+			const project = await await ProjectDoc.findOne({
+				where: { userId: id }
+			})
+			if (project) {
+				return project;
+			}
+			throw new Error("Sorry something went wrong...");
+		},
 		async mindSet(_, args, { user }) {
 			if (user) {
 				return await Mindset.findOne({
@@ -402,7 +419,59 @@ const resolvers = {
 				return "Success";
 			}
 			return "Sorry something wrong happened";
-		}
+		},
+		async updateProjectDoc(
+			root,
+			{ contextLink,
+				companyLink,
+				businessModelLink,
+				comercialtLink,
+				marketingtLink,
+				managementLink,
+				corporateLink,
+				businessPlanLink,
+				proofOfConceptLink,
+				planFinancierLink,
+				companyManagement,
+				turnoverGrowth,
+				projectLegalAuthorizations,
+				fluxGrowth,
+				teamProfile,
+				companyVision,
+				abilityToGenerateEmployment,
+				cashFlowStatement,
+				balanceSheet,
+				cR }, { user }) {
+			const doc = await ProjectDoc.findOne({
+				where: { userId: user.id }
+			});
+			await doc.update({
+				contextLink,
+				companyLink,
+				businessModelLink,
+				comercialtLink,
+				marketingtLink,
+				managementLink,
+				corporateLink,
+				businessPlanLink,
+				proofOfConceptLink,
+				planFinancierLink,
+				companyManagement,
+				turnoverGrowth,
+				projectLegalAuthorizations,
+				fluxGrowth,
+				teamProfile,
+				companyVision,
+				abilityToGenerateEmployment,
+				cashFlowStatement,
+				balanceSheet,
+				cR
+			});
+			if (doc) {
+				return "Success!!!";
+			}
+			return "Sorry something went wrong...";
+		},
 	},
 };
 

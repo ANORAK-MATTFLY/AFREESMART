@@ -1,14 +1,15 @@
 import axios from 'axios';
-import stl from '../../../../styles/client.homepage.module.scss';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
+import stl from '../../../../styles/client.homepage.module.scss';
 import style from '../../../../styles/client.homepage.module.scss'
 import LottieSuperObj from '../../../buttons/lottieFingerprint';
 import doc from '../../../../lotties/drop zone';
 import successAnimation from '../../../../lotties/validated.json';
 
 
-const updateCompanyLegal = async (arg) => {
+
+const updateBalanceSheetCard = async (arg) => {
     if (typeof window !== 'undefined') {
         var token = localStorage.getItem('afreesmartAcessToken') || '';
     };
@@ -20,8 +21,8 @@ const updateCompanyLegal = async (arg) => {
         },
         data: {
             query: `
-        mutation {
-            updateProjectDoc(projectLegalAuthorizations: "${arg}")
+            mutation {
+            updateProjectDoc(balanceSheet: "${arg}")
             }
             `
         }
@@ -30,10 +31,10 @@ const updateCompanyLegal = async (arg) => {
 }
 
 
-const UploadProjectLegalAuthorizationsCard = () => {
-    const [isDropped, setIsDropped] = useState(null);
+const UploadBalanceSheetCard = () => {
     const [docs, setDoc] = useState(null);
     const [isFetched, setIsFetched] = useState(false);
+    const [isDropped, setIsDropped] = useState(false);
     const getDocs = async () => {
         if (typeof window !== 'undefined') {
             var token = localStorage.getItem('afreesmartAcessToken') || '';
@@ -48,14 +49,14 @@ const UploadProjectLegalAuthorizationsCard = () => {
                 query: `
                 query {
                     getProjectDocById{
-                    projectLegalAuthorizations
+                    balanceSheet
                     }
                 }
                 `
             }
         })
         if (req.data.data !== null) {
-            await setDoc(req.data.data.getProjectDocById.projectLegalAuthorizations);
+            await setDoc(req.data.data.getProjectDocById.balanceSheet);
             await setIsFetched(true);
         };
     };
@@ -64,14 +65,6 @@ const UploadProjectLegalAuthorizationsCard = () => {
     }, [isFetched]);
 
 
-    const successIllustration = {
-        loop: true,
-        autoplay: true,
-        animationData: successAnimation,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
-        }
-    };
     const onDrop = useCallback((acceptedFiles) => {
         acceptedFiles.forEach(async (acceptedFile) => {
             const formData = new FormData();
@@ -86,7 +79,7 @@ const UploadProjectLegalAuthorizationsCard = () => {
             if (req.data !== null) {
                 var res = await req.data.secure_url;
             }
-            updateCompanyLegal(res);
+            updateBalanceSheetCard(res);
             setIsDropped(true);
         });
     }, []);
@@ -96,7 +89,14 @@ const UploadProjectLegalAuthorizationsCard = () => {
         accepts: ".docx",
         multiple: false,
     });
-
+    const successIllustration = {
+        loop: true,
+        autoplay: true,
+        animationData: successAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     const obj = {
         loop: true,
         autoplay: true,
@@ -106,9 +106,12 @@ const UploadProjectLegalAuthorizationsCard = () => {
         }
     };
 
+    console.log(docs);
+
+
     return (
-        <div className={style.card}  {...getRootProps()}>
-            <h3>Legibilite du projet et autorisations accorde</h3>
+        <div className={style.card} {...getRootProps()} >
+            <h3>Le bilan de votre entreprise</h3>
             <div className={stl.cardIllustration1}>
                 {docs == '' || docs == null ?
                     <LottieSuperObj objectProps={obj} />
@@ -123,4 +126,4 @@ const UploadProjectLegalAuthorizationsCard = () => {
     );
 }
 
-export default UploadProjectLegalAuthorizationsCard;
+export default UploadBalanceSheetCard;

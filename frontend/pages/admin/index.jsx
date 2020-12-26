@@ -87,8 +87,6 @@ const AdminHomePage = ({ projects }) => {
                 </table>
                 <FileUploadSection />
             </div>
-
-
         </div>
     );
 }

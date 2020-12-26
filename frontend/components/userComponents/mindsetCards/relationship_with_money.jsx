@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import family from '../../../lotties/33300-familia.json';
+import ambitionAnimation from '../../../lotties/ambition.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateFamilyUtil from '../../../utils/updateFamily';
+import updateAmbitionUtil from '../../../utils/updateAmbition';
 
 
-const FamilyCard = () => {
+const RelationShipWithMoney = () => {
     const router = useRouter();
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
@@ -28,7 +28,7 @@ const FamilyCard = () => {
                 query: `
                     query{
                         mindSet{
-                            family
+                            ambitions
                         }
                     }
                 `
@@ -37,8 +37,8 @@ const FamilyCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { family } = mindSet
-        if (!family) {
+        const { ambitions } = mindSet
+        if (!ambitions) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -48,15 +48,15 @@ const FamilyCard = () => {
         componentDidMount();
     }
     const onSubmit = async (data) => {
-        if (data.family) {
-            await updateFamilyUtil(data.family);
+        if (data.ambitions) {
+            await updateAmbitionUtil(data.ambitions);
             await router.reload()
         }
     }
     const youthPower = {
         loop: true,
         autoplay: true,
-        animationData: family,
+        animationData: ambitionAnimation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -77,39 +77,38 @@ const FamilyCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="family">Combien de frere et soeur avez-vouz ?</label>
+                    <label className={stl.label} htmlFor="ambitions">Decrivez vos ambitions</label>
                     <input className={stl.input}
                         type="text"
-                        name="family"
+                        name="ambitions"
                         placeholder="Points forts"
-                        id="family"
+                        id="ambitions"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
-                <h3>Quel est votre attitude face aux donneurs de leçons sur votre projet ?</h3>
+            : <form onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+                <h3>Quel est votre rapport avec l’argent</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-
                     <div className={stl.QbtnLong}>
-                        <p>Personne ne connait mieux que moi le projet pour me dire quoi faire.</p>
+                        <p>L’argent est un mauvais maitre mais un bon serviteur.</p>
                     </div>
                     <div className={stl.QbtnLong}>
-                        <p>J’adore les remarques et conseils car ça me permet de m’améliorer.</p>
+                        <p>L’argent ne rend pas heureux mais contribue à 90%</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>L’argent ne m’intéresse pas.</p>
                     </div>
                     <div className={stl.QbtnLong}>
-                        <p>J’aime écouter les remarques seulement si je sais que j’ai tort.</p>
-                    </div>
-                    <div className={stl.QbtnLong}>
-                        <p>Ça me vexe car ça veut dire que la personne pense que je ne fais pas bien mon travail.</p>
+                        <p>Il ne faut pas travailler pour l’argent mais le faire travailler pour nous.</p>
                     </div>
                 </div>
-            </div>
+            </form>
     );
 }
 
-export default FamilyCard;
+export default RelationShipWithMoney;

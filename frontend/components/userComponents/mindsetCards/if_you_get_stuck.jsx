@@ -4,17 +4,17 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import family from '../../../lotties/33300-familia.json';
+import diplomaAnimation from '../../../lotties/diploma.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateFamilyUtil from '../../../utils/updateFamily';
+import updateDiplomaUtil from '../../../utils/updateDiploma';
 
 
-const FamilyCard = () => {
+const IfYouGetStuck = () => {
     const router = useRouter();
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
-        completionHandler();
+        completionHandler()
     }, [isCompleted])
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
@@ -28,7 +28,7 @@ const FamilyCard = () => {
                 query: `
                     query{
                         mindSet{
-                            family
+                            diploma
                         }
                     }
                 `
@@ -37,8 +37,8 @@ const FamilyCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { family } = mindSet
-        if (!family) {
+        const { diploma } = mindSet
+        if (!diploma) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -47,16 +47,16 @@ const FamilyCard = () => {
     const completionHandler = () => {
         componentDidMount();
     }
-    const onSubmit = async (data) => {
-        if (data.family) {
-            await updateFamilyUtil(data.family);
-            await router.reload()
+    const onSubmit = data => {
+        if (data.diploma) {
+            updateDiplomaUtil(data.diploma);
+            router.reload();
         }
     }
-    const youthPower = {
+    const Achieved = {
         loop: true,
         autoplay: true,
-        animationData: family,
+        animationData: diplomaAnimation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -77,39 +77,38 @@ const FamilyCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="family">Combien de frere et soeur avez-vouz ?</label>
+                    <label className={stl.label} htmlFor="diploma">Quel est vos diploms obtenue jusqu-ici ?</label>
                     <input className={stl.input}
                         type="text"
-                        name="family"
-                        placeholder="Points forts"
-                        id="family"
+                        name="diploma"
+                        placeholder="Vos diplomes"
+                        id="diploma"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
             : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
-                <h3>Quel est votre attitude face aux donneurs de leçons sur votre projet ?</h3>
+                <h3>Quand vous ne savez pas faire quelque chose ?</h3>
                 <div className={stl.cardIllustration}>
-                    <LottieSuperObj objectProps={youthPower} />
+                    <LottieSuperObj objectProps={Achieved} />
                 </div>
                 <div className={stl.cardInput}>
-
                     <div className={stl.QbtnLong}>
-                        <p>Personne ne connait mieux que moi le projet pour me dire quoi faire.</p>
+                        <p>Vous demandez conseils auprès des autres.</p>
                     </div>
                     <div className={stl.QbtnLong}>
-                        <p>J’adore les remarques et conseils car ça me permet de m’améliorer.</p>
+                        <p>Vous cherchez par vous-même la solution via internet, livre etc</p>
                     </div>
                     <div className={stl.QbtnLong}>
-                        <p>J’aime écouter les remarques seulement si je sais que j’ai tort.</p>
+                        <p>Vous engagez quelqu’un pour le faire à votre place.</p>
                     </div>
                     <div className={stl.QbtnLong}>
-                        <p>Ça me vexe car ça veut dire que la personne pense que je ne fais pas bien mon travail.</p>
+                        <p>Vous laissez tomber car vous n’aimez pas vous prendre la tête.</p>
                     </div>
                 </div>
             </div>
     );
 }
 
-export default FamilyCard;
+export default IfYouGetStuck;

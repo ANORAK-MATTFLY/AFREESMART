@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import ambitionAnimation from '../../../lotties/ambition.json';
+import family from '../../../lotties/33300-familia.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateAmbitionUtil from '../../../utils/updateAmbition';
+import updateFamilyUtil from '../../../utils/updateFamily';
 
 
-const AmbitionCard = () => {
+const EdCard = () => {
     const router = useRouter();
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
@@ -28,7 +28,7 @@ const AmbitionCard = () => {
                 query: `
                     query{
                         mindSet{
-                            ambitions
+                            family
                         }
                     }
                 `
@@ -37,8 +37,8 @@ const AmbitionCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { ambitions } = mindSet
-        if (!ambitions) {
+        const { family } = mindSet
+        if (!family) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -48,15 +48,15 @@ const AmbitionCard = () => {
         componentDidMount();
     }
     const onSubmit = async (data) => {
-        if (data.ambitions) {
-            await updateAmbitionUtil(data.ambitions);
+        if (data.family) {
+            await updateFamilyUtil(data.family);
             await router.reload()
         }
     }
     const youthPower = {
         loop: true,
         autoplay: true,
-        animationData: ambitionAnimation,
+        animationData: family,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -77,35 +77,42 @@ const AmbitionCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="ambitions">Decrivez vos ambitions</label>
+                    <label className={stl.label} htmlFor="family">Combien de frere et soeur avez-vouz ?</label>
                     <input className={stl.input}
                         type="text"
-                        name="ambitions"
+                        name="family"
                         placeholder="Points forts"
-                        id="ambitions"
+                        id="family"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Vos ambitions</h3>
+            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+                <h3>Quel est votre niveau d’études</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="ambitions">Decrivez vos ambitions</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="ambitions"
-                        placeholder="Vos ambitions"
-                        id="ambitions"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
+
+                    <div className={stl.Qbtn}>
+                        <p>Bac (diplôme d’état)</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Bac+3</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Bac+4</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Bac+5</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Bac+5  et plus</p>
+                    </div>
                 </div>
-            </form>
+            </div>
     );
 }
 
-export default AmbitionCard;
+export default EdCard;

@@ -1,13 +1,99 @@
 import axios from 'axios';
-import { useState } from 'react';
-import stl from '../../../styles//client.homepage.module.scss';
-import Card from '../../userComponents/card';
+import { useState, useCallback, useEffect } from 'react';
+import { useDropzone } from 'react-dropzone';
+import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import doc from '../../../lotties/drop zone.json';
+import successAnimation from '../../../lotties/validated.json';
 import Link from 'next/link';
 
 
+const updateProofOfConcept = async (arg) => {
+    if (typeof window !== 'undefined') {
+        var token = localStorage.getItem('afreesmartAcessToken') || '';
+    }
+    const config = await {
+        url: "http://localhost:9100/graphql",
+        method: "post",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        data: {
+            query: `
+            mutation{
+                updateProjectDoc(proofOfConceptLink:"${arg}")
+            }
+        `
+        }
+    };
+    await axios(config);
+}
+
+
 const UploadProofOfConceptCard = ({ proofOfConceptLink }) => {
+    const [docs, setDocs] = useState({
+        proofOfConceptLink: ''
+    });
+    const successIllustration = {
+        loop: true,
+        autoplay: true,
+        animationData: successAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+    const getDocs = async () => {
+        if (typeof window !== 'undefined') {
+            var token = localStorage.getItem('afreesmartAcessToken') || '';
+        };
+        const config = {
+            url: 'http://localhost:9100/graphql',
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            data: {
+                query: `
+                query {
+                    getProjectDocById {
+                        proofOfConceptLink
+                    }
+                }
+                    `
+            }
+        }
+        const req = await axios(config);
+        if (req.data.data !== null) {
+            setDocs(req.data.data.getProjectDocById.proofOfConceptLink);
+        }
+    }
+
+    useEffect(() => {
+        getDocs();
+    }, [docs])
+    const onDrop = useCallback((acceptedFiles) => {
+        acceptedFiles.forEach(async (acceptedFile) => {
+            const formData = new FormData();
+            formData.append('file', acceptedFile);
+            formData.append('upload_preset', 'evofo95k')
+            const config = {
+                url: `https://api.cloudinary.com/v1_1/dbku02uef/upload`,
+                method: 'post',
+                data: formData,
+            }
+            const req = await axios(config)
+            if (req.data !== null) {
+                var res = await req.data.secure_url;
+            }
+            updateProofOfConcept(res);
+        });
+    }, []);
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        accepts: ".docx",
+        multiple: false,
+    });
     const obj = {
         loop: true,
         autoplay: true,
@@ -17,11 +103,16 @@ const UploadProofOfConceptCard = ({ proofOfConceptLink }) => {
         }
     };
 
+
     return (
-        <Card>
+        <div className={stl.card} {...getRootProps()}>
             <h3>Proof Of concept</h3>
             <div className={stl.cardIllustration1}>
-                <LottieSuperObj objectProps={obj} />
+                {docs == '' || docs == null ?
+                    <LottieSuperObj objectProps={obj} />
+                    :
+                    <LottieSuperObj objectProps={successIllustration} />
+                }
             </div>
             <div className={stl.cardInput}>
                 <h3 className={stl.label} htmlFor="education">Posez votre document ici </h3>
@@ -31,7 +122,7 @@ const UploadProofOfConceptCard = ({ proofOfConceptLink }) => {
                     </a>
                 </Link>
             </div>
-        </Card>
+        </div>
     );
 }
 

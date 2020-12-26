@@ -1,6 +1,6 @@
 import axios from 'axios';
 import stl from '../../../../styles/client.homepage.module.scss';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import style from '../../../../styles/client.homepage.module.scss'
 import LottieSuperObj from '../../../buttons/lottieFingerprint';
@@ -9,13 +9,19 @@ import successAnimation from '../../../../lotties/validated.json';
 
 
 const updateCashFlowStatement = async (arg) => {
+    if (typeof window !== 'undefined') {
+        var token = localStorage.getItem('afreesmartAcessToken') || '';
+    };
     const config = {
         url: 'http://localhost:9100/graphql',
         method: 'post',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
         data: {
             query: `
-        mutation {
-            updateTemplateDoc(cashFlowStatement: "${arg}")
+            mutation {
+            updateProjectDoc(cashFlowStatement: "${arg}")
             }
             `
         }
@@ -26,7 +32,38 @@ const updateCashFlowStatement = async (arg) => {
 
 
 const UploadCashFlowStatementCard = () => {
-    const [isDropped, setIsDropped] = useState(null);
+    const [docs, setDoc] = useState(null);
+    const [isFetched, setIsFetched] = useState(false);
+    const getDocs = async () => {
+        if (typeof window !== 'undefined') {
+            var token = localStorage.getItem('afreesmartAcessToken') || '';
+        };
+        const req = await axios({
+            url: 'http://localhost:9100/graphql',
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            data: {
+                query: `
+                query {
+                    getProjectDocById{
+                    cashFlowStatement
+                    }
+                }
+                `
+            }
+        })
+        if (req.data.data !== null) {
+            await setDoc(req.data.data.getProjectDocById.cashFlowStatement);
+            await setIsFetched(true);
+        };
+    };
+    useEffect(() => {
+        getDocs();
+    }, [isFetched]);
+
+
     const successIllustration = {
         loop: true,
         autoplay: true,
@@ -49,8 +86,7 @@ const UploadCashFlowStatementCard = () => {
             if (req.data !== null) {
                 var res = await req.data.secure_url;
             }
-            updateCashFlowStatement(res);
-            setIsDropped(true);
+            await updateCashFlowStatement(res);
         });
     }, []);
 
@@ -73,13 +109,14 @@ const UploadCashFlowStatementCard = () => {
         <div className={style.card} {...getRootProps()}>
             <h3>Remote des flux</h3>
             <div className={stl.cardIllustration1}>
-                <LottieSuperObj objectProps={obj} />
+                {docs == '' || docs == null ?
+                    <LottieSuperObj objectProps={obj} />
+                    :
+                    <LottieSuperObj objectProps={successIllustration} />
+                }
             </div>
             <div className={stl.cardInput}>
                 <h3 className={stl.label} htmlFor="education">Posez votre document ici </h3>
-
-                <div className={stl.btn1}>Telechargez le theme</div>
-
             </div>
         </div>
     );

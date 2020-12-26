@@ -2,19 +2,17 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
-import Card from '../card';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import education from '../../../lotties/education.json';
-import successAnimation from '../../../lotties/validated.json'
+import successAnimation from '../../../lotties/validated.json';
 import updateEducationUtil from '../../../utils/updateEducation';
 
 const EducationCard = ({ projects }) => {
-    console.log(projects);
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
-        completionHandler()
-    }, [isCompleted])
+        completionHandler();
+    }, [isCompleted]);
     const componentDidMount = async () => {
         const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -71,40 +69,33 @@ const EducationCard = ({ projects }) => {
     };
     return (
         isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
+            <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="education">Quel est votre niveaux d'education ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="education"
-                        placeholder="Education"
-                        id="Education"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
+                    <div className={stl.label} htmlFor="education">Quel est votre niveaux d'education ?</div>
                 </div>
-            </form>
-            : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Education</h3>
+            </div>
+            :
+            <div className={stl.cardLong}>
+                <h3>Que pensez-vous du travail en équipe ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={obj} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="education">Quel est votre niveaux d'education ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="education"
-                        placeholder="Education"
-                        id="projectName"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
+                    <div className={stl.Qbtn}>
+                        <p>Je bosse mieux seul. </p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Je renforce mes faiblesses et je me concentre sur mes forces.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>J’aime travailler avec des personnes ayant les mêmes forces que moi.</p>
+                    </div>
                 </div>
-            </form>
+            </div>
     );
 }
 export async function getServerSideProps() {
@@ -121,8 +112,8 @@ export async function getServerSideProps() {
             query: `
                 query{
                     mindSet{
-                        education
-                    }
+                    education
+                }
                 }
             `
         }

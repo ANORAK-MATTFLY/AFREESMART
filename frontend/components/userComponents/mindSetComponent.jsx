@@ -1,4 +1,4 @@
-import MindSetIllustration from '../../lotties/mindset.json';
+import MindSetIllustration from '../../lotties/42054-smart-brain.json';
 import LottieSuperObj from '../buttons/lottieFingerprint';
 
 

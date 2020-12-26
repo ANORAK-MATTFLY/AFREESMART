@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import achievement from '../../../lotties/achievement.json';
+import ambitionAnimation from '../../../lotties/ambition.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateAchievementUtil from '../../../utils/updateAchievement';
+import updateAmbitionUtil from '../../../utils/updateAmbition';
 
 
-const AchievementCard = () => {
+const FiveStrength = () => {
+    const router = useRouter();
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
-        completionHandler()
+        completionHandler();
     }, [isCompleted])
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
@@ -26,7 +28,7 @@ const AchievementCard = () => {
                 query: `
                     query{
                         mindSet{
-                            achievements
+                            ambitions
                         }
                     }
                 `
@@ -35,8 +37,8 @@ const AchievementCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { achievements } = mindSet
-        if (!achievements) {
+        const { ambitions } = mindSet
+        if (!ambitions) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -45,15 +47,16 @@ const AchievementCard = () => {
     const completionHandler = () => {
         componentDidMount();
     }
-    const onSubmit = data => {
-        if (data.achievements) {
-            updateAchievementUtil(data.achievements);
+    const onSubmit = async (data) => {
+        if (data.ambitions) {
+            await updateAmbitionUtil(data.ambitions);
+            await router.reload()
         }
     }
-    const Achieved = {
+    const youthPower = {
         loop: true,
         autoplay: true,
-        animationData: achievement,
+        animationData: ambitionAnimation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -74,29 +77,29 @@ const AchievementCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="achievements">Quel est votre niveaux d'education ?</label>
+                    <label className={stl.label} htmlFor="ambitions">Decrivez vos ambitions</label>
                     <input className={stl.input}
                         type="text"
-                        name="achievements"
-                        placeholder="Accomplissements"
-                        id="achievements"
+                        name="ambitions"
+                        placeholder="Points forts"
+                        id="ambitions"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
             : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Accomplissements</h3>
+                <h3>Quels sont vos 5 forces personnel ?</h3>
                 <div className={stl.cardIllustration}>
-                    <LottieSuperObj objectProps={Achieved} />
+                    <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="achievements">Quel sont vos Accomplissements ?</label>
+                    <label className={stl.label} htmlFor="ambitions">Decrivez vos ambitions</label>
                     <input className={stl.input}
                         type="text"
-                        name="achievements"
-                        placeholder="Accomplissements"
-                        id="achievements"
+                        name="ambitions"
+                        placeholder="Vos ambitions"
+                        id="ambitions"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
@@ -105,4 +108,4 @@ const AchievementCard = () => {
     );
 }
 
-export default AchievementCard;
+export default FiveStrength;

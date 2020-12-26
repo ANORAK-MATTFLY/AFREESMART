@@ -1,11 +1,102 @@
-import stl from '../../../styles//client.homepage.module.scss';
-import Card from '../../userComponents/card';
+import axios from 'axios';
+import { useState, useCallback, useEffect } from 'react';
+import { useDropzone } from 'react-dropzone';
+import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import doc from '../../../lotties/drop zone.json';
+import successAnimation from '../../../lotties/validated.json';
 import Link from 'next/link';
 
 
-const UploadTeamProfileCard = ({ marketingtLink }) => {
+const updateMarketing = async (arg) => {
+    if (typeof window !== 'undefined') {
+        var token = localStorage.getItem('afreesmartAcessToken') || '';
+    }
+    const config = {
+        url: "http://localhost:9100/graphql",
+        method: "post",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        data: {
+            query: `
+            mutation{
+                updateProjectDoc(marketingtLink:"${arg}")
+            }
+        `
+        }
+    };
+    await axios(config);
+}
+
+
+
+
+const UploadMarketingCard = ({ marketingtLink }) => {
+    const [docs, setDocs] = useState({
+        marketingtLink: ''
+    });
+    const successIllustration = {
+        loop: true,
+        autoplay: true,
+        animationData: successAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+    const getDocs = async () => {
+        if (typeof window !== 'undefined') {
+            var token = localStorage.getItem('afreesmartAcessToken') || '';
+        };
+        const config = {
+            url: 'http://localhost:9100/graphql',
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            data: {
+                query: `
+                query {
+                    getProjectDocById {
+                    marketingtLink
+                    proofOfConceptLink
+                    }
+                }
+                    `
+            }
+        }
+        const req = await axios(config);
+        if (req.data.data !== null) {
+            setDocs(req.data.data.getProjectDocById.marketingtLink);
+        }
+    }
+
+    useEffect(() => {
+        getDocs();
+    }, [docs])
+    const onDrop = useCallback((acceptedFiles) => {
+        acceptedFiles.forEach(async (acceptedFile) => {
+            const formData = new FormData();
+            formData.append('file', acceptedFile);
+            formData.append('upload_preset', 'evofo95k')
+            const config = {
+                url: `https://api.cloudinary.com/v1_1/dbku02uef/upload`,
+                method: 'post',
+                data: formData,
+            }
+            const req = await axios(config)
+            if (req.data !== null) {
+                var res = await req.data.secure_url;
+            }
+            updateMarketing(res);
+        });
+    }, []);
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        accepts: ".docx",
+        multiple: false,
+    });
     const obj = {
         loop: true,
         autoplay: true,
@@ -15,11 +106,17 @@ const UploadTeamProfileCard = ({ marketingtLink }) => {
         }
     };
 
+
+
     return (
-        <Card>
-            <h3>Profile de l'equipe</h3>
+        <div className={stl.card} {...getRootProps()}>
+            <h3>Marketing</h3>
             <div className={stl.cardIllustration1}>
-                <LottieSuperObj objectProps={obj} />
+                {docs == '' || docs == null ?
+                    <LottieSuperObj objectProps={obj} />
+                    :
+                    <LottieSuperObj objectProps={successIllustration} />
+                }
             </div>
             <div className={stl.cardInput}>
                 <h3 className={stl.label} htmlFor="education">Posez votre document ici </h3>
@@ -29,8 +126,8 @@ const UploadTeamProfileCard = ({ marketingtLink }) => {
                     </a>
                 </Link>
             </div>
-        </Card>
+        </div>
     );
 }
 
-export default UploadTeamProfileCard;
+export default UploadMarketingCard;

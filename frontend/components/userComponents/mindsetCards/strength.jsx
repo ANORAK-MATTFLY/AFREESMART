@@ -71,7 +71,7 @@ const StrengthCard = () => {
     };
     return (
         isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
+            <form onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
                 <h3>Vos points forts</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
@@ -88,23 +88,26 @@ const StrengthCard = () => {
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Vos points forts</h3>
+            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+                <h3>Que représentez l’échec pour vous ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="strength">Quel est votre niveaux d'education ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="strength"
-                        placeholder="Points forts"
-                        id="strength"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous allez tenter de mieux faire la prochaine fois, pas des regrets.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous ne connaissez pas d’échec.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>C’est une manière de gagner de l’expérience, ça ne vous freine pas pour avancer.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>L’échec vous mets en horreur, vous pouvez abandonner et essayer autre chose.</p>
+                    </div>
                 </div>
-            </form>
+            </div>
     );
 }
 

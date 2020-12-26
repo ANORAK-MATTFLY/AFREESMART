@@ -49,6 +49,16 @@ const typeDefs = gql`
       businessPlanLink: String
       proofOfConceptLink: String
       planFinancierLink: String
+      companyManagement: String
+      turnoverGrowth: String
+      projectLegalAuthorizations: String
+      fluxGrowth: String
+      teamProfile: String
+      companyVision: String
+      abilityToGenerateEmployment: String
+      cashFlowStatement: String
+      balanceSheet: String
+      cR: String
     }
 
     type TemplateDoc {
@@ -112,7 +122,9 @@ const typeDefs = gql`
     getAllProject: [Project!]
     getTemplateById(id:ID): TemplateDoc!
     getProjectById(id:ID): Project!
+    getProjectDocById: ProjectDoc!
     getMindSetById(id:ID): Mindset!
+    getProjectDocByIdButForReal(id:ID): ProjectDoc!
   }
 
   type Mutation {

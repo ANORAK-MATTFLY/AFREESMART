@@ -1,6 +1,6 @@
 import axios from 'axios';
 import stl from '../../../../styles/client.homepage.module.scss';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import style from '../../../../styles/client.homepage.module.scss'
 import LottieSuperObj from '../../../buttons/lottieFingerprint';
@@ -8,13 +8,19 @@ import doc from '../../../../lotties/drop zone';
 import successAnimation from '../../../../lotties/validated.json';
 
 const updateTurnoverGrowth = async (arg) => {
+    if (typeof window !== 'undefined') {
+        var token = localStorage.getItem('afreesmartAcessToken') || '';
+    };
     const config = {
         url: 'http://localhost:9100/graphql',
         method: 'post',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
         data: {
             query: `
         mutation {
-            updateTemplateDoc(turnoverGrowth: "${arg}")
+            updateProjectDoc(turnoverGrowth: "${arg}")
             }
             `
         }
@@ -25,7 +31,37 @@ const updateTurnoverGrowth = async (arg) => {
 
 
 const UploadMoneyGrowthCard = () => {
-    const [isDropped, setIsDropped] = useState(null);
+    const [docs, setDoc] = useState(null);
+    const [isFetched, setIsFetched] = useState(false);
+    const getDocs = async () => {
+        if (typeof window !== 'undefined') {
+            var token = localStorage.getItem('afreesmartAcessToken') || '';
+        };
+        const req = await axios({
+            url: 'http://localhost:9100/graphql',
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            data: {
+                query: `
+                query {
+                    getProjectDocById{
+                    turnoverGrowth
+                    }
+                }
+                `
+            }
+        })
+        if (req.data.data !== null) {
+            await setDoc(req.data.data.getProjectDocById.turnoverGrowth);
+            await setIsFetched(true);
+        };
+    };
+    useEffect(() => {
+        getDocs();
+    }, [isFetched]);
+
     const successIllustration = {
         loop: true,
         autoplay: true,
@@ -49,7 +85,6 @@ const UploadMoneyGrowthCard = () => {
                 var res = await req.data.secure_url;
             }
             updateTurnoverGrowth(res);
-            setIsDropped(true);
         });
     }, []);
 
@@ -71,7 +106,11 @@ const UploadMoneyGrowthCard = () => {
         <div className={style.card} {...getRootProps()}>
             <h3>Croissance du chiffre d'affaire</h3>
             <div className={stl.cardIllustration1}>
-                <LottieSuperObj objectProps={obj} />
+                {docs == '' || docs == null ?
+                    <LottieSuperObj objectProps={obj} />
+                    :
+                    <LottieSuperObj objectProps={successIllustration} />
+                }
             </div>
             <div className={stl.cardInput}>
                 <h3 className={stl.label} htmlFor="education">Posez votre document ici </h3>

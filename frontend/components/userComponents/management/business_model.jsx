@@ -1,17 +1,39 @@
 import axios from 'axios';
 import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import stl from '../../../styles//client.homepage.module.scss';
-import Card from '../../userComponents/card';
+import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import doc from '../../../lotties/drop zone.json';
 import successAnimation from '../../../lotties/validated.json';
-import FilesUpload from '../../../components/userComponents/uploadefiles';
-import Link from 'next/link';
+
+
+
+const updateBusinessModel = async (arg) => {
+    if (typeof window !== 'undefined') {
+        var token = localStorage.getItem('afreesmartAcessToken') || '';
+    }
+    const config = {
+        url: "http://localhost:9100/graphql",
+        method: "post",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        data: {
+            query: `
+            mutation{
+                updateProjectDoc(businessModelLink:"${arg}")
+            }
+        `
+        }
+    };
+    await axios(config);
+}
 
 
 const UploadBusinessModelCard = ({ businessModelLink }) => {
-    const [isDropped, setIsDropped] = useState(null);
+    const [docs, setDocs] = useState({
+        businessModelLink: ''
+    });
     const successIllustration = {
         loop: true,
         autoplay: true,
@@ -20,6 +42,41 @@ const UploadBusinessModelCard = ({ businessModelLink }) => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const getDocs = async () => {
+        if (typeof window !== 'undefined') {
+            var token = localStorage.getItem('afreesmartAcessToken') || '';
+        };
+        const config = {
+            url: 'http://localhost:9100/graphql',
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            data: {
+                query: `
+                query {
+                    getProjectDocById {
+                    contextLink
+                    companyLink
+                    businessModelLink
+                    comercialtLink
+                    marketingtLink
+                    managementLink
+                    corporateLink
+                    businessPlanLink
+                    proofOfConceptLink
+                    planFinancierLink
+                    }
+                }
+                    `
+            }
+        }
+        const req = await axios(config);
+        if (req.data.data !== null) {
+            setDocs(req.data.data.getProjectDocById.businessModelLink);
+        }
+    }
+    getDocs();
     const onDrop = useCallback((acceptedFiles) => {
         acceptedFiles.forEach(async (acceptedFile) => {
             const formData = new FormData();
@@ -34,8 +91,7 @@ const UploadBusinessModelCard = ({ businessModelLink }) => {
             if (req.data !== null) {
                 var res = await req.data.secure_url;
             }
-            updateContext(res);
-            setIsDropped(true);
+            updateBusinessModel(res);
         });
     }, []);
 
@@ -45,8 +101,6 @@ const UploadBusinessModelCard = ({ businessModelLink }) => {
         multiple: false,
     });
 
-
-
     const obj = {
         loop: true,
         autoplay: true,
@@ -55,11 +109,16 @@ const UploadBusinessModelCard = ({ businessModelLink }) => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+
     return (
-        <Card>
+        <div className={stl.card} {...getRootProps()}>
             <h3>Business Model</h3>
             <div className={stl.cardIllustration1}>
-                <LottieSuperObj objectProps={obj} />
+                {docs == '' || docs == null ?
+                    <LottieSuperObj objectProps={obj} />
+                    :
+                    <LottieSuperObj objectProps={successIllustration} />
+                }
             </div>
             <div className={stl.cardInput}>
                 <h3 className={stl.label} htmlFor="education">Posez votre document ici </h3>
@@ -69,7 +128,7 @@ const UploadBusinessModelCard = ({ businessModelLink }) => {
                     </a>
                 </Link>
             </div>
-        </Card>
+        </div>
     );
 }
 

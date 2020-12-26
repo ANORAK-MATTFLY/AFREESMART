@@ -14,7 +14,6 @@ const HomePageLayout = ({ children }) => {
         <div className={stl.container}>
             <div className={stl.sideBar}>
                 <div className={stl.logoSection}></div>
-
                 <div className={stl.homePageLinks}>
                     <Link href={'/home'}>
                         <div className={stl.linkWrapper}><p>Gouvernance</p></div>

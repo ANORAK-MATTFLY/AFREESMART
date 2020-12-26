@@ -1,6 +1,3 @@
-import axios from 'axios';
-import { useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
 import stl from '../../styles/admin.dashboard.module.scss';
 import ContextCard from '../admincmt/templatesCoards/context';
 import CompanyTemplate from '../admincmt/templatesCoards/company';

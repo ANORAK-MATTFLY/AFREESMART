@@ -88,23 +88,26 @@ const PhilosophyCard = () => {
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Decrivez votre philosophie</h3>
+            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+                <h3>Si ce que vous faites ne marche pas ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="philosophy">Decrivez votre philosophie(comment vouz fonctionnez)</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="philosophy"
-                        placeholder="Philosophie"
-                        id="philosophy"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous cherchez à savoir pourquoi ?</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous laissez tomber et passer à autre chose.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous continuez jusqu’à ce que ça marche.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous prenez conseils auprès des autres.</p>
+                    </div>
                 </div>
-            </form>
+            </div>
     );
 }
 

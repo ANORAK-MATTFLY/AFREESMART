@@ -88,23 +88,23 @@ const MotivationCard = () => {
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Motivations</h3>
+            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+                <h3>Vous allez arriver en retard à un rendez-vous que faites-vous ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={Motivated} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="motivation">Quel sont vos Motivations ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="motivation"
-                        placeholder="motivation"
-                        id="motivation"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
+                    <div className={stl.Qbtn}>
+                        <p>Vous n’êtes jamais en retard.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous vous excusez devant lui à votre arrivée.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous prévenez 15 minutes avant l’heure du rendez-vous votre retard.</p>
+                    </div>
                 </div>
-            </form>
+            </div>
     );
 }
 
