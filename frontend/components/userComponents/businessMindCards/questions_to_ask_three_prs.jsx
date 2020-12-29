@@ -3,12 +3,12 @@ import axios from 'axios';
 import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import previous from '../../../lotties/previousCreated.json';
+import employeesAnimation from '../../../lotties/employeesManaged.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateCompaniesCreatedUtil from '../../../utils/updatePreviousCompany';
+import updateEmployeesUtil from '../../../utils/updateEmpleeManaged';
 
 
-const PreviousCompaniesCard = () => {
+const QuestionsForThreePrs = () => {
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
@@ -26,7 +26,7 @@ const PreviousCompaniesCard = () => {
                 query: `
                     query{
                         businessMind{
-                            companyCreatedPreviously
+                            numberOfEmployeesManaged
                         }
                     }
                 `
@@ -35,8 +35,8 @@ const PreviousCompaniesCard = () => {
         let res = await req.data;
         const { data } = res;
         const { businessMind } = data;
-        const { companyCreatedPreviously } = businessMind
-        if (!companyCreatedPreviously) {
+        const { numberOfEmployeesManaged } = businessMind
+        if (!numberOfEmployeesManaged) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -46,14 +46,14 @@ const PreviousCompaniesCard = () => {
         componentDidMount();
     }
     const onSubmit = data => {
-        if (data.companyCreated) {
-            updateCompaniesCreatedUtil(data.companyCreated);
+        if (data.employees) {
+            updateEmployeesUtil(data.employees);
         }
     }
     const Achieved = {
         loop: true,
         autoplay: true,
-        animationData: previous,
+        animationData: employeesAnimation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -74,29 +74,29 @@ const PreviousCompaniesCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="companyCreated">Avez-vous deja cree des entreprises avant ?</label>
+                    <label className={stl.label} htmlFor="employees">Quels sont les deux questions que vous poserez à ces trois personnes ?</label>
                     <input className={stl.input}
                         type="text"
-                        name="companyCreated"
-                        placeholder="Echec"
-                        id="companyCreated"
+                        name="employees"
+                        placeholder="Employes"
+                        id="employees"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
             : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Accomplissements</h3>
+                <h3>Employes</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={Achieved} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="companyCreated">Avez-vous deja cree des entreprises avant ?</label>
+                    <p className={stl.label} htmlFor="employees">Quels sont les deux questions que vous poserez à ces trois personnes ?</p>
                     <input className={stl.input}
                         type="text"
-                        name="companyCreated"
-                        placeholder="Vos entreprises precedente"
-                        id="companyCreated"
+                        name="employees"
+                        placeholder="Employes"
+                        id="employees"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
@@ -105,4 +105,4 @@ const PreviousCompaniesCard = () => {
     );
 }
 
-export default PreviousCompaniesCard;
+export default QuestionsForThreePrs;

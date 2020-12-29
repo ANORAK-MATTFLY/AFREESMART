@@ -87,21 +87,23 @@ const typeDefs = gql`
 
     type Mindset{
       id: Int!
-      motivations: String
+      companyValues: String
       family: String
-      education: String
+      thoughtOnTeamwork: String
       ethic: String
-      philosophies: String
-      diploma: String
-      strength: String
-      weaknesses: String
-      ambitions: String
-      achievements: String
+      IfWrong: String
+      IfLate: String
+      IfYouGetStuck: String
+      ifYouFaille: String
+      fiveKeyStrength: String
+      fiveWeakness: String
+      relationShipWithMoney: String
+      education: String
     }
     type AbilityToMakeMoney{
       id: Int!
-      moneyInBank: String
-      debt: String
+      passive: String
+      monthlyEarningMoney: String
     }
 
     type BusinessMind{
@@ -110,6 +112,13 @@ const typeDefs = gql`
       companyCreatedPreviously: String
       failuresAsEntrepreneur: String
       numberOfEmployeesManaged: String
+      mentors: String
+      doYouHaveSupport: String
+      howManyAreYou: String
+      companyFailures: String
+      PreviousCompaniesCard: String
+      twoQuestionsForThisPeople: String
+      threePeopleYouWouldLikeToMet: String
     }
 
   type Query {
@@ -166,8 +175,15 @@ const typeDefs = gql`
       companyCreatedPreviously: String
       failuresAsEntrepreneur: String
       numberOfEmployeesManaged: String
+      mentors: String
+      doYouHaveSupport: String
+      howManyAreYou: String
+      companyFailures: String
+      PreviousCompaniesCard: String
+      twoQuestionsForThisPeople: String
+      threePeopleYouWouldLikeToMet: String
     ): String!
-    updateAbilityToMakeMoney(moneyInBank: String, debt: String): String!
+    updateAbilityToMakeMoney(passive: String, monthlyEarningMoney: String): String!
     # 
     invalidateProject(isValid: Boolean): String!
     setToInvalidateProject(isValid: Boolean): String!

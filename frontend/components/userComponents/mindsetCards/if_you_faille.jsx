@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import weaknessAnimation from '../../../lotties/weaknesses.json';
+import philosopher from '../../../lotties/philosophy.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateWeaknessesUtil from '../../../utils/updateWeaknesses';
+import updatePhilosophyUtil from '../../../utils/updatePhilosophy';
 
 
-const WeaknessesCard = () => {
+const IfYouFaille = () => {
     const router = useRouter();
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
@@ -28,7 +28,7 @@ const WeaknessesCard = () => {
                 query: `
                     query{
                         mindSet{
-                            weaknesses
+                            philosophies
                         }
                     }
                 `
@@ -37,8 +37,8 @@ const WeaknessesCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { weaknesses } = mindSet
-        if (!weaknesses) {
+        const { philosophies } = mindSet
+        if (!philosophies) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -48,15 +48,15 @@ const WeaknessesCard = () => {
         componentDidMount();
     }
     const onSubmit = async (data) => {
-        if (data.weaknesses) {
-            await updateWeaknessesUtil(data.weaknesses);
+        if (data.philosophy) {
+            await updatePhilosophyUtil(data.philosophy);
             await router.reload()
         }
     }
     const youthPower = {
         loop: true,
         autoplay: true,
-        animationData: weaknessAnimation,
+        animationData: philosopher,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -77,35 +77,38 @@ const WeaknessesCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="weaknesses">Decrivez vos ambitions</label>
+                    <label className={stl.label} htmlFor="philosophy">Decrivez votre philosophie(comment vouz fonctionnez)</label>
                     <input className={stl.input}
                         type="text"
-                        name="weaknesses"
-                        placeholder="Points failbe"
-                        id="weaknesses"
+                        name="philosophy"
+                        placeholder="Philosophie"
+                        id="philosophy"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Quels sont vos 5 faiblesses ?</h3>
+            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+                <h3>Si ce que vous faites ne marche pas ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="weaknesses">Decrivez vos points faible</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="weaknesses"
-                        placeholder="Vos point failbe"
-                        id="weaknesses"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous cherchez à savoir pourquoi ?</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous laissez tomber et passer à autre chose.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous continuez jusqu’à ce que ça marche.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous prenez conseils auprès des autres.</p>
+                    </div>
                 </div>
-            </form>
+            </div>
     );
 }
 
-export default WeaknessesCard;
+export default IfYouFaille;

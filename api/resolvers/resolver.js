@@ -323,7 +323,20 @@ const resolvers = {
 			}
 			return "Success";
 		},
-		async updateBusinessMind(_, { idol, careerAchievement, companyCreatedPreviously, failuresAsEntrepreneur, numberOfEmployeesManaged }, { user }) {
+		async updateBusinessMind(_, {
+			idol,
+			careerAchievement,
+			companyCreatedPreviously,
+			failuresAsEntrepreneur,
+			numberOfEmployeesManaged,
+			mentors,
+			doYouHaveSupport,
+			howManyAreYou,
+			companyFailures,
+			PreviousCompaniesCard,
+			twoQuestionsForThisPeople,
+			threePeopleYouWouldLikeToMet
+		}, { user }) {
 			if (!user) {
 				throw new Error("Sorry you're not an authenticated user...")
 			}
@@ -334,7 +347,14 @@ const resolvers = {
 						careerAchievement,
 						companyCreatedPreviously,
 						failuresAsEntrepreneur,
-						numberOfEmployeesManaged
+						numberOfEmployeesManaged,
+						mentors,
+						doYouHaveSupport,
+						howManyAreYou,
+						companyFailures,
+						PreviousCompaniesCard,
+						twoQuestionsForThisPeople,
+						threePeopleYouWouldLikeToMet
 					},
 					{ where: { id: user.id } }
 				)
@@ -343,15 +363,15 @@ const resolvers = {
 			}
 			return "Success";
 		},
-		async updateAbilityToMakeMoney(_, { moneyInBank, debt }, { user }) {
+		async updateAbilityToMakeMoney(_, { passive, monthlyEarningMoney }, { user }) {
 			if (!user) {
 				throw new Error("Sorry you're not an authenticated user...")
 			}
 			if (user) {
 				await AbilityToManageMoney.update(
 					{
-						moneyInBank,
-						debt
+						passive,
+						monthlyEarningMoney
 					},
 					{ where: { id: user.id } }
 				)

@@ -5,8 +5,8 @@ import achievement from '../../lotties/achievement.json';
 import motivation from '../../lotties/motivation.json';
 import power from '../../lotties/youth-power.json'
 import stl from '../../styles/client.homepage.module.scss'
-import MoneyInTheBankCard from '../../components/userComponents/moneyMaker/moneyInTheBank';
-import DebtCard from '../../components/userComponents/moneyMaker/debt';
+import MonthlyEarningMoney from '../../components/userComponents/moneyMaker/mounthlyEarn';
+import Passive from '../../components/userComponents/moneyMaker/actual_passive';
 
 
 const MoneyMakerPage = () => {
@@ -44,8 +44,8 @@ const MoneyMakerPage = () => {
                 <h2> Decrivez-nous votre habiltee a vous faire de l'argent !</h2>
             </TitleSection>
             <div className={stl.cardsSection}>
-                <MoneyInTheBankCard />
-                <DebtCard />
+                <MonthlyEarningMoney />
+                <Passive />
             </div>
         </HomePageLayout>
     );

@@ -34,6 +34,34 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: true
             },
+            mentors: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            doYouHaveSupport: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            howManyAreYou: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            companyFailures: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            PreviousCompaniesCard: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            twoQuestionsForThisPeople: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            threePeopleYouWouldLikeToMet: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
         },
         {
             sequelize,

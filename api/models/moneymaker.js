@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
     AbilityToManageMoney.init(
         {
-            moneyInBank: {
+            passive: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            debt: {
+            monthlyEarningMoney: {
                 type: DataTypes.STRING,
                 allowNull: true
             },

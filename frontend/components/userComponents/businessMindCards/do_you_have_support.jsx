@@ -1,23 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
-import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import motivation from '../../../lotties/motivation.json';
-import successAnimation from '../../../lotties/validated.json'
-import updateMotivationUtil from '../../../utils/updateMotivation';
+import education from '../../../lotties/education.json';
+import successAnimation from '../../../lotties/validated.json';
+import updateEducationUtil from '../../../utils/updateEducation';
 
-
-const MotivationCard = () => {
-    const router = useRouter();
+const DoYouHaveSupport = ({ projects }) => {
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
-        completionHandler()
-    }, [isCompleted])
+        completionHandler();
+    }, [isCompleted]);
     const componentDidMount = async () => {
-        const token = localStorage.getItem('afreesmartAcessToken') || '';
+        const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
             url: 'http://localhost:9100/graphql',
             method: 'post',
@@ -28,7 +25,7 @@ const MotivationCard = () => {
                 query: `
                     query{
                         mindSet{
-                            motivations
+                            education
                         }
                     }
                 `
@@ -37,26 +34,27 @@ const MotivationCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { motivations } = mindSet
-        if (!motivations) {
+        const { education } = mindSet
+        if (!education) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
         }
+
     }
     const completionHandler = () => {
         componentDidMount();
     }
-    const onSubmit = async (data) => {
-        if (data.motivation) {
-            await updateMotivationUtil(data.motivation);
-            await router.reload()
+    const onSubmit = data => {
+        if (data.education) {
+            updateEducationUtil(data.education);
         }
     }
-    const Motivated = {
+
+    const obj = {
         loop: true,
         autoplay: true,
-        animationData: motivation,
+        animationData: education,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -71,41 +69,64 @@ const MotivationCard = () => {
     };
     return (
         isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
+            <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="motivation">Quel est votre niveaux d'education ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="motivation"
-                        placeholder="Motivation"
-                        id="motivation"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
+                    <div className={stl.label} htmlFor="education">Est-ce que votre entourage soutient votre projet </div>
                 </div>
-            </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
-                <h3>Vous allez arriver en retard à un rendez-vous que faites-vous ?</h3>
+            </div>
+            :
+            <div className={stl.cardSmallGrid}>
+                <h3>Est-ce que votre entourage soutient votre projet ?
+
+                </h3>
                 <div className={stl.cardIllustration}>
-                    <LottieSuperObj objectProps={Motivated} />
+                    <LottieSuperObj objectProps={obj} />
                 </div>
                 <div className={stl.cardInput}>
                     <div className={stl.Qbtn}>
-                        <p>Vous n’êtes jamais en retard.</p>
+                        <p>Oui</p>
                     </div>
-                    <div className={stl.QbtnLong}>
-                        <p>Vous vous excusez devant lui à votre arrivée.</p>
-                    </div>
-                    <div className={stl.QbtnLong}>
-                        <p>Vous prévenez 15 minutes avant l’heure du rendez-vous votre retard.</p>
+                    <div className={stl.Qbtn}>
+                        <p>Non</p>
                     </div>
                 </div>
             </div>
     );
 }
+export async function getServerSideProps() {
+    if (typeof window !== 'undefined') {
+        var accessToken = localStorage.getItem('afreesmartAcessToken');
+    }
+    const req = await axios({
+        url: 'http://localhost:9100/graphql',
+        method: 'post',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+        },
+        data: {
+            query: `
+                query{
+                    mindSet{
+                    education
+                }
+                }
+            `
+        }
+    })
+    const projects = await req.data;
+    return {
+        props: {
+            projects,
+        },
+    }
+}
 
-export default MotivationCard;
+
+
+
+
+export default DoYouHaveSupport;

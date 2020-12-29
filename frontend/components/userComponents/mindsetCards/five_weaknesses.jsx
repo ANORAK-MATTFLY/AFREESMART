@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import failureAnimation from '../../../lotties/21395-waffle.json';
+import weaknessAnimation from '../../../lotties/weaknesses.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateFailureUtil from '../../../utils/updateFailur';
+import updateWeaknessesUtil from '../../../utils/updateWeaknesses';
 
 
-const FailureCard = () => {
+const FiveWeaknessesCard = () => {
+    const router = useRouter();
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
-        completionHandler()
+        completionHandler();
     }, [isCompleted])
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
@@ -25,8 +27,8 @@ const FailureCard = () => {
             data: {
                 query: `
                     query{
-                        businessMind{
-                            failuresAsEntrepreneur
+                        mindSet{
+                            weaknesses
                         }
                     }
                 `
@@ -34,9 +36,9 @@ const FailureCard = () => {
         })
         let res = await req.data;
         const { data } = res;
-        const { businessMind } = data;
-        const { failuresAsEntrepreneur } = businessMind
-        if (!failuresAsEntrepreneur) {
+        const { mindSet } = data;
+        const { weaknesses } = mindSet
+        if (!weaknesses) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -45,15 +47,16 @@ const FailureCard = () => {
     const completionHandler = () => {
         componentDidMount();
     }
-    const onSubmit = data => {
-        if (data.failure) {
-            updateFailureUtil(data.failure);
+    const onSubmit = async (data) => {
+        if (data.weaknesses) {
+            await updateWeaknessesUtil(data.weaknesses);
+            await router.reload()
         }
     }
-    const Achieved = {
+    const youthPower = {
         loop: true,
         autoplay: true,
-        animationData: failureAnimation,
+        animationData: weaknessAnimation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -74,29 +77,29 @@ const FailureCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="failure">Quel est votre niveaux d'education ?</label>
+                    <label className={stl.label} htmlFor="weaknesses">Decrivez vos ambitions</label>
                     <input className={stl.input}
                         type="text"
-                        name="failure"
-                        placeholder="Echec"
-                        id="failure"
+                        name="weaknesses"
+                        placeholder="Points failbe"
+                        id="weaknesses"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
             : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Accomplissements</h3>
+                <h3>Quels sont vos 5 faiblesses ?</h3>
                 <div className={stl.cardIllustration}>
-                    <LottieSuperObj objectProps={Achieved} />
+                    <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="achievements">Quel sont vos Accomplissements ?</label>
+                    <label className={stl.label} htmlFor="weaknesses">Decrivez vos points faible</label>
                     <input className={stl.input}
                         type="text"
-                        name="failure"
-                        placeholder="Echec"
-                        id="failure"
+                        name="weaknesses"
+                        placeholder="Vos point failbe"
+                        id="weaknesses"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
@@ -105,4 +108,4 @@ const FailureCard = () => {
     );
 }
 
-export default FailureCard;
+export default FiveWeaknessesCard;

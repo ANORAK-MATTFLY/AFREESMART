@@ -7,7 +7,7 @@ import education from '../../../lotties/education.json';
 import successAnimation from '../../../lotties/validated.json';
 import updateEducationUtil from '../../../utils/updateEducation';
 
-const EducationCard = ({ projects }) => {
+const HowManyAreYou = ({ projects }) => {
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
@@ -80,19 +80,26 @@ const EducationCard = ({ projects }) => {
             </div>
             :
             <div className={stl.cardLong}>
-                <h3>Que pensez-vous du travail en équipe ?</h3>
+                <h3>Combien de personne compose votre ménage en dehors de vous-même ?
+                </h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={obj} />
                 </div>
                 <div className={stl.cardInput}>
                     <div className={stl.Qbtn}>
-                        <p>Je bosse mieux seul. </p>
+                        <p>0</p>
                     </div>
-                    <div className={stl.QbtnLong}>
-                        <p>Je renforce mes faiblesses et je me concentre sur mes forces.</p>
+                    <div className={stl.Qbtn}>
+                        <p>1-3</p>
                     </div>
-                    <div className={stl.QbtnLong}>
-                        <p>J’aime travailler avec des personnes ayant les mêmes forces que moi.</p>
+                    <div className={stl.Qbtn}>
+                        <p>3-6</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>6-9</p>
+                    </div>
+                    <div className={stl.Qbtn}>
+                        <p>Plus de 9 </p>
                     </div>
                 </div>
             </div>
@@ -130,4 +137,4 @@ export async function getServerSideProps() {
 
 
 
-export default EducationCard;
+export default HowManyAreYou;

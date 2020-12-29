@@ -3,12 +3,12 @@ import axios from 'axios';
 import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import DebtAnimation from '../../../lotties/debt.json';
+import idolAnimation from '../../../lotties/business-plan-or-chart-presentation';
 import successAnimation from '../../../lotties/validated.json'
-import updateDebtUtil from '../../../utils/updateDebt';
+import updateIdolUtil from '../../../utils/updateIdol';
 
 
-const DebtCard = () => {
+const IdolCard = () => {
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
@@ -25,8 +25,8 @@ const DebtCard = () => {
             data: {
                 query: `
                     query{
-                        moneyMaker{
-                            debt
+                        businessMind{
+                            idol
                         }
                     }
                 `
@@ -34,26 +34,27 @@ const DebtCard = () => {
         })
         let res = await req.data;
         const { data } = res;
-        const { moneyMaker } = data;
-        const { debt } = moneyMaker
-        if (!debt) {
+        const { businessMind } = data;
+        const { idol } = businessMind
+        if (!idol) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
         }
+        console.log(idol);
     }
     const completionHandler = () => {
         componentDidMount();
     }
     const onSubmit = data => {
-        if (data.debt) {
-            updateDebtUtil(data.debt);
+        if (data.idol) {
+            updateIdolUtil(data.idol);
         }
     }
     const Achieved = {
         loop: true,
         autoplay: true,
-        animationData: DebtAnimation,
+        animationData: idolAnimation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -74,29 +75,31 @@ const DebtCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="debt">Avez-vous deja cree des entreprises avant ?</label>
+                    <label className={stl.label} htmlFor="idol">Citez trois personnes qui vous inspire que vous ne connaissez pas ?
+</label>
                     <input className={stl.input}
                         type="text"
-                        name="debt"
-                        placeholder="Dette"
-                        id="debt"
+                        name="idol"
+                        placeholder="Vos idol"
+                        id="idol"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
             : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>En dettement</h3>
+                <h3>Qui vous inspire</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={Achieved} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="debt">Combien d'employes avez-vous eu a gerer ?</label>
+                    <p className={stl.label} htmlFor="idol">Citez trois personnes qui vous inspire que vous ne connaissez pas ?
+</p>
                     <input className={stl.input}
                         type="text"
-                        name="debt"
-                        placeholder="Dette"
-                        id="debt"
+                        name="idol"
+                        placeholder="Vos idols"
+                        id="idol"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
@@ -105,4 +108,4 @@ const DebtCard = () => {
     );
 }
 
-export default DebtCard;
+export default IdolCard;

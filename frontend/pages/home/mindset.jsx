@@ -2,15 +2,15 @@ import stl from '../../styles/client.homepage.module.scss'
 import MindSet from '../../components/userComponents/mindSetComponent';
 import HomePageLayout from '../../components/userComponents/homePageLayout';
 import TitleSection from '../../components/userComponents/titleSection';
-import EducationCard from '../../components/userComponents/mindsetCards/education';
+import ThoughtOnTeamwork from '../../components/userComponents/mindsetCards/thought_on_teamwork';
 import IfWrong from '../../components/userComponents/mindsetCards/if_wrong';
-import MotivationCard from '../../components/userComponents/mindsetCards/motivation';
-import StrengthCard from '../../components/userComponents/mindsetCards/strength';
+import IfLate from '../../components/userComponents/mindsetCards/if_you_are_late';
+import WhatIsFailureToYou from '../../components/userComponents/mindsetCards/what_is_failure';
 import FamilyCard from '../../components/userComponents/mindsetCards/family';
 import EthicCard from '../../components/userComponents/mindsetCards/ethic';
-import PhilosophyCard from '../../components/userComponents/mindsetCards/philosophy';
+import IfYouFaille from '../../components/userComponents/mindsetCards/if_you_faille';
 import FiveStrength from '../../components/userComponents/mindsetCards/five_strength';
-import WeaknessesCard from '../../components/userComponents/mindsetCards/weaknesses';
+import FiveWeaknessesCard from '../../components/userComponents/mindsetCards/five_weaknesses';
 import RelationShipWithMoney from '../../components/userComponents/mindsetCards/relationship_with_money';
 import Ent_values_Card from '../../components/userComponents/mindsetCards/ent_values';
 import EdCard from '../../components/userComponents/mindsetCards/niveau_etude';
@@ -30,16 +30,16 @@ const MindSetComponent = () => {
                 <h2> Decrivez-nous votre mindset !</h2>
             </TitleSection>
             <div className={stl.cardsSection}>
-                <EducationCard />
+                <ThoughtOnTeamwork />
                 <IfWrong />
-                <MotivationCard />
-                <StrengthCard />
+                <IfLate />
+                <WhatIsFailureToYou />
                 <IfYouGetStuck />
                 <FamilyCard />
                 <EthicCard />
-                <PhilosophyCard />
+                <IfYouFaille />
                 <FiveStrength />
-                <WeaknessesCard />
+                <FiveWeaknessesCard />
                 <RelationShipWithMoney />
                 <Ent_values_Card />
                 <EdCard />

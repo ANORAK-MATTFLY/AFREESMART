@@ -3,12 +3,12 @@ import axios from 'axios';
 import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import BankAnimation from '../../../lotties/money.json';
+import failureAnimation from '../../../lotties/21395-waffle.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateMoneyUtil from '../../../utils/updateMoneyInBank';
+import updateFailureUtil from '../../../utils/updateFailur';
 
 
-const MoneyInTheBankCard = () => {
+const ThreeGhost = () => {
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
@@ -25,8 +25,8 @@ const MoneyInTheBankCard = () => {
             data: {
                 query: `
                     query{
-                        moneyMaker{
-                            moneyInBank
+                        businessMind{
+                            failuresAsEntrepreneur
                         }
                     }
                 `
@@ -34,9 +34,9 @@ const MoneyInTheBankCard = () => {
         })
         let res = await req.data;
         const { data } = res;
-        const { moneyMaker } = data;
-        const { moneyInBank } = moneyMaker
-        if (!moneyInBank) {
+        const { businessMind } = data;
+        const { failuresAsEntrepreneur } = businessMind
+        if (!failuresAsEntrepreneur) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -46,14 +46,14 @@ const MoneyInTheBankCard = () => {
         componentDidMount();
     }
     const onSubmit = data => {
-        if (data.bank) {
-            updateMoneyUtil(data.bank);
+        if (data.failure) {
+            updateFailureUtil(data.failure);
         }
     }
     const Achieved = {
         loop: true,
         autoplay: true,
-        animationData: BankAnimation,
+        animationData: failureAnimation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -74,29 +74,29 @@ const MoneyInTheBankCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="bank">Avez-vous deja cree des entreprises avant ?</label>
+                    <label className={stl.label} htmlFor="failure">Citez trois personnes que vous aurez voulu rencontrer s’ils étaient encore vivants ?</label>
                     <input className={stl.input}
                         type="text"
-                        name="bank"
-                        placeholder="Banque"
-                        id="bank"
+                        name="failure"
+                        placeholder="Echec"
+                        id="failure"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
             : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Bank</h3>
+                <h3>Qui auriez-vous voulue rencontrer ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={Achieved} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="bank">Combien d'employes avez-vous eu a gerer ?</label>
+                    <p className={stl.label} htmlFor="achievements">Citez trois personnes que vous aurez voulu rencontrer s’ils étaient encore vivants ?</p>
                     <input className={stl.input}
                         type="text"
-                        name="bank"
-                        placeholder="Releve banquair"
-                        id="bank"
+                        name="failure"
+                        placeholder="Echec"
+                        id="failure"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
@@ -105,4 +105,4 @@ const MoneyInTheBankCard = () => {
     );
 }
 
-export default MoneyInTheBankCard;
+export default ThreeGhost;

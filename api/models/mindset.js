@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     Mindset.init(
         {
-            motivations: {
+            companyValues: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: true,
             },
-            education: {
+            thoughtOnTeamwork: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
@@ -30,30 +30,39 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            philosophies: {
+            IfWrong: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            diploma: {
+            IfLate: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            strength: {
+            IfYouGetStuck: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            weaknesses: {
+            ifYouFaille: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            ambitions: {
+            fiveKeyStrength: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            achievements: {
+            fiveWeakness: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
+            relationShipWithMoney: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            education: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+
         },
         {
             sequelize,

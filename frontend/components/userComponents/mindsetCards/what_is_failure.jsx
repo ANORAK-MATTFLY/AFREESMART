@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import employeesAnimation from '../../../lotties/employeesManaged.json';
+import power from '../../../lotties/youth-power.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateEmployeesUtil from '../../../utils/updateEmpleeManaged';
+import updateStrengthUtil from '../../../utils/updateStrength';
 
 
-const EmployeeCard = () => {
+const WhatIsFailureToYou = () => {
+    const router = useRouter();
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
-        completionHandler()
+        completionHandler();
     }, [isCompleted])
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
@@ -25,8 +27,8 @@ const EmployeeCard = () => {
             data: {
                 query: `
                     query{
-                        businessMind{
-                            numberOfEmployeesManaged
+                        mindSet{
+                            strength
                         }
                     }
                 `
@@ -34,9 +36,9 @@ const EmployeeCard = () => {
         })
         let res = await req.data;
         const { data } = res;
-        const { businessMind } = data;
-        const { numberOfEmployeesManaged } = businessMind
-        if (!numberOfEmployeesManaged) {
+        const { mindSet } = data;
+        const { strength } = mindSet
+        if (!strength) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -45,15 +47,16 @@ const EmployeeCard = () => {
     const completionHandler = () => {
         componentDidMount();
     }
-    const onSubmit = data => {
-        if (data.employees) {
-            updateEmployeesUtil(data.employees);
+    const onSubmit = async (data) => {
+        if (data.strength) {
+            await updateStrengthUtil(data.strength);
+            await router.reload();
         }
     }
-    const Achieved = {
+    const youthPower = {
         loop: true,
         autoplay: true,
-        animationData: employeesAnimation,
+        animationData: power,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -68,41 +71,44 @@ const EmployeeCard = () => {
     };
     return (
         isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Completed</h3>
+            <form onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+                <h3>Vos points forts</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="employees">Avez-vous deja cree des entreprises avant ?</label>
+                    <label className={stl.label} htmlFor="strength">Que représente l’échec pour vous ?</label>
                     <input className={stl.input}
                         type="text"
-                        name="employees"
-                        placeholder="Employes"
-                        id="employees"
+                        name="strength"
+                        placeholder="Points forts"
+                        id="strength"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Employes</h3>
+            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+                <h3>Que représente l’échec pour vous ?</h3>
                 <div className={stl.cardIllustration}>
-                    <LottieSuperObj objectProps={Achieved} />
+                    <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="employees">Combien d'employes avez-vous eu a gerer ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="employees"
-                        placeholder="Employes"
-                        id="employees"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous allez tenter de mieux faire la prochaine fois, pas des regrets.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous ne connaissez pas d’échec.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>C’est une manière de gagner de l’expérience, ça ne vous freine pas pour avancer.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>L’échec vous mets en horreur, vous pouvez abandonner et essayer autre chose.</p>
+                    </div>
                 </div>
-            </form>
+            </div>
     );
 }
 
-export default EmployeeCard;
+export default WhatIsFailureToYou;

@@ -1,23 +1,21 @@
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
-import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import family from '../../../lotties/33300-familia.json';
-import successAnimation from '../../../lotties/validated.json'
-import updateFamilyUtil from '../../../utils/updateFamily';
+import education from '../../../lotties/education.json';
+import successAnimation from '../../../lotties/validated.json';
+import updateEducationUtil from '../../../utils/updateEducation';
 
-
-const EdCard = () => {
-    const router = useRouter();
+const Mentors = ({ projects }) => {
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
         completionHandler();
-    }, [isCompleted])
+    }, [isCompleted]);
     const componentDidMount = async () => {
-        const token = localStorage.getItem('afreesmartAcessToken') || '';
+        const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
             url: 'http://localhost:9100/graphql',
             method: 'post',
@@ -28,7 +26,7 @@ const EdCard = () => {
                 query: `
                     query{
                         mindSet{
-                            family
+                            education
                         }
                     }
                 `
@@ -37,26 +35,27 @@ const EdCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { family } = mindSet
-        if (!family) {
+        const { education } = mindSet
+        if (!education) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
         }
+
     }
     const completionHandler = () => {
         componentDidMount();
     }
-    const onSubmit = async (data) => {
-        if (data.family) {
-            await updateFamilyUtil(data.family);
-            await router.reload()
+    const onSubmit = data => {
+        if (data.education) {
+            updateEducationUtil(data.education);
         }
     }
-    const youthPower = {
+
+    const obj = {
         loop: true,
         autoplay: true,
-        animationData: family,
+        animationData: education,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -71,48 +70,63 @@ const EdCard = () => {
     };
     return (
         isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
+            <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="family">Quel est votre niveau d’études</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="family"
-                        placeholder="Points forts"
-                        id="family"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
+                    <div className={stl.label} htmlFor="education">Quel est votre niveaux d'education ?</div>
                 </div>
-            </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
-                <h3>Quel est votre niveau d’études</h3>
+            </div>
+            :
+            <div className={stl.cardSmallGrid}>
+                <h3>Avez-vous des mentors ?
+                </h3>
                 <div className={stl.cardIllustration}>
-                    <LottieSuperObj objectProps={youthPower} />
+                    <LottieSuperObj objectProps={obj} />
                 </div>
                 <div className={stl.cardInput}>
-
                     <div className={stl.Qbtn}>
-                        <p>Bac (diplôme d’état)</p>
+                        <p>Oui</p>
                     </div>
                     <div className={stl.Qbtn}>
-                        <p>Bac+3</p>
-                    </div>
-                    <div className={stl.Qbtn}>
-                        <p>Bac+4</p>
-                    </div>
-                    <div className={stl.Qbtn}>
-                        <p>Bac+5</p>
-                    </div>
-                    <div className={stl.Qbtn}>
-                        <p>Bac+5  et plus</p>
+                        <p>Non</p>
                     </div>
                 </div>
             </div>
     );
 }
+export async function getServerSideProps() {
+    if (typeof window !== 'undefined') {
+        var accessToken = localStorage.getItem('afreesmartAcessToken');
+    }
+    const req = await axios({
+        url: 'http://localhost:9100/graphql',
+        method: 'post',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+        },
+        data: {
+            query: `
+                query{
+                    mindSet{
+                    education
+                }
+                }
+            `
+        }
+    })
+    const projects = await req.data;
+    return {
+        props: {
+            projects,
+        },
+    }
+}
 
-export default EdCard;
+
+
+
+
+export default Mentors;

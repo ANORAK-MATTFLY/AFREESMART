@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import idolAnimation from '../../../lotties/idol.json';
+import motivation from '../../../lotties/motivation.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateIdolUtil from '../../../utils/updateIdol';
+import updateMotivationUtil from '../../../utils/updateMotivation';
 
 
-const IdolCard = () => {
+const IfLate = () => {
+    const router = useRouter();
     const [isCompleted, setIsCompleted] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     useEffect(() => {
@@ -25,8 +27,8 @@ const IdolCard = () => {
             data: {
                 query: `
                     query{
-                        businessMind{
-                            idol
+                        mindSet{
+                            motivations
                         }
                     }
                 `
@@ -34,27 +36,27 @@ const IdolCard = () => {
         })
         let res = await req.data;
         const { data } = res;
-        const { businessMind } = data;
-        const { idol } = businessMind
-        if (!idol) {
+        const { mindSet } = data;
+        const { motivations } = mindSet
+        if (!motivations) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
         }
-        console.log(idol);
     }
     const completionHandler = () => {
         componentDidMount();
     }
-    const onSubmit = data => {
-        if (data.idol) {
-            updateIdolUtil(data.idol);
+    const onSubmit = async (data) => {
+        if (data.motivation) {
+            await updateMotivationUtil(data.motivation);
+            await router.reload()
         }
     }
-    const Achieved = {
+    const Motivated = {
         loop: true,
         autoplay: true,
-        animationData: idolAnimation,
+        animationData: motivation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -75,35 +77,35 @@ const IdolCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="idol">Quel est votre niveaux d'education ?</label>
+                    <label className={stl.label} htmlFor="motivation">Quel est votre niveaux d'education ?</label>
                     <input className={stl.input}
                         type="text"
-                        name="idol"
-                        placeholder="Vos idol"
-                        id="idol"
+                        name="motivation"
+                        placeholder="Motivation"
+                        id="motivation"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
                 </div>
             </form>
-            : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Qui sont vos idol ?</h3>
+            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+                <h3>Vous allez arriver en retard à un rendez-vous que faites-vous ?</h3>
                 <div className={stl.cardIllustration}>
-                    <LottieSuperObj objectProps={Achieved} />
+                    <LottieSuperObj objectProps={Motivated} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="idol">Quel sont vos Accomplissements ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="idol"
-                        placeholder="Vos idols"
-                        id="idol"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>
+                    <div className={stl.Qbtn}>
+                        <p>Vous n’êtes jamais en retard.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous vous excusez devant lui à votre arrivée.</p>
+                    </div>
+                    <div className={stl.QbtnLong}>
+                        <p>Vous prévenez 15 minutes avant l’heure du rendez-vous votre retard.</p>
+                    </div>
                 </div>
-            </form>
+            </div>
     );
 }
 
-export default IdolCard;
+export default IfLate;
