@@ -10,7 +10,7 @@ async function updateWeaknessesUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateMindset(weaknesses:"${str}")
+                    updateMindset(fiveWeakness:"${str}")
                 }
             `
         }

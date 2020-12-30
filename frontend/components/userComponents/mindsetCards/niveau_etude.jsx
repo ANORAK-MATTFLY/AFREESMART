@@ -1,21 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
-import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import family from '../../../lotties/33300-familia.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateFamilyUtil from '../../../utils/updateFamily';
+import UpdateEducationUtil from '../../../utils/updateEducation';
 
 
 const EdCard = () => {
-    const router = useRouter();
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler();
-    }, [isCompleted])
+    const [isSelected, setIsSelected] = useState(false);
+    const [diploma, setDiploma] = useState('');
+
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -28,7 +23,7 @@ const EdCard = () => {
                 query: `
                     query{
                         mindSet{
-                            family
+                            education
                         }
                     }
                 `
@@ -37,22 +32,10 @@ const EdCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { family } = mindSet
-        if (!family) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
+        const { education } = mindSet
+        setDiploma(education);
     }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = async (data) => {
-        if (data.family) {
-            await updateFamilyUtil(data.family);
-            await router.reload()
-        }
-    }
+    componentDidMount();
     const youthPower = {
         loop: true,
         autoplay: true,
@@ -69,45 +52,42 @@ const EdCard = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const OnclickHandler = (x) => {
+        UpdateEducationUtil(x);
+        setIsSelected(true);
+    };
     return (
-        isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
+        (diploma != null) || (isSelected != false) ?
+            <div className={stl.card}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="family">Quel est votre niveau d’études</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="family"
-                        placeholder="Points forts"
-                        id="family"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
+                    <h3 className={stl.label} >Quel est votre niveau d’études</h3>
+
                 </div>
-            </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+            </div>
+            : <div className={stl.cardLong}>
                 <h3>Quel est votre niveau d’études</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
 
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Bac (diplôme d’état)')}>
                         <p>Bac (diplôme d’état)</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Bac+3')}>
                         <p>Bac+3</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Bac+4')}>
                         <p>Bac+4</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Bac+5')}>
                         <p>Bac+5</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Bac+5  et plus')}>
                         <p>Bac+5  et plus</p>
                     </div>
                 </div>

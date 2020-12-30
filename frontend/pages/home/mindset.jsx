@@ -6,8 +6,8 @@ import ThoughtOnTeamwork from '../../components/userComponents/mindsetCards/thou
 import IfWrong from '../../components/userComponents/mindsetCards/if_wrong';
 import IfLate from '../../components/userComponents/mindsetCards/if_you_are_late';
 import WhatIsFailureToYou from '../../components/userComponents/mindsetCards/what_is_failure';
-import FamilyCard from '../../components/userComponents/mindsetCards/family';
-import EthicCard from '../../components/userComponents/mindsetCards/ethic';
+import ThoughtOnAdvices from '../../components/userComponents/mindsetCards/thougth_on_advices';
+import EthicCard from '../../components/userComponents/mindsetCards/why_ent';
 import IfYouFaille from '../../components/userComponents/mindsetCards/if_you_faille';
 import FiveStrength from '../../components/userComponents/mindsetCards/five_strength';
 import FiveWeaknessesCard from '../../components/userComponents/mindsetCards/five_weaknesses';
@@ -35,7 +35,7 @@ const MindSetComponent = () => {
                 <IfLate />
                 <WhatIsFailureToYou />
                 <IfYouGetStuck />
-                <FamilyCard />
+                <ThoughtOnAdvices />
                 <EthicCard />
                 <IfYouFaille />
                 <FiveStrength />

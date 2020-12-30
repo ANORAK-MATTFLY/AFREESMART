@@ -5,7 +5,7 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import education from '../../../lotties/education.json';
 import successAnimation from '../../../lotties/validated.json';
-import updateEducationUtil from '../../../utils/updateEducation';
+// import updateEducationUtil from '../../../utils/updateEducation';
 
 const EmployeeManagement = ({ projects }) => {
     const [isCompleted, setIsCompleted] = useState(false);

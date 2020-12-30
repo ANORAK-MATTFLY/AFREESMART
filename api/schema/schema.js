@@ -90,11 +90,14 @@ const typeDefs = gql`
       companyValues: String
       family: String
       thoughtOnTeamwork: String
+      thoughtOnAdvices: String
+      whyBecomeEnt: String
       ethic: String
       IfWrong: String
       IfLate: String
       IfYouGetStuck: String
       ifYouFaille: String
+      ifYouHaveNoExp: String
       fiveKeyStrength: String
       fiveWeakness: String
       relationShipWithMoney: String
@@ -167,7 +170,20 @@ const typeDefs = gql`
     userId: Int) : String!
     # Project related mutations ends here.
     # Mindset related mutations start here.
-    updateMindset(motivations: String, family: String, education: String, ethic: String, philosophies: String, diploma: String, strength: String, weaknesses: String, ambitions: String, achievements: String): String!
+    updateMindset(companyValues: String
+      family: String
+      thoughtOnTeamwork: String
+      thoughtOnAdvices: String
+      whyBecomeEnt: String
+      IfWrong: String
+      IfLate: String
+      IfYouGetStuck: String
+      ifYouFaille: String
+      ifYouHaveNoExp: String
+      fiveKeyStrength: String
+      fiveWeakness: String
+      relationShipWithMoney: String
+      education: String): String!
     # AbilityToMakeMoney related mutations start here.
     updateBusinessMind(
       idol: String

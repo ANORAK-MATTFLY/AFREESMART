@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateAchievementUtil(str) {
+async function updateHowManyUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,7 +10,7 @@ async function updateAchievementUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateMindset(achievements:"${str}")
+                    updateBusinessMind(twoQuestionsForThisPeople:"${str}")
             }
             `
         }
@@ -18,4 +18,4 @@ async function updateAchievementUtil(str) {
 }
 
 
-export default updateAchievementUtil;
+export default updateHowManyUtil;

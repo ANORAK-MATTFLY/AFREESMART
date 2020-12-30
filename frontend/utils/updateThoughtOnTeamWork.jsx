@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateEthicUtil(str) {
+async function updateThoughtOnTeamWork(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,7 +10,7 @@ async function updateEthicUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateMindset(ethic:"${str}")
+                    updateMindset(thoughtOnTeamwork:"${str}")
                 }
             `
         }
@@ -18,4 +18,4 @@ async function updateEthicUtil(str) {
 }
 
 
-export default updateEthicUtil;
+export default updateThoughtOnTeamWork;

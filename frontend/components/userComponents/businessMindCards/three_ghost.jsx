@@ -5,7 +5,7 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import failureAnimation from '../../../lotties/21395-waffle.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateFailureUtil from '../../../utils/updateFailur';
+import updateThreeGhostUtil from '../../../utils/updateThreeGhost';
 
 
 const ThreeGhost = () => {
@@ -26,7 +26,7 @@ const ThreeGhost = () => {
                 query: `
                     query{
                         businessMind{
-                            failuresAsEntrepreneur
+                            threePeopleYouWouldLikeToMet
                         }
                     }
                 `
@@ -35,8 +35,8 @@ const ThreeGhost = () => {
         let res = await req.data;
         const { data } = res;
         const { businessMind } = data;
-        const { failuresAsEntrepreneur } = businessMind
-        if (!failuresAsEntrepreneur) {
+        const { threePeopleYouWouldLikeToMet } = businessMind
+        if (!threePeopleYouWouldLikeToMet) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -47,7 +47,7 @@ const ThreeGhost = () => {
     }
     const onSubmit = data => {
         if (data.failure) {
-            updateFailureUtil(data.failure);
+            updateThreeGhostUtil(data.failure);
         }
     }
     const Achieved = {
@@ -86,12 +86,11 @@ const ThreeGhost = () => {
                 </div>
             </form>
             : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Qui auriez-vous voulue rencontrer ?</h3>
+                <p className={stl.label} htmlFor="achievements">Citez trois personnes que vous aurez voulu rencontrer s’ils étaient encore vivants ?</p>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={Achieved} />
                 </div>
                 <div className={stl.cardInput}>
-                    <p className={stl.label} htmlFor="achievements">Citez trois personnes que vous aurez voulu rencontrer s’ils étaient encore vivants ?</p>
                     <input className={stl.input}
                         type="text"
                         name="failure"

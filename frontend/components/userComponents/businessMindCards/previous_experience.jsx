@@ -26,7 +26,7 @@ const PreviousCompaniesCard = () => {
                 query: `
                     query{
                         businessMind{
-                            companyCreatedPreviously
+                            PreviousCompaniesCard
                         }
                     }
                 `
@@ -35,8 +35,8 @@ const PreviousCompaniesCard = () => {
         let res = await req.data;
         const { data } = res;
         const { businessMind } = data;
-        const { companyCreatedPreviously } = businessMind
-        if (!companyCreatedPreviously) {
+        const { PreviousCompaniesCard } = businessMind
+        if (!PreviousCompaniesCard) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -74,11 +74,11 @@ const PreviousCompaniesCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="companyCreated">Avez-vous deja cree des entreprises avant ?</label>
+                    <label className={stl.label} htmlFor="companyCreated">Qu’as-tu déjà accomplis dans ta vie professionnelle dont tu es fière ?</label>
                     <input className={stl.input}
                         type="text"
                         name="companyCreated"
-                        placeholder="Echec"
+                        placeholder="..."
                         id="companyCreated"
                         ref={register({ required: true })}
                     />

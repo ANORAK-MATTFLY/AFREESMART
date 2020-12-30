@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import education from '../../../lotties/education.json';
 import successAnimation from '../../../lotties/validated.json';
-import updateEducationUtil from '../../../utils/updateEducation';
+import updateThoughtOnTeamWork from '../../../utils/updateThoughtOnTeamWork';
 
-const ThoughtOnTeamwork = ({ projects }) => {
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler();
-    }, [isCompleted]);
+const ThoughtOnTeamwork = () => {
+    const [thought, setThought] = useState('');
+    const [isSelected, setIsSelected] = useState(false);
     const componentDidMount = async () => {
         const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -23,33 +19,21 @@ const ThoughtOnTeamwork = ({ projects }) => {
             },
             data: {
                 query: `
-                    query{
-                        mindSet{
-                            education
+                        query{
+                            mindSet{
+                                thoughtOnTeamwork
+                            }
                         }
-                    }
                 `
             }
         })
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { education } = mindSet
-        if (!education) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
-
+        const { thoughtOnTeamwork } = mindSet;
+        await setThought(thoughtOnTeamwork);
     }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = data => {
-        if (data.education) {
-            updateEducationUtil(data.education);
-        }
-    }
+    componentDidMount();
 
     const obj = {
         loop: true,
@@ -67,9 +51,14 @@ const ThoughtOnTeamwork = ({ projects }) => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const OnclickHandler = (x) => {
+        updateThoughtOnTeamWork(x);
+        setIsSelected(true);
+    };
+
     return (
-        isCompleted ?
-            <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+        thought !== null || isSelected !== false ?
+            <div className={stl.cardLong}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
@@ -85,49 +74,19 @@ const ThoughtOnTeamwork = ({ projects }) => {
                     <LottieSuperObj objectProps={obj} />
                 </div>
                 <div className={stl.cardInput}>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler("Je bosse mieux seul.")}>
                         <p>Je bosse mieux seul. </p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler("Je renforce mes faiblesses et je me concentre sur mes forces.")}>
                         <p>Je renforce mes faiblesses et je me concentre sur mes forces.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler("J’aime travailler avec des personnes ayant les mêmes forces que moi.")}>
                         <p>J’aime travailler avec des personnes ayant les mêmes forces que moi.</p>
                     </div>
                 </div>
             </div>
     );
 }
-export async function getServerSideProps() {
-    if (typeof window !== 'undefined') {
-        var accessToken = localStorage.getItem('afreesmartAcessToken');
-    }
-    const req = await axios({
-        url: 'http://localhost:9100/graphql',
-        method: 'post',
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
-        },
-        data: {
-            query: `
-                query{
-                    mindSet{
-                    education
-                }
-                }
-            `
-        }
-    })
-    const projects = await req.data;
-    return {
-        props: {
-            projects,
-        },
-    }
-}
-
-
-
 
 
 export default ThoughtOnTeamwork;

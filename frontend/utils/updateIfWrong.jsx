@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateAmbitionUtil(str) {
+async function updateIfWrongUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,12 +10,12 @@ async function updateAmbitionUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateMindset(ambitions:"${str}")
-                }
+                    updateMindset(IfWrong:"${str}")
+            }
             `
         }
     })
 }
 
 
-export default updateAmbitionUtil;
+export default updateIfWrongUtil;

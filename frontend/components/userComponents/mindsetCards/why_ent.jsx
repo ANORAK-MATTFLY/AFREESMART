@@ -1,21 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
-import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import ethic from '../../../lotties/ethic.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateEthicUtil from '../../../utils/updateEthic';
+import updateEntUtil from '../../../utils/updateEnt';
 
 
 const EthicCard = () => {
-    const router = useRouter();
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler();
-    }, [isCompleted])
+    const [isSelected, setIsSelected] = useState(false);
+    const [reason, setReason] = useState('');
+
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -28,7 +23,7 @@ const EthicCard = () => {
                 query: `
                     query{
                         mindSet{
-                            ethic
+                            whyBecomeEnt
                         }
                     }
                 `
@@ -37,22 +32,12 @@ const EthicCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { ethic } = mindSet
-        if (!ethic) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
+        const { whyBecomeEnt } = mindSet
+        setReason(whyBecomeEnt);
     }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = async (data) => {
-        if (data.ethic) {
-            await updateEthicUtil(data.ethic);
-            await router.reload()
-        }
-    }
+
+
+    componentDidMount();
     const youthPower = {
         loop: true,
         autoplay: true,
@@ -69,54 +54,50 @@ const EthicCard = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const OnclickHandler = (x) => {
+        updateEntUtil(x);
+        setIsSelected(true);
+    };
     return (
-        isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
+        (reason != null) || (isSelected != false) ?
+            <div className={stl.card}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="ethic">Decrivez votre sans de l'ethic</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="ethic"
-                        placeholder="Points forts"
-                        id="ethic"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
+                    <h3>Pourquoi souhaitez-vous entreprendre ?</h3>
                 </div>
-            </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLarge}>
+            </div>
+            : <div className={stl.cardLarge}>
                 <h3>Pourquoi souhaitez-vous entreprendre ?
                 </h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Car ça vous passionne.')}>
                         <p>Car ça vous passionne.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous sentez que vous êtes destinés à faire votre projet.')}>
                         <p>Vous sentez que vous êtes destinés à faire votre projet.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Pour impressionner mon entourage sur mon intelligence et combativité.')}>
                         <p>Pour impressionner mon entourage sur mon intelligence et combativité.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Par vengeance, je me suis fait humilier, je veux prouver que je suis le/la meilleur (e).')}>
                         <p>Par vengeance, je me suis fait humilier, je veux prouver que je suis le/la meilleur (e).</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous avez besoin d’argent pour s’occuper d’un proche.')}>
                         <p>Vous avez besoin d’argent pour s’occuper d’un proche.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous n’aimez pas l’autorité et souhaitez être votre propre chef.')}>
                         <p>Vous n’aimez pas l’autorité et souhaitez être votre propre chef.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Car vous avez vu une opportunité de mieux faire que les autres.')}>
                         <p>Car vous avez vu une opportunité de mieux faire que les autres.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Le projet que vous souhaitez faire n’existe pas, vous voulez être le premier.')}>
                         <p>Le projet que vous souhaitez faire n’existe pas, vous voulez être le premier.</p>
                     </div>
 

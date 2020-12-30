@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updatePhilosophyUtil(str) {
+async function updateThreeGhostUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,12 +10,12 @@ async function updatePhilosophyUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateMindset(philosophies:"${str}")
-                }
+                    updateBusinessMind(threePeopleYouWouldLikeToMet:"${str}")
+            }
             `
         }
     })
 }
 
 
-export default updatePhilosophyUtil;
+export default updateThreeGhostUtil;

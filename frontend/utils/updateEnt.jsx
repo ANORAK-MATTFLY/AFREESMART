@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateFamilyUtil(str) {
+async function updateEntUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,7 +10,7 @@ async function updateFamilyUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateMindset(family:"${str}")
+                    updateMindset(whyBecomeEnt:"${str}")
                 }
             `
         }
@@ -18,4 +18,4 @@ async function updateFamilyUtil(str) {
 }
 
 
-export default updateFamilyUtil;
+export default updateEntUtil;

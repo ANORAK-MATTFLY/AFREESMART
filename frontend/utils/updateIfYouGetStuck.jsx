@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function UpdateEducationUtil(str) {
+async function updateIfYouGetStuckUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,12 +10,12 @@ async function UpdateEducationUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateMindset(education:"${str}")
-            }
+                    updateMindset(IfYouGetStuck:"${str}")
+                }
             `
         }
     })
 }
 
 
-export default UpdateEducationUtil;
+export default updateIfYouGetStuckUtil;

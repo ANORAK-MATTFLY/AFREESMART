@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateFailureUtil(str) {
+async function UpdateIfYouHaveNoExpUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,12 +10,12 @@ async function updateFailureUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateBusinessMind(failuresAsEntrepreneur:"${str}")
-            }
+                    updateMindset(ifYouHaveNoExp:"${str}")
+                }
             `
         }
     })
 }
 
 
-export default updateFailureUtil;
+export default UpdateIfYouHaveNoExpUtil;

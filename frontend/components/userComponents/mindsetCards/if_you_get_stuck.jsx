@@ -1,21 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
-import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import diplomaAnimation from '../../../lotties/diploma.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateDiplomaUtil from '../../../utils/updateDiploma';
+import UpdateIfYouHaveNoExpUtil from '../../../utils/updateifYouHaveNoExp';
 
 
 const IfYouGetStuck = () => {
-    const router = useRouter();
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler()
-    }, [isCompleted])
+    const [isSelected, setIsSelected] = useState(false);
+    const [isStuck, setIsStuck] = useState('');
+
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -28,7 +23,7 @@ const IfYouGetStuck = () => {
                 query: `
                     query{
                         mindSet{
-                            diploma
+                            ifYouHaveNoExp
                         }
                     }
                 `
@@ -37,22 +32,10 @@ const IfYouGetStuck = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { diploma } = mindSet
-        if (!diploma) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
+        const { ifYouHaveNoExp } = mindSet
+        setIsStuck(ifYouHaveNoExp)
     }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = data => {
-        if (data.diploma) {
-            updateDiplomaUtil(data.diploma);
-            router.reload();
-        }
-    }
+    componentDidMount();
     const Achieved = {
         loop: true,
         autoplay: true,
@@ -69,41 +52,38 @@ const IfYouGetStuck = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const OnclickHandler = (x) => {
+        UpdateIfYouHaveNoExpUtil(x);
+        setIsSelected(true);
+    };
     return (
-        isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
+        (isStuck != null) || (isSelected != false) ?
+            <div className={stl.card}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="diploma">Quel est vos diploms obtenue jusqu-ici ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="diploma"
-                        placeholder="Vos diplomes"
-                        id="diploma"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
+                    <h3 className={stl.label} htmlFor="diploma">Quand vous ne savez pas faire quelque chose ?</h3>
+
                 </div>
-            </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+            </div>
+            : <div className={stl.cardLong}>
                 <h3>Quand vous ne savez pas faire quelque chose ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={Achieved} />
                 </div>
                 <div className={stl.cardInput}>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous demandez conseils auprès des autres.')}>
                         <p>Vous demandez conseils auprès des autres.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous cherchez par vous-même la solution via internet, livre etc')}>
                         <p>Vous cherchez par vous-même la solution via internet, livre etc</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous engagez quelqu’un pour le faire à votre place.')}>
                         <p>Vous engagez quelqu’un pour le faire à votre place.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous laissez tomber car vous n’aimez pas vous prendre la tête.')}>
                         <p>Vous laissez tomber car vous n’aimez pas vous prendre la tête.</p>
                     </div>
                 </div>

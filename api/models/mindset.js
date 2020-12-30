@@ -26,7 +26,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            ethic: {
+            thoughtOnAdvices: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            whyBecomeEnt: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
@@ -43,6 +47,10 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true
             },
             ifYouFaille: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            ifYouHaveNoExp: {
                 type: DataTypes.STRING,
                 allowNull: true
             },

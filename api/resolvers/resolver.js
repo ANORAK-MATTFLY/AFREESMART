@@ -298,23 +298,41 @@ const resolvers = {
 			return await `The validity of the project ${project.isValid}`;
 		},
 
-		async updateMindset(_, { motivations, family, education, ethic, philosophies, diploma, strength, weaknesses, ambitions, achievements }, { user }) {
+		async updateMindset(_, { companyValues,
+			family,
+			thoughtOnTeamwork,
+			thoughtOnAdvices,
+			whyBecomeEnt,
+			IfWrong,
+			IfLate,
+			IfYouGetStuck,
+			ifYouFaille,
+			ifYouHaveNoExp,
+			fiveKeyStrength,
+			fiveWeakness,
+			relationShipWithMoney,
+			education }, { user }) {
 			if (!user) {
 				throw new Error("Sorry you're not an authenticated user...")
 			}
 			if (user) {
 				await Mindset.update(
 					{
-						motivations,
+						companyValues,
 						family,
-						education,
-						ethic,
-						philosophies,
-						diploma,
-						strength,
-						weaknesses,
-						ambitions,
-						achievements
+						thoughtOnTeamwork,
+						thoughtOnTeamwork,
+						thoughtOnAdvices,
+						whyBecomeEnt,
+						IfWrong,
+						IfLate,
+						IfYouGetStuck,
+						ifYouFaille,
+						ifYouHaveNoExp,
+						fiveKeyStrength,
+						fiveWeakness,
+						relationShipWithMoney,
+						education
 					},
 					{ where: { id: user.id } }
 				)

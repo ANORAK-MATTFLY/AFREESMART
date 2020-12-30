@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import employeesAnimation from '../../../lotties/employeesManaged.json';
-import successAnimation from '../../../lotties/validated.json'
-import updateEmployeesUtil from '../../../utils/updateEmpleeManaged';
+import successAnimation from '../../../lotties/validated.json';
+import updateQuestionsUtil from '../../../utils/updateQuestionsForTHosePpl';
 
 
 const QuestionsForThreePrs = () => {
@@ -26,7 +26,7 @@ const QuestionsForThreePrs = () => {
                 query: `
                     query{
                         businessMind{
-                            numberOfEmployeesManaged
+                            twoQuestionsForThisPeople
                         }
                     }
                 `
@@ -35,8 +35,8 @@ const QuestionsForThreePrs = () => {
         let res = await req.data;
         const { data } = res;
         const { businessMind } = data;
-        const { numberOfEmployeesManaged } = businessMind
-        if (!numberOfEmployeesManaged) {
+        const { twoQuestionsForThisPeople } = businessMind
+        if (!twoQuestionsForThisPeople) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -47,7 +47,7 @@ const QuestionsForThreePrs = () => {
     }
     const onSubmit = data => {
         if (data.employees) {
-            updateEmployeesUtil(data.employees);
+            updateQuestionsUtil(data.employees);
         }
     }
     const Achieved = {
@@ -86,16 +86,15 @@ const QuestionsForThreePrs = () => {
                 </div>
             </form>
             : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Employes</h3>
+                <p className={stl.label} htmlFor="employees">Quels sont les deux questions que vous poserez à ces trois personnes ?</p>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={Achieved} />
                 </div>
                 <div className={stl.cardInput}>
-                    <p className={stl.label} htmlFor="employees">Quels sont les deux questions que vous poserez à ces trois personnes ?</p>
                     <input className={stl.input}
                         type="text"
                         name="employees"
-                        placeholder="Employes"
+                        placeholder="..."
                         id="employees"
                         ref={register({ required: true })}
                     />

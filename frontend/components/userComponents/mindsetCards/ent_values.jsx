@@ -6,16 +6,13 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import family from '../../../lotties/33300-familia.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateFamilyUtil from '../../../utils/updateFamily';
+import updateCompanyValuesUtil from '../../../utils/CompanyVal';
 
 
 const Ent_values_Card = () => {
-    const router = useRouter();
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler();
-    }, [isCompleted])
+    const [isSelected, setIsSelected] = useState(false);
+    const [values, setValues] = useState('');
+
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -28,7 +25,7 @@ const Ent_values_Card = () => {
                 query: `
                     query{
                         mindSet{
-                            family
+                            companyValues
                         }
                     }
                 `
@@ -37,22 +34,11 @@ const Ent_values_Card = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { family } = mindSet
-        if (!family) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
+        const { companyValues } = mindSet;
+        setValues(companyValues);
     }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = async (data) => {
-        if (data.family) {
-            await updateFamilyUtil(data.family);
-            await router.reload()
-        }
-    }
+
+    componentDidMount();
     const youthPower = {
         loop: true,
         autoplay: true,
@@ -69,66 +55,59 @@ const Ent_values_Card = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const OnclickHandler = (x) => {
+        updateCompanyValuesUtil(x);
+        setIsSelected(true);
+    };
     return (
-        isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
+        (values != null) || (isSelected != false) ?
+            <div className={stl.card}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="family">Combien de frere et soeur avez-vouz ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="family"
-                        placeholder="Points forts"
-                        id="family"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
+                    <h3 className={stl.label} >Combien de frere et soeur avez-vouz ?</h3>
                 </div>
-            </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLargeGrid}>
+            </div>
+            : <div className={stl.cardLargeGrid}>
                 <h3>Quels sont tes valeurs entrepreneuriales ? (4 choix maximum)</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
 
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Challenge')}>
                         <p>Challenge</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Innovation')}>
                         <p>Innovation</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Sécurité')}>
                         <p>Sécurité</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Audace')}>
                         <p>Audace</p>
                     </div>
-                    <div className={stl.Qbtn}>
-                        <p>Audace</p>
-                    </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Leadership')}>
                         <p>Leadership</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Storytelling')}>
                         <p>Storytelling</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Empathie')}>
                         <p>Empathie</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Honneur')}>
                         <p>Honneur</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Loyauté')}>
                         <p>Loyauté</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Méritocratie')}>
                         <p>Méritocratie</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Famille avant le travail')}>
                         <p>Famille avant le travail</p>
                     </div>
                     <div className={stl.Qbtn}>

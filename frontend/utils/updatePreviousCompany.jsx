@@ -10,7 +10,7 @@ async function updateCompaniesCreatedUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateBusinessMind(companyCreatedPreviously:"${str}")
+                    updateBusinessMind(PreviousCompaniesCard:"${str}")
                 }
             `
         }

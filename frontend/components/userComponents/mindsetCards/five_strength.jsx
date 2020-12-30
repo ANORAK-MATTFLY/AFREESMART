@@ -6,7 +6,7 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import ambitionAnimation from '../../../lotties/ambition.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateAmbitionUtil from '../../../utils/updateAmbition';
+import UpdateFiveKeyStrengthUtil from '../../../utils/updateFiveKeyStrengthUtil';
 
 
 const FiveStrength = () => {
@@ -28,7 +28,7 @@ const FiveStrength = () => {
                 query: `
                     query{
                         mindSet{
-                            ambitions
+                            fiveKeyStrength
                         }
                     }
                 `
@@ -37,8 +37,8 @@ const FiveStrength = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { ambitions } = mindSet
-        if (!ambitions) {
+        const { fiveKeyStrength } = mindSet;
+        if (!fiveKeyStrength) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -48,9 +48,8 @@ const FiveStrength = () => {
         componentDidMount();
     }
     const onSubmit = async (data) => {
-        if (data.ambitions) {
-            await updateAmbitionUtil(data.ambitions);
-            await router.reload()
+        if (data.fiveKeyStrength) {
+            await UpdateFiveKeyStrengthUtil(data.fiveKeyStrength);
         }
     }
     const youthPower = {
@@ -77,12 +76,12 @@ const FiveStrength = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="ambitions">Decrivez vos ambitions</label>
+                    <label className={stl.label} htmlFor="fiveKeyStrength">Quels sont vos 5 forces personnel ?</label>
                     <input className={stl.input}
                         type="text"
-                        name="ambitions"
-                        placeholder="Points forts"
-                        id="ambitions"
+                        name="fiveKeyStrength"
+                        placeholder="..."
+                        id="fiveKeyStrength"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
@@ -94,12 +93,11 @@ const FiveStrength = () => {
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="ambitions">Decrivez vos ambitions</label>
                     <input className={stl.input}
                         type="text"
-                        name="ambitions"
-                        placeholder="Vos ambitions"
-                        id="ambitions"
+                        name="fiveKeyStrength"
+                        placeholder="..."
+                        id="fiveKeyStrength"
                         ref={register({ required: true })}
                     />
                     <button className={stl.btn} onClick={() => completionHandler()}>Valider</button>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateIdolUtil(str) {
+async function updateMentorsUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,7 +10,7 @@ async function updateIdolUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateBusinessMind(idol:"${str}")
+                    updateBusinessMind(mentors:"${str}")
             }
             `
         }
@@ -18,4 +18,4 @@ async function updateIdolUtil(str) {
 }
 
 
-export default updateIdolUtil;
+export default updateMentorsUtil;

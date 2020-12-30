@@ -1,19 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import achievement from '../../../lotties/achievement.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateAchievementUtil from '../../../utils/updateAchievement';
+import updateIfWrongUtil from '../../../utils/updateIfWrong';
 
 
 const IfWrong = () => {
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler()
-    }, [isCompleted])
+    const [isSelected, setIsSelected] = useState(false);
+    const [wrong, setWrong] = useState('');
+
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -26,7 +23,7 @@ const IfWrong = () => {
                 query: `
                     query{
                         mindSet{
-                            achievements
+                            IfWrong
                         }
                     }
                 `
@@ -35,21 +32,10 @@ const IfWrong = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { achievements } = mindSet
-        if (!achievements) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
+        const { IfWrong } = mindSet
+        setWrong(IfWrong);
     }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = data => {
-        if (data.achievements) {
-            updateAchievementUtil(data.achievements);
-        }
-    }
+    componentDidMount()
     const Achieved = {
         loop: true,
         autoplay: true,
@@ -66,26 +52,24 @@ const IfWrong = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    console.log(wrong, isSelected);
+    const OnclickHandler = (x) => {
+        updateIfWrongUtil(x);
+        setIsSelected(true);
+    };
     return (
-        isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
+        (wrong != null) || (isSelected != false) ?
+            <div className={stl.card}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="achievements">Quel est votre niveaux d'education ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="achievements"
-                        placeholder="Accomplissements"
-                        id="achievements"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
+                    <h3 className={stl.label} htmlFor="achievements">Si vous avez tort comment réagissez-vous ?</h3>
+
                 </div>
-            </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+            </div>
+            : <div className={stl.cardLong} >
                 <h3>Si vous avez tort comment réagissez-vous ?
                 </h3>
                 <div className={stl.cardIllustration}>
@@ -93,13 +77,13 @@ const IfWrong = () => {
                 </div>
 
                 <div className={stl.cardInput}>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Vous avez rarement tort.')}>
                         <p>Vous avez rarement tort.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous prenez du recul sur ce qui s’est passé et vous trouvez une manière de réparer vos torts.')}>
                         <p>Vous prenez du recul sur ce qui s’est passé et vous trouvez une manière de réparer vos torts.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous cherchez à savoir qui ou quoi vous a induit en erreur.')}>
                         <p>Vous cherchez à savoir qui ou quoi vous a induit en erreur.</p>
                     </div>
                 </div>

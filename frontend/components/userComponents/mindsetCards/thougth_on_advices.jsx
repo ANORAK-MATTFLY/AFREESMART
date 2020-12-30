@@ -1,21 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
-import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import family from '../../../lotties/33300-familia.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateFamilyUtil from '../../../utils/updateFamily';
+import updateThoughtOnAdvicesUtil from '../../../utils/updateupdateThoughtOnAdvicesUtil';
 
 
-const FamilyCard = () => {
-    const router = useRouter();
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler();
-    }, [isCompleted])
+const ThoughtOnAdvices = () => {
+    const [isSelected, setIsSelected] = useState(false);
+    const [thought, setThought] = useState('');
+
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -28,7 +23,7 @@ const FamilyCard = () => {
                 query: `
                     query{
                         mindSet{
-                            family
+                            thoughtOnAdvices
                         }
                     }
                 `
@@ -37,22 +32,12 @@ const FamilyCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { family } = mindSet
-        if (!family) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
+        const { thoughtOnAdvices } = mindSet
+
+        setThought(thoughtOnAdvices)
     }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = async (data) => {
-        if (data.family) {
-            await updateFamilyUtil(data.family);
-            await router.reload()
-        }
-    }
+    componentDidMount();
+
     const youthPower = {
         loop: true,
         autoplay: true,
@@ -69,42 +54,39 @@ const FamilyCard = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const OnclickHandler = (x) => {
+        updateThoughtOnAdvicesUtil(x);
+        setIsSelected(true);
+    };
     return (
-        isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
+        (thought != null) || (isSelected != false) ?
+            <div className={stl.card}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="family">Combien de frere et soeur avez-vouz ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="family"
-                        placeholder="Points forts"
-                        id="family"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
+                    <h3 className={stl.label}>Quel est votre attitude face aux donneurs de leçons sur votre projet ?</h3>
+
                 </div>
-            </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+            </div>
+            : <div className={stl.cardLong}>
                 <h3>Quel est votre attitude face aux donneurs de leçons sur votre projet ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
 
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Personne ne connait mieux que moi le projet pour me dire quoi faire.')}>
                         <p>Personne ne connait mieux que moi le projet pour me dire quoi faire.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('J’adore les remarques et conseils car ça me permet de m’améliorer.')}>
                         <p>J’adore les remarques et conseils car ça me permet de m’améliorer.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('J’aime écouter les remarques seulement si je sais que j’ai tort.')}>
                         <p>J’aime écouter les remarques seulement si je sais que j’ai tort.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Ça me vexe car ça veut dire que la personne pense que je ne fais pas bien mon travail.')}>
                         <p>Ça me vexe car ça veut dire que la personne pense que je ne fais pas bien mon travail.</p>
                     </div>
                 </div>
@@ -112,4 +94,4 @@ const FamilyCard = () => {
     );
 }
 
-export default FamilyCard;
+export default ThoughtOnAdvices;

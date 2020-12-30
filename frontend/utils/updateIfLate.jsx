@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateDiplomaUtil(str) {
+async function updateIfLateUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,7 +10,7 @@ async function updateDiplomaUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateMindset(diploma:"${str}")
+                    updateMindset(IfLate:"${str}")
                 }
             `
         }
@@ -18,4 +18,4 @@ async function updateDiplomaUtil(str) {
 }
 
 
-export default updateDiplomaUtil;
+export default updateIfLateUtil;

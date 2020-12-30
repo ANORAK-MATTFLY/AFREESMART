@@ -28,7 +28,7 @@ const FiveWeaknessesCard = () => {
                 query: `
                     query{
                         mindSet{
-                            weaknesses
+                            fiveWeakness
                         }
                     }
                 `
@@ -37,8 +37,8 @@ const FiveWeaknessesCard = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { weaknesses } = mindSet
-        if (!weaknesses) {
+        const { fiveWeakness } = mindSet
+        if (!fiveWeakness) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -50,7 +50,6 @@ const FiveWeaknessesCard = () => {
     const onSubmit = async (data) => {
         if (data.weaknesses) {
             await updateWeaknessesUtil(data.weaknesses);
-            await router.reload()
         }
     }
     const youthPower = {
@@ -77,7 +76,7 @@ const FiveWeaknessesCard = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="weaknesses">Decrivez vos ambitions</label>
+                    <label className={stl.label} htmlFor="weaknesses">Quels sont vos 5 faiblesses ?</label>
                     <input className={stl.input}
                         type="text"
                         name="weaknesses"

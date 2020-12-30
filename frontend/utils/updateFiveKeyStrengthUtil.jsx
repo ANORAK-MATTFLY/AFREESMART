@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateMotivationUtil(str) {
+async function UpdateFiveKeyStrengthUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,7 +10,7 @@ async function updateMotivationUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateMindset(motivations:"${str}")
+                    updateMindset(fiveKeyStrength:"${str}")
                 }
             `
         }
@@ -18,4 +18,4 @@ async function updateMotivationUtil(str) {
 }
 
 
-export default updateMotivationUtil;
+export default UpdateFiveKeyStrengthUtil;

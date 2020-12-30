@@ -6,16 +6,13 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import power from '../../../lotties/youth-power.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateStrengthUtil from '../../../utils/updateStrength';
+import updateFailure from '../../../utils/updateFailure';
 
 
 const WhatIsFailureToYou = () => {
-    const router = useRouter();
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler();
-    }, [isCompleted])
+    const [failure, setFailure] = useState('')
+    const [isSelected, setIsSelected] = useState(false);
+
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -28,7 +25,7 @@ const WhatIsFailureToYou = () => {
                 query: `
                     query{
                         mindSet{
-                            strength
+                            ifYouFaille
                         }
                     }
                 `
@@ -37,22 +34,11 @@ const WhatIsFailureToYou = () => {
         let res = await req.data;
         const { data } = res;
         const { mindSet } = data;
-        const { strength } = mindSet
-        if (!strength) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
+        const { ifYouFaille } = mindSet
+        setFailure(ifYouFaille);
     }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = async (data) => {
-        if (data.strength) {
-            await updateStrengthUtil(data.strength);
-            await router.reload();
-        }
-    }
+    componentDidMount();
+
     const youthPower = {
         loop: true,
         autoplay: true,
@@ -69,41 +55,38 @@ const WhatIsFailureToYou = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const OnclickHandler = (x) => {
+        updateFailure(x);
+        setIsSelected(true);
+    };
+    console.log(failure);
     return (
-        isCompleted ?
-            <form onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
-                <h3>Vos points forts</h3>
+        failure !== null || failure !== null || isSelected !== false ?
+            <div className={stl.cardLong}>
+                <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="strength">Que représente l’échec pour vous ?</label>
-                    <input className={stl.input}
-                        type="text"
-                        name="strength"
-                        placeholder="Points forts"
-                        id="strength"
-                        ref={register({ required: true })}
-                    />
-                    <button className={stl.btn} onClick={() => completionHandler()}>Modifier</button>
+                    <h3 className={stl.label} htmlFor="strength">Que représente l’échec pour vous ?</h3>
                 </div>
-            </form>
-            : <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+            </div>
+            : <div className={stl.cardLong} >
                 <h3>Que représente l’échec pour vous ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous allez tenter de mieux faire la prochaine fois, pas des regrets.')}>
                         <p>Vous allez tenter de mieux faire la prochaine fois, pas des regrets.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('Vous ne connaissez pas d’échec.')}>
                         <p>Vous ne connaissez pas d’échec.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('C’est une manière de gagner de l’expérience, ça ne vous freine pas pour avancer.')}>
                         <p>C’est une manière de gagner de l’expérience, ça ne vous freine pas pour avancer.</p>
                     </div>
-                    <div className={stl.QbtnLong}>
+                    <div className={stl.QbtnLong} onClick={() => OnclickHandler('L’échec vous mets en horreur, vous pouvez abandonner et essayer autre chose.')}>
                         <p>L’échec vous mets en horreur, vous pouvez abandonner et essayer autre chose.</p>
                     </div>
                 </div>

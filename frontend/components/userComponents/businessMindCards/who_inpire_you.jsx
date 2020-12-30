@@ -5,7 +5,7 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import idolAnimation from '../../../lotties/business-plan-or-chart-presentation';
 import successAnimation from '../../../lotties/validated.json'
-import updateIdolUtil from '../../../utils/updateIdol';
+import updateMentorsUtil from '../../../utils/updateIdol';
 
 
 const IdolCard = () => {
@@ -26,7 +26,7 @@ const IdolCard = () => {
                 query: `
                     query{
                         businessMind{
-                            idol
+                            mentors
                         }
                     }
                 `
@@ -35,20 +35,19 @@ const IdolCard = () => {
         let res = await req.data;
         const { data } = res;
         const { businessMind } = data;
-        const { idol } = businessMind
-        if (!idol) {
+        const { mentors } = businessMind
+        if (!mentors) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
         }
-        console.log(idol);
     }
     const completionHandler = () => {
         componentDidMount();
     }
     const onSubmit = data => {
         if (data.idol) {
-            updateIdolUtil(data.idol);
+            updateMentorsUtil(data.idol);
         }
     }
     const Achieved = {
@@ -88,13 +87,11 @@ const IdolCard = () => {
                 </div>
             </form>
             : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Qui vous inspire</h3>
+                <p>Citez trois personnes qui vous inspire que vous ne connaissez pas ?</p>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={Achieved} />
                 </div>
                 <div className={stl.cardInput}>
-                    <p className={stl.label} htmlFor="idol">Citez trois personnes qui vous inspire que vous ne connaissez pas ?
-</p>
                     <input className={stl.input}
                         type="text"
                         name="idol"
