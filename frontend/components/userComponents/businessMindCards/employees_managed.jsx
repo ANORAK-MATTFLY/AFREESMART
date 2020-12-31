@@ -5,14 +5,11 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import education from '../../../lotties/education.json';
 import successAnimation from '../../../lotties/validated.json';
-// import updateEducationUtil from '../../../utils/updateEducation';
+import updatePplManagedUtil from '../../../utils/updatePplManged';
 
 const EmployeeManagement = ({ projects }) => {
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler();
-    }, [isCompleted]);
+    const [isSelected, setIsSelected] = useState(false);
+    const [pplManaged, setPplManaged] = useState(null);
     const componentDidMount = async () => {
         const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -24,8 +21,8 @@ const EmployeeManagement = ({ projects }) => {
             data: {
                 query: `
                     query{
-                        mindSet{
-                            education
+                        businessMind{
+                            numberOfEmployeesManaged
                         }
                     }
                 `
@@ -33,23 +30,13 @@ const EmployeeManagement = ({ projects }) => {
         })
         let res = await req.data;
         const { data } = res;
-        const { mindSet } = data;
-        const { education } = mindSet
-        if (!education) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
+        const { businessMind } = data;
+        const { numberOfEmployeesManaged } = businessMind
+        setPplManaged(numberOfEmployeesManaged);
 
     }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = data => {
-        if (data.education) {
-            updateEducationUtil(data.education);
-        }
-    }
+
+    componentDidMount();
 
     const obj = {
         loop: true,
@@ -67,15 +54,19 @@ const EmployeeManagement = ({ projects }) => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const OnclickHandler = (x) => {
+        updatePplManagedUtil(x);
+        setIsSelected(true);
+    };
     return (
-        isCompleted ?
-            <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+        (pplManaged != null) || (isSelected != false) ?
+            <div className={stl.cardLong}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <div className={stl.label} htmlFor="education">Quel est votre niveaux d'education ?</div>
+                    <div className={stl.label} htmlFor="education">Combien de personne avez-vous déjà gérer pour une affaire ?</div>
                 </div>
             </div>
             :
@@ -86,55 +77,24 @@ const EmployeeManagement = ({ projects }) => {
                     <LottieSuperObj objectProps={obj} />
                 </div>
                 <div className={stl.cardInput}>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('0-5')}>
                         <p>0-5</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('5-10')}>
                         <p>5-10</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('10-20')}>
                         <p>10-20</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('20-100')}>
                         <p>20-100</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('100 à')}>
                         <p>100 à</p>
                     </div>
                 </div>
             </div>
     );
 }
-export async function getServerSideProps() {
-    if (typeof window !== 'undefined') {
-        var accessToken = localStorage.getItem('afreesmartAcessToken');
-    }
-    const req = await axios({
-        url: 'http://localhost:9100/graphql',
-        method: 'post',
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
-        },
-        data: {
-            query: `
-                query{
-                    mindSet{
-                    education
-                }
-                }
-            `
-        }
-    })
-    const projects = await req.data;
-    return {
-        props: {
-            projects,
-        },
-    }
-}
-
-
-
-
 
 export default EmployeeManagement;

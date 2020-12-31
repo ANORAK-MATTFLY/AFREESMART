@@ -1,18 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import education from '../../../lotties/education.json';
 import successAnimation from '../../../lotties/validated.json';
-// import updateEducationUtil from '../../../utils/updateEducation';
+import updateCompFailedUtil from '../../../utils/updateCompanyFailed';
 
-const CompanyFailures = ({ projects }) => {
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler();
-    }, [isCompleted]);
+const CompanyFailures = () => {
+    const [isSelected, setIsSelected] = useState(false);
+    const [failures, setFailures] = useState(null);
     const componentDidMount = async () => {
         const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -24,8 +20,8 @@ const CompanyFailures = ({ projects }) => {
             data: {
                 query: `
                     query{
-                        mindSet{
-                            education
+                        businessMind{
+                            companyFailures
                         }
                     }
                 `
@@ -33,23 +29,12 @@ const CompanyFailures = ({ projects }) => {
         })
         let res = await req.data;
         const { data } = res;
-        const { mindSet } = data;
-        const { education } = mindSet
-        if (!education) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
+        const { businessMind } = data;
+        const { companyFailures } = businessMind
+        setFailures(companyFailures)
+    }
 
-    }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = data => {
-        if (data.education) {
-            updateEducationUtil(data.education);
-        }
-    }
+    componentDidMount();
 
     const obj = {
         loop: true,
@@ -67,15 +52,19 @@ const CompanyFailures = ({ projects }) => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const OnclickHandler = (x) => {
+        updateCompFailedUtil(x);
+        setIsSelected(true);
+    };
     return (
-        isCompleted ?
-            <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+        (failures != null) || (isSelected != false) ?
+            <div className={stl.cardLong}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <div className={stl.label} htmlFor="education">Quel est votre niveaux d'education ?</div>
+                    <div className={stl.label} htmlFor="education">Combien de faillites avez-vous connu ?</div>
                 </div>
             </div>
             :
@@ -87,13 +76,13 @@ const CompanyFailures = ({ projects }) => {
                     <LottieSuperObj objectProps={obj} />
                 </div>
                 <div className={stl.cardInput}>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('1')}>
                         <p>1 </p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('2')}>
                         <p>2</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('Plus que ca')}>
                         <p>Plus que ca</p>
                     </div>
                 </div>

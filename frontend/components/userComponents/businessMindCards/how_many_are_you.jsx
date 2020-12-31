@@ -22,7 +22,7 @@ const HowManyAreYou = ({ projects }) => {
             data: {
                 query: `
                     query{
-                        mindSet{
+                        businessMind{
                             howManyAreYou
                         }
                     }
@@ -31,8 +31,8 @@ const HowManyAreYou = ({ projects }) => {
         })
         let res = await req.data;
         const { data } = res;
-        const { mindSet } = data;
-        const { howManyAreYou } = mindSet
+        const { businessMind } = data;
+        const { howManyAreYou } = businessMind
         setTotal(howManyAreYou);
     }
 

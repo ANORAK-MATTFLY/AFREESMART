@@ -5,7 +5,7 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import previous from '../../../lotties/previousCreated.json';
 import successAnimation from '../../../lotties/validated.json'
-import updateCompaniesCreatedUtil from '../../../utils/updatePreviousCompany';
+import updatePreviousExpUtil from '../../../utils/updatePreviousExp';
 
 
 const PreviousCompaniesCard = () => {
@@ -26,7 +26,7 @@ const PreviousCompaniesCard = () => {
                 query: `
                     query{
                         businessMind{
-                            PreviousCompaniesCard
+                            careerAchievement
                         }
                     }
                 `
@@ -35,8 +35,8 @@ const PreviousCompaniesCard = () => {
         let res = await req.data;
         const { data } = res;
         const { businessMind } = data;
-        const { PreviousCompaniesCard } = businessMind
-        if (!PreviousCompaniesCard) {
+        const { careerAchievement } = businessMind
+        if (!careerAchievement) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -47,7 +47,7 @@ const PreviousCompaniesCard = () => {
     }
     const onSubmit = data => {
         if (data.companyCreated) {
-            updateCompaniesCreatedUtil(data.companyCreated);
+            updatePreviousExpUtil(data.companyCreated);
         }
     }
     const Achieved = {
@@ -95,7 +95,7 @@ const PreviousCompaniesCard = () => {
                     <input className={stl.input}
                         type="text"
                         name="companyCreated"
-                        placeholder="Vos entreprises precedente"
+                        placeholder="..."
                         id="companyCreated"
                         ref={register({ required: true })}
                     />

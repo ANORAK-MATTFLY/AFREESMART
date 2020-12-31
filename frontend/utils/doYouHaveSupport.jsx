@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateHowManyUtil(str) {
+async function UpdateDoYouHaveSupportUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'http://localhost:9100/graphql',
@@ -10,7 +10,7 @@ async function updateHowManyUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateBusinessMind(howManyAreYou:"${str}")
+                    updateBusinessMind(doYouHaveSupport:"${str}")
             }
             `
         }
@@ -18,4 +18,4 @@ async function updateHowManyUtil(str) {
 }
 
 
-export default updateHowManyUtil;
+export default UpdateDoYouHaveSupportUtil;

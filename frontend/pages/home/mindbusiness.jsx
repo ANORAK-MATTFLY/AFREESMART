@@ -28,7 +28,7 @@ const MindBusiness = () => {
                 <IdolCard />
                 <ThreeGhost />
                 <PreviousCompaniesCard />
-                <QuestionsForThreePrs />
+                {/* <QuestionsForThreePrs /> */}
                 <NumberOfCompaniesCreated />
                 <CompanyFailures />
                 <EmployeeManagement />

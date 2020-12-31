@@ -10,7 +10,7 @@ async function UpdateEducationUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateMindset(education:"${str}")
+                    BusinessMind(education:"${str}")
             }
             `
         }
