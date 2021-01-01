@@ -3,7 +3,7 @@ async function updateCompanyType(generatesMoney) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     if (generatesMoney !== null) {
         await axios({
-            url: 'http://localhost:9100/graphql',
+            url: 'https://afre-api.herokuapp.com/graphql',
             method: 'post',
             headers: {
                 'Authorization': `Bearer ${token}`,

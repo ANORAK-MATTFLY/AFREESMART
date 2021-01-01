@@ -2,7 +2,7 @@ import axios from 'axios';
 async function test1Redirection() {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     let req = await axios({
-        url: 'http://localhost:9100/graphql',
+        url: 'https://afre-api.herokuapp.com/graphql',
         method: 'post',
         headers: {
             'Authorization': `Bearer ${token}`,

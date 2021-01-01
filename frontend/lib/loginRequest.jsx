@@ -5,7 +5,7 @@ async function loginRequest(email, password) {
   }
 
   let req = await axios({
-    url: 'http://localhost:9100/graphql',
+    url: 'https://afre-api.herokuapp.com/graphql',
     method: 'post',
     data: {
       query: `

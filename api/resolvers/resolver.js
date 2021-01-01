@@ -1,7 +1,7 @@
+require('dotenv').config();
 const { User, Project, Mindset, BusinessMind, AbilityToManageMoney, ProjectDoc, TemplateDoc } = require('../models');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
-require('dotenv').config();
 
 
 const resolvers = {

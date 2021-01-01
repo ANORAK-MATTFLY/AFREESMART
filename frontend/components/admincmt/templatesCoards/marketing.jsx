@@ -8,7 +8,7 @@ import FilesUpload from '../../../components/userComponents/uploadefiles';
 
 const updateMarketing = async (arg) => {
     const config = await {
-        url: 'http://localhost:9100/graphql',
+        url: 'https://afre-api.herokuapp.com/graphql',
         method: 'post',
         data: {
             query: `

@@ -14,7 +14,7 @@ const updateTeamProfile = async (arg) => {
         var token = localStorage.getItem('afreesmartAcessToken') || '';
     };
     const config = {
-        url: 'http://localhost:9100/graphql',
+        url: 'https://afre-api.herokuapp.com/graphql',
         method: 'post',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -40,7 +40,7 @@ const UploadTeamProfileCard = () => {
             var token = localStorage.getItem('afreesmartAcessToken') || '';
         };
         const req = await axios({
-            url: 'http://localhost:9100/graphql',
+            url: 'https://afre-api.herokuapp.com/graphql',
             method: 'post',
             headers: {
                 'Authorization': `Bearer ${token}`,

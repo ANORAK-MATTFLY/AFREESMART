@@ -13,7 +13,7 @@ const updateCorporate = async (arg) => {
         var token = localStorage.getItem('afreesmartAcessToken') || '';
     }
     const config = {
-        url: "http://localhost:9100/graphql",
+        url: "https://afre-api.herokuapp.com/graphql",
         method: "post",
         headers: {
             "Authorization": `Bearer ${token}`
@@ -47,7 +47,7 @@ const UploadCorporateCard = ({ corporateLink }) => {
             var token = localStorage.getItem('afreesmartAcessToken') || '';
         };
         const config = {
-            url: 'http://localhost:9100/graphql',
+            url: 'https://afre-api.herokuapp.com/graphql',
             method: 'post',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -111,7 +111,7 @@ const UploadCorporateCard = ({ corporateLink }) => {
         <div className={stl.card} {...getRootProps()}>
             <h3>Corporate</h3>
             <div className={stl.cardIllustration1}>
-            {docs == '' || docs == null ?
+                {docs == '' || docs == null ?
                     <LottieSuperObj objectProps={obj} />
                     :
                     <LottieSuperObj objectProps={successIllustration} />

@@ -16,7 +16,7 @@ const Passive = ({ projects }) => {
     const componentDidMount = async () => {
         const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
-            url: 'http://localhost:9100/graphql',
+            url: 'https://afre-api.herokuapp.com/graphql',
             method: 'post',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -68,7 +68,7 @@ const Passive = ({ projects }) => {
         }
     };
     return (
-        isCompleted ?
+        isCompleted == false ?
             <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
@@ -107,7 +107,7 @@ export async function getServerSideProps() {
         var accessToken = localStorage.getItem('afreesmartAcessToken');
     }
     const req = await axios({
-        url: 'http://localhost:9100/graphql',
+        url: 'https://afre-api.herokuapp.com/graphql',
         method: 'post',
         headers: {
             'Authorization': `Bearer ${accessToken}`,

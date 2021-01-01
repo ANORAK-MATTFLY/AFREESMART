@@ -23,6 +23,9 @@
     "mysql2": "^2.2.5",
     "sequelize": "^6.3.5"
   },
+  "engines": {
+    "node": "12.18.2"
+  },
   "devDependencies": {
     "babel-watch": "^7.0.0"
   }

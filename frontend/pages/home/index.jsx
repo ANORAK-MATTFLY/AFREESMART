@@ -55,7 +55,7 @@ const HomePage = ({ templateData }) => {
 
 export async function getStaticProps() {
     const config = {
-        url: 'http://localhost:9100/graphql',
+        url: 'https://afre-api.herokuapp.com/graphql',
         method: 'post',
         data: {
             query: `

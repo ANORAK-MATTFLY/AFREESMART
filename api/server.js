@@ -9,7 +9,10 @@ const db = require('./models');
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 9100;
-
+let port = process.env.PORT;
+if (port == null || port == "") {
+	port = 9100;
+}
 
 const auth = jwt({
 	secret: process.env.JWT_SECRET,
@@ -48,7 +51,7 @@ const server = new ApolloServer({
 server.applyMiddleware({ app });
 // deployement
 db.sequelize.sync().then(() => {
-	app.listen(PORT, () => {
-		console.log(`server running on port http://localhost:${PORT}/graphql`);
+	app.listen(port, () => {
+		console.log(`server running on port https://afre-api.herokuapp.com/graphql`);
 	});
 });

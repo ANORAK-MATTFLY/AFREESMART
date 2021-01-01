@@ -2,7 +2,7 @@ import axios from 'axios';
 async function UpdateEducationUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
-        url: 'http://localhost:9100/graphql',
+        url: 'https://afre-api.herokuapp.com/graphql',
         method: 'post',
         headers: {
             'Authorization': `Bearer ${token}`,

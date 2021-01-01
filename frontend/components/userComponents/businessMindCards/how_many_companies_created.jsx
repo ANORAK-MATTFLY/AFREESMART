@@ -13,7 +13,7 @@ const NumberOfCompaniesCreated = () => {
     const componentDidMount = async () => {
         const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
-            url: 'http://localhost:9100/graphql',
+            url: 'https://afre-api.herokuapp.com/graphql',
             method: 'post',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -22,7 +22,7 @@ const NumberOfCompaniesCreated = () => {
                 query: `
                     query{
                         businessMind{
-                            PreviousCompaniesCard
+                            companyCreatedPreviously
                         }
                     }
                 `
@@ -31,8 +31,8 @@ const NumberOfCompaniesCreated = () => {
         let res = await req.data;
         const { data } = res;
         const { businessMind } = data;
-        const { PreviousCompaniesCard } = businessMind
-        setPreviousCompanies(PreviousCompaniesCard)
+        const { companyCreatedPreviously } = businessMind
+        setPreviousCompanies(companyCreatedPreviously)
     }
 
     componentDidMount();

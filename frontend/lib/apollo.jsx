@@ -13,7 +13,7 @@ function createIsomorphLink() {
     } else {
         const { HttpLink } = require('@apollo/client/link/http')
         return new HttpLink({
-            uri: 'http://localhost:9100/graphql',
+            uri: 'https://afre-api.herokuapp.com/graphql',
             // credentials: 'same-origin',
         })
     }
@@ -69,7 +69,7 @@ export function useApollo(initialState) {
 //     } else {
 //         const { HttpLink } = require('@apollo/client/link/http')
 //         return new HttpLink({
-//             uri: 'http://localhost:9100/graphql',
+//             uri: 'https://afre-api.herokuapp.com/graphql',
 //             credentials: 'same-origin',
 //         })
 //     }

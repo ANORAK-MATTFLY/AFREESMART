@@ -13,7 +13,7 @@ const DoYouHaveSupport = () => {
     const componentDidMount = async () => {
         const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
-            url: 'http://localhost:9100/graphql',
+            url: 'https://afre-api.herokuapp.com/graphql',
             method: 'post',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -94,7 +94,7 @@ export async function getServerSideProps() {
         var accessToken = localStorage.getItem('afreesmartAcessToken');
     }
     const req = await axios({
-        url: 'http://localhost:9100/graphql',
+        url: 'https://afre-api.herokuapp.com/graphql',
         method: 'post',
         headers: {
             'Authorization': `Bearer ${accessToken}`,

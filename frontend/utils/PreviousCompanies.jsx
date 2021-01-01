@@ -2,7 +2,7 @@ import axios from 'axios';
 async function UpdatePreviousCompaniesUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
-        url: 'http://localhost:9100/graphql',
+        url: 'https://afre-api.herokuapp.com/graphql',
         method: 'post',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -10,7 +10,7 @@ async function UpdatePreviousCompaniesUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateBusinessMind(PreviousCompaniesCard:"${str}")
+                    updateBusinessMind(companyCreatedPreviously:"${str}")
             }
             `
         }
