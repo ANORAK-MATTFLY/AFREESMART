@@ -5,14 +5,11 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import education from '../../../lotties/education.json';
 import successAnimation from '../../../lotties/validated.json';
-import updateEducationUtil from '../../../utils/updateEducation';
+import updatePassiveUtil from '../../../utils/updatePassive';
 
 const Passive = ({ projects }) => {
-    const [isCompleted, setIsCompleted] = useState(false);
-    const { register, handleSubmit, errors } = useForm();
-    useEffect(() => {
-        completionHandler();
-    }, [isCompleted]);
+    const [isSelected, setIsSelected] = useState(false);
+    const [passive, setPassive] = useState('');
     const componentDidMount = async () => {
         const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
@@ -24,8 +21,8 @@ const Passive = ({ projects }) => {
             data: {
                 query: `
                     query{
-                        mindSet{
-                            education
+                        moneyMaker{
+                            passive
                         }
                     }
                 `
@@ -33,23 +30,12 @@ const Passive = ({ projects }) => {
         })
         let res = await req.data;
         const { data } = res;
-        const { mindSet } = data;
-        const { education } = mindSet
-        if (!education) {
-            setIsCompleted(false)
-        } else {
-            setIsCompleted(true)
-        }
+        const { moneyMaker } = data;
+        const { passive } = moneyMaker;
+        setPassive(passive);
+    }
 
-    }
-    const completionHandler = () => {
-        componentDidMount();
-    }
-    const onSubmit = data => {
-        if (data.education) {
-            updateEducationUtil(data.education);
-        }
-    }
+    componentDidMount();
 
     const obj = {
         loop: true,
@@ -67,9 +53,13 @@ const Passive = ({ projects }) => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const OnclickHandler = (x) => {
+        updatePassiveUtil(x);
+        setIsSelected(true);
+    };
     return (
-        isCompleted == false ?
-            <div onSubmit={handleSubmit(onSubmit)} className={stl.cardLong}>
+        (passive != null) || (isSelected != false) ?
+            <div className={stl.cardLong}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={completedAnimation} />
@@ -86,52 +76,21 @@ const Passive = ({ projects }) => {
                     <LottieSuperObj objectProps={obj} />
                 </div>
                 <div className={stl.cardInput}>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('0-200 $')}>
                         <p>0-200 $</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('200-500 $')}>
                         <p>200-500 $</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('500-1000 $')}>
                         <p>500-1000 $</p>
                     </div>
-                    <div className={stl.Qbtn}>
+                    <div className={stl.Qbtn} onClick={() => OnclickHandler('1000 à $')}>
                         <p>1000 à $</p>
                     </div>
                 </div>
             </div>
     );
 }
-export async function getServerSideProps() {
-    if (typeof window !== 'undefined') {
-        var accessToken = localStorage.getItem('afreesmartAcessToken');
-    }
-    const req = await axios({
-        url: 'https://afre-api.herokuapp.com/graphql',
-        method: 'post',
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
-        },
-        data: {
-            query: `
-                query{
-                    mindSet{
-                    education
-                }
-                }
-            `
-        }
-    })
-    const projects = await req.data;
-    return {
-        props: {
-            projects,
-        },
-    }
-}
-
-
-
-
 
 export default Passive;

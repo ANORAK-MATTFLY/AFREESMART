@@ -12,7 +12,6 @@ import updateCompanyValuesUtil from '../../../utils/CompanyVal';
 const Ent_values_Card = () => {
     const [isSelected, setIsSelected] = useState(false);
     const [values, setValues] = useState('');
-
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({

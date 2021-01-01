@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateMoneyUtil(str) {
+async function updatePassiveUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'https://afre-api.herokuapp.com/graphql',
@@ -10,7 +10,7 @@ async function updateMoneyUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateAbilityToMakeMoney(monthlyEarningMoney:"${str}")
+                    updateAbilityToMakeMoney(passive:"${str}")
                 }
             `
         }
@@ -18,4 +18,4 @@ async function updateMoneyUtil(str) {
 }
 
 
-export default updateMoneyUtil;
+export default updatePassiveUtil;

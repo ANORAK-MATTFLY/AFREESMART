@@ -491,16 +491,21 @@ export async function getServerSideProps({ query }) {
                         userId
                     }
                     getMindSetById(id:${id}){
-                        motivations
-                        ethic
-                        family
-                        philosophies
-                        diploma
-                        strength
-                        weaknesses
-                        ambitions
-                        achievements
-                        education
+                        companyValues: String
+                        family: String
+                        thoughtOnTeamwork: String
+                        thoughtOnAdvices: String
+                        whyBecomeEnt: String
+                        ethic: String
+                        IfWrong: String
+                        IfLate: String
+                        IfYouGetStuck: String
+                        ifYouFaille: String
+                        ifYouHaveNoExp: String
+                        fiveKeyStrength: String
+                        fiveWeakness: String
+                        relationShipWithMoney: String
+                        education: String
                         }
                 }
                 
