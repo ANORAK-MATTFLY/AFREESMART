@@ -9,7 +9,7 @@ import UpdateEducationUtil from '../../../utils/updateEducation';
 
 const EdCard = () => {
     const [isSelected, setIsSelected] = useState(false);
-    const [diploma, setDiploma] = useState('');
+    const [diploma, setDiploma] = useState(null);
 
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';

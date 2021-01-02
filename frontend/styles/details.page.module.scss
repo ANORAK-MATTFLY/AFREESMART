@@ -22,13 +22,12 @@ $black: rgb(53, 53, 53);
     align-items: stretch;
     flex-direction: column;
     height: 100%;
-    width: 90%;
+    width: 100%;
     padding-top: 1%;
     background-color: white;
     border-radius: 7px;
     color: $black;
     font-family: $font;
-    box-shadow: 6px 8px 40px 1px rgba(56, 56, 56, 0.363);
     .cardsBar{
         display: flex;
         justify-content: space-around;
@@ -269,14 +268,14 @@ $black: rgb(53, 53, 53);
                     justify-content: center;
                     align-items: center;
                     margin-left: auto;
-                    height: 20%;
-                    width: 40%;
+                    height: 25%;
+                    width: 100%;
                     border-radius: $border;
                     border: 1.5px rgb(114, 224, 215) solid;
                     color: rgb(34, 48, 47);
                     font-weight: bold;
                     p{
-                        font-size: 0.6rem;
+                        font-size: 0.7rem;
                     }
                     
                 }

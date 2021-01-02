@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function UpdateIdolsUtil(str) {
+async function UpdateMentorsUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'https://afre-api.herokuapp.com/graphql',
@@ -10,7 +10,7 @@ async function UpdateIdolsUtil(str) {
         data: {
             query: `
                 mutation{
-                    updateBusinessMind(idol:"${str}")
+                    updateBusinessMind(mentors:"${str}")
             }
             `
         }
@@ -18,4 +18,4 @@ async function UpdateIdolsUtil(str) {
 }
 
 
-export default UpdateIdolsUtil;
+export default UpdateMentorsUtil;

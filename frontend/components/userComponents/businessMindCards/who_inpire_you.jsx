@@ -5,7 +5,7 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import idolAnimation from '../../../lotties/business-plan-or-chart-presentation';
 import successAnimation from '../../../lotties/validated.json'
-import updateMentorsUtil from '../../../utils/updateIdol';
+import UpdateIdolsUtil from '../../../utils/updateIdol';
 
 
 const IdolCard = () => {
@@ -26,7 +26,7 @@ const IdolCard = () => {
                 query: `
                     query{
                         businessMind{
-                            mentors
+                            idol
                         }
                     }
                 `
@@ -35,8 +35,8 @@ const IdolCard = () => {
         let res = await req.data;
         const { data } = res;
         const { businessMind } = data;
-        const { mentors } = businessMind
-        if (!mentors) {
+        const { idol } = businessMind
+        if (!idol) {
             setIsCompleted(false)
         } else {
             setIsCompleted(true)
@@ -47,7 +47,7 @@ const IdolCard = () => {
     }
     const onSubmit = data => {
         if (data.idol) {
-            updateMentorsUtil(data.idol);
+            UpdateIdolsUtil(data.idol);
         }
     }
     const Achieved = {

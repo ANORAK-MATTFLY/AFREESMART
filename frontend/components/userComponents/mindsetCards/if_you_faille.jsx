@@ -4,7 +4,7 @@ import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import philosopher from '../../../lotties/philosophy.json';
 import successAnimation from '../../../lotties/validated.json'
-import UpdateIfYouGetStuckUtil from '../../../utils/updateFiveKeyStrengthUtil';
+import UpdateIfYouGetStuckUtil from '../../../utils/updateIfYouGetStuck';
 
 
 const IfYouFaille = () => {
@@ -55,7 +55,7 @@ const IfYouFaille = () => {
         }
     };
     const OnclickHandler = (x) => {
-        updateIfYouGetStuckUtil(x);
+        UpdateIfYouGetStuckUtil(x);
         setIsSelected(true);
     };
     return (

@@ -1,5 +1,5 @@
 import axios from 'axios';
-async function updateIfYouGetStuckUtil(str) {
+async function UpdateIfYouGetStuckUtil(str) {
     const token = localStorage.getItem('afreesmartAcessToken') || '';
     await axios({
         url: 'https://afre-api.herokuapp.com/graphql',
@@ -18,4 +18,4 @@ async function updateIfYouGetStuckUtil(str) {
 }
 
 
-export default updateIfYouGetStuckUtil;
+export default UpdateIfYouGetStuckUtil;

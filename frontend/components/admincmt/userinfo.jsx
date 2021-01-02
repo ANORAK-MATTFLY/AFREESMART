@@ -4,98 +4,135 @@ import stl from '../../styles/details.page.module.scss';
 
 const UserInfo = ({ mindset }) => {
     const {
-        motivations,
-        ethic,
+        companyValues,
         family,
-        philosophies,
-        diploma,
-        strength,
-        weaknesses,
-        ambitions,
-        achievements,
+        thoughtOnTeamwork,
+        thoughtOnAdvices,
+        whyBecomeEnt,
+        ethic,
+        IfWrong,
+        IfLate,
+        IfYouGetStuck,
+        ifYouFaille,
+        ifYouHaveNoExp,
+        fiveKeyStrength,
+        fiveWeakness,
+        relationShipWithMoney,
         education,
     } = mindset;
+
+    const {
+        idol,
+        careerAchievement,
+        companyCreatedPreviously,
+        failuresAsEntrepreneur,
+        numberOfEmployeesManaged,
+        mentors,
+        doYouHaveSupport,
+        howManyAreYou,
+        companyFailures,
+        PreviousCompaniesCard,
+        twoQuestionsForThisPeople,
+        threePeopleYouWouldLikeToMet
+    } = businessMind;
+
     return (
         <div className={stl.userDetails}>
-            <h3>Ben Matanda</h3>
+            <h3>Mind set</h3>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
-                    <p>{motivations}</p>
+                    <p>{thoughtOnTeamwork}</p>
                 </div>
                 <div className={stl.quotesTitle}>
-                    <p>Motivation</p>
+                    <p>Que pensez-vous du travail en équipe ?</p>
                 </div>
             </div>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
-                    <p>{ethic}</p>
+                    <p>{IfWrong}</p>
                 </div>
                 <div className={stl.quotesTitle}>
-                    <p>Ethique</p>
+                    <p>Si vous avez tort comment réagissez-vous ?</p>
                 </div>
             </div>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
-                    <p>{family}</p>
+                    <p>{IfLate}</p>
                 </div>
                 <div className={stl.quotesTitle}>
-                    <p>Famille</p>
+                    <p>Vous allez arriver en retard à un rendez-vous que faites-vous ?</p>
                 </div>
             </div>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
-                    <p>{philosophies}</p>
+                    <p>{ifYouFaille}</p>
                 </div>
                 <div className={stl.quotesTitle}>
-                    <p>philosophies</p>
+                    <p>Que représentez l’échec pour vous ?</p>
                 </div>
             </div>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
-                    <p>{diploma}</p>
+                    <p>{thoughtOnAdvices}</p>
                 </div>
                 <div className={stl.quotesTitle}>
-                    <p>Diplomes</p>
+                    <p>Quel est votre attitude face aux donneurs de leçons sur votre projet ?</p>
                 </div>
             </div>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
-                    <p>{strength}</p>
+                    <p>{whyBecomeEnt}</p>
                 </div>
                 <div className={stl.quotesTitle}>
-                    <p>Points forts</p>
+                    <p>Pourquoi souhaitez-vous entreprendre ?</p>
                 </div>
             </div>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
-                    <p>{weaknesses}</p>
+                    <p>{IfYouGetStuck}</p>
                 </div>
                 <div className={stl.quotesTitle}>
-                    <p>Points faibles</p>
+                    <p>Si ce que vous faites ne marche pas ?</p>
                 </div>
             </div>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
-                    <p>{ambitions}</p>
+                    <p>{ifYouHaveNoExp}</p>
                 </div>
                 <div className={stl.quotesTitle}>
-                    <p>Ambitions</p>
+                    <p>Quand vous ne savez pas faire quelque chose ?</p>
                 </div>
             </div>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
-                    <p>{achievements}</p>
+                    <p>{fiveKeyStrength}</p>
                 </div>
                 <div className={stl.quotesTitle}>
-                    <p>Accomplisements</p>
+                    <p>Quels sont vos 5 forces personnel ?</p>
                 </div>
             </div>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
-                    <p>{education}</p>
+                    <p>{fiveWeakness}</p>
                 </div>
                 <div className={stl.quotesTitle}>
-                    <p>Education</p>
+                    <p>Quels sont vos 5 faiblesses ?</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{relationShipWithMoney}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Quel est votre rapport avec l’argent</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{companyValues}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Quels sont tes valeurs entrepreneuriales ?</p>
                 </div>
             </div>
         </div>

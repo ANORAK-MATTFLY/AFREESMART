@@ -66,7 +66,7 @@ const Ent_values_Card = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <h3 className={stl.label} >Combien de frere et soeur avez-vouz ?</h3>
+                    <h3 className={stl.label} >Quels sont tes valeurs entrepreneuriales ? (4 choix maximum)</h3>
                 </div>
             </div>
             : <div className={stl.cardLargeGrid}>

@@ -11,15 +11,7 @@ import UpdateProject from '../../../components/admincmt/updateproject';
 import { useRouter } from 'next/router';
 
 
-
-
-
-
-
-
-
-
-const DetailPage = ({ project, mindset, userRole }) => {
+const DetailPage = ({ project, mindset, businessMind, userRole }) => {
     const [docs, setDocs] = useState({
         turnoverGrowth: "",
         companyManagement: "",
@@ -460,7 +452,7 @@ const DetailPage = ({ project, mindset, userRole }) => {
                             </div>
                             : null
                     }
-                    <UserInfo mindset={mindset} />
+                    <UserInfo mindset={mindset} businessMind={businessMind} />
                 </div>
             </div>
         </div>
@@ -491,22 +483,36 @@ export async function getServerSideProps({ query }) {
                         userId
                     }
                     getMindSetById(id:${id}){
-                        companyValues: String
-                        family: String
-                        thoughtOnTeamwork: String
-                        thoughtOnAdvices: String
-                        whyBecomeEnt: String
-                        ethic: String
-                        IfWrong: String
-                        IfLate: String
-                        IfYouGetStuck: String
-                        ifYouFaille: String
-                        ifYouHaveNoExp: String
-                        fiveKeyStrength: String
-                        fiveWeakness: String
-                        relationShipWithMoney: String
-                        education: String
+                        companyValues
+                        family
+                        thoughtOnTeamwork
+                        thoughtOnAdvices
+                        whyBecomeEnt
+                        ethic
+                        IfWrong
+                        IfLate
+                        IfYouGetStuck
+                        ifYouFaille
+                        ifYouHaveNoExp
+                        fiveKeyStrength
+                        fiveWeakness
+                        relationShipWithMoney
+                        education
                         }
+                    getBusinessMindById(id:${id}){
+                        idol
+                        careerAchievement
+                        companyCreatedPreviously
+                        failuresAsEntrepreneur
+                        numberOfEmployeesManaged
+                        mentors
+                        doYouHaveSupport
+                        howManyAreYou
+                        companyFailures
+                        PreviousCompaniesCard
+                        twoQuestionsForThisPeople
+                        threePeopleYouWouldLikeToMet
+                    }
                 }
                 
             `
@@ -514,9 +520,10 @@ export async function getServerSideProps({ query }) {
     })
     const project = await req.data.data.getProjectById;
     const mindset = await req.data.data.getMindSetById;
+    const businessMind = await req.data.data.getBusinessMindById;
     return {
         props: {
-            project, mindset,
+            project, mindset, businessMind
         },
     }
 }
