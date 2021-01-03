@@ -2,7 +2,12 @@ import stl from '../../styles/details.page.module.scss';
 
 
 
-const UserInfo = ({ mindset }) => {
+const UserInfo = ({ mindset, businessMind, moneyMaker }) => {
+    const {
+        passive,
+        monthlyEarningMoney
+    } = moneyMaker;
+    console.log(monthlyEarningMoney);
     const {
         companyValues,
         family,
@@ -38,7 +43,7 @@ const UserInfo = ({ mindset }) => {
 
     return (
         <div className={stl.userDetails}>
-            <h3>Mind set</h3>
+            <h3>Mindset</h3>
             <div className={stl.quotes}>
                 <div className={stl.quotesContent}>
                     <p>{thoughtOnTeamwork}</p>
@@ -133,6 +138,96 @@ const UserInfo = ({ mindset }) => {
                 </div>
                 <div className={stl.quotesTitle}>
                     <p>Quels sont tes valeurs entrepreneuriales ?</p>
+                </div>
+            </div>
+            <h3>Mind Business</h3>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{idol}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Citez trois personnes qui vous inspire que vous ne connaissez pas ?</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{threePeopleYouWouldLikeToMet}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Citez trois personnes que vous aurez voulu rencontrer s’ils étaient encore vivants ?</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{companyCreatedPreviously}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Combien d’entreprises avez-vous déjà créer ?</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{companyFailures}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Combien de faillites avez-vous connu ?</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{numberOfEmployeesManaged}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Combien de personne avez-vous déjà gérer pour une affaire ?</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{mentors}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Avez-vous des mentors ?</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{howManyAreYou}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Combien de personne compose votre ménage en dehors de vous-même ?</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{doYouHaveSupport}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Est-ce que votre entourage soutient votre projet ?</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{careerAchievement}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Qu’as-tu déjà accomplis dans ta vie professionnelle dont tu es fière ?</p>
+                </div>
+            </div>
+            <h3>Money maker</h3>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{passive}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>De combien sont vos revenues passives ?</p>
+                </div>
+            </div>
+            <div className={stl.quotes}>
+                <div className={stl.quotesContent}>
+                    <p>{monthlyEarningMoney}</p>
+                </div>
+                <div className={stl.quotesTitle}>
+                    <p>Combien gagnez-vous par mois aujourd’hui en dehors de vos revenus passives ?</p>
                 </div>
             </div>
         </div>

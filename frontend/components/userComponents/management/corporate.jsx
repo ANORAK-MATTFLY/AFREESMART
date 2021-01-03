@@ -56,11 +56,7 @@ const UploadCorporateCard = ({ corporateLink }) => {
                 query: `
                 query {
                     getProjectDocById {
-                    marketingtLink
-                    managementLink
                     corporateLink
-                    proofOfConceptLink
-                    planFinancierLink
                     }
                 }
                     `

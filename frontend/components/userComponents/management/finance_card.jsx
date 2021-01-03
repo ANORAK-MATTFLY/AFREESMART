@@ -8,7 +8,7 @@ import successAnimation from '../../../lotties/validated.json';
 import Link from 'next/link';
 
 
-const updateCorporate = async (arg) => {
+const updatePlanFin = async (arg) => {
     if (typeof window !== 'undefined') {
         var token = localStorage.getItem('afreesmartAcessToken') || '';
     }
@@ -31,7 +31,7 @@ const updateCorporate = async (arg) => {
 
 const UploadFinanceCard = ({ planFinancierLink }) => {
     const [docs, setDocs] = useState({
-        contextLink: ''
+        planFinancierLink: null
     });
     const successIllustration = {
         loop: true,
@@ -55,10 +55,6 @@ const UploadFinanceCard = ({ planFinancierLink }) => {
                 query: `
                 query {
                     getProjectDocById {
-                    marketingtLink
-                    managementLink
-                    corporateLink
-                    proofOfConceptLink
                     planFinancierLink
                     }
                 }
@@ -88,7 +84,7 @@ const UploadFinanceCard = ({ planFinancierLink }) => {
             if (req.data !== null) {
                 var res = await req.data.secure_url;
             }
-            updateCorporate(res);
+            updatePlanFin(res);
         });
     }, []);
 

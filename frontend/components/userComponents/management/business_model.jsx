@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Link from 'next/link';
 import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import stl from '../../../styles/client.homepage.module.scss';

@@ -136,6 +136,7 @@ const typeDefs = gql`
     getProjectById(id:ID): Project!
     getProjectDocById: ProjectDoc!
     getMindSetById(id:ID): Mindset!
+    getAbilityToMakeMoneyById(id:ID): AbilityToMakeMoney!
     getBusinessMindById(id:ID): BusinessMind!
     getProjectDocByIdButForReal(id:ID): ProjectDoc!
   }

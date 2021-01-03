@@ -11,7 +11,7 @@ import UpdateProject from '../../../components/admincmt/updateproject';
 import { useRouter } from 'next/router';
 
 
-const DetailPage = ({ project, mindset, businessMind, userRole }) => {
+const DetailPage = ({ project, mindset, businessMind, moneyMaker, userRole }) => {
     const [docs, setDocs] = useState({
         turnoverGrowth: "",
         companyManagement: "",
@@ -164,7 +164,7 @@ const DetailPage = ({ project, mindset, businessMind, userRole }) => {
                 <div className={stl.detailsSection}>
                     {role == 2 ?
                         <div className={stl.description}>
-                            <h1>Gestion de document</h1>
+                            <h1>Gestion de document Management</h1>
                             <div className={stl.criteriaCard}>
                                 <div className={stl.docCard}>
                                     <div className={stl.docName}>
@@ -300,7 +300,7 @@ const DetailPage = ({ project, mindset, businessMind, userRole }) => {
                         </div>
                         : role == 3 ?
                             <div className={stl.description}>
-                                <h1>Gestion de document</h1>
+                                <h1>Gestion de document Gouvernance</h1>
                                 <div className={stl.criteriaCard}>
                                     <div className={stl.docCard}>
                                         <div className={stl.docName}>
@@ -452,7 +452,7 @@ const DetailPage = ({ project, mindset, businessMind, userRole }) => {
                             </div>
                             : null
                     }
-                    <UserInfo mindset={mindset} businessMind={businessMind} />
+                    <UserInfo mindset={mindset} businessMind={businessMind} moneyMaker={moneyMaker} />
                 </div>
             </div>
         </div>
@@ -513,6 +513,10 @@ export async function getServerSideProps({ query }) {
                         twoQuestionsForThisPeople
                         threePeopleYouWouldLikeToMet
                     }
+                    getAbilityToMakeMoneyById(id:${id}){
+                        passive
+                        monthlyEarningMoney
+                    }
                 }
                 
             `
@@ -521,9 +525,10 @@ export async function getServerSideProps({ query }) {
     const project = await req.data.data.getProjectById;
     const mindset = await req.data.data.getMindSetById;
     const businessMind = await req.data.data.getBusinessMindById;
+    const moneyMaker = await req.data.data.getAbilityToMakeMoneyById;
     return {
         props: {
-            project, mindset, businessMind
+            project, mindset, businessMind, moneyMaker
         },
     }
 }
