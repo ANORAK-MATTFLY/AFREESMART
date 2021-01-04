@@ -5,7 +5,7 @@ import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import fundRaise from '../../lotties/Found raise'
 import updateExpectedTurnover from '../../lib/updateTurnover';
 import setInvalidate from '../../utils/setInvalidate';
-
+import loadingAnimation from '../../lotties/loadingAnimation.json';
 
 
 const Test2Quiz1 = () => {
@@ -34,6 +34,14 @@ const Test2Quiz1 = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const loading = {
+        loop: true,
+        autoplay: true,
+        animationData: loadingAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     return (
         <div className={stl.container}>
             <div className={stl.progressBar}>
@@ -41,7 +49,10 @@ const Test2Quiz1 = () => {
             </div>
             <div className={stl.quizBox}>
                 <div className={stl.illustrationCard}>
-                    <LottieSuperObj objectProps={obj} />
+                    {choice !== null ?
+                        <LottieSuperObj objectProps={loading} />
+                        : <LottieSuperObj objectProps={obj} />
+                    }
                 </div>
                 <h3>Quel a été le chiffre d'affaires annuelles le plus élevé que vous ayez réalisé ?</h3>
                 <div className={stl.buttonSection}>

@@ -3,12 +3,11 @@ import axios from 'axios';
 import stl from "../../styles/quizUI.module.scss";
 import { useRouter } from 'next/router'
 import updateToisSimplifiedActionCompany from '../../lib/updateToisSimplifiedActionCompany';
-import test1Redirection from '../../lib/test1Redirection';
 import { motion } from "framer-motion";
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import quizIllustration from '../../lotties/business-plan-or-chart-presentation.json'
 import InvalidateProject from '../../lib/invalidateProject';
-
+import loadingAnimation from '../../lotties/loadingAnimation.json';
 
 
 
@@ -28,8 +27,11 @@ const Question8 = () => {
             }
         }
     }
+    function componentDidMount() {
+        onClickHandler();
+    }
     useEffect(() => {
-        onClickHandler()
+        componentDidMount();
     }, [myBoolean]);
     const obj = {
         loop: true,
@@ -39,6 +41,15 @@ const Question8 = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const loading = {
+        loop: true,
+        autoplay: true,
+        animationData: loadingAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+    console.log(isClicked);
     return (
         <div className={stl.container}>
             <div className={stl.progressBar}>
@@ -55,7 +66,10 @@ const Question8 = () => {
                 </div>
                 <div className={stl.mainSection}>
                     <div className={stl.rocketIllustration}>
-                        <LottieSuperObj objectProps={obj} />
+                        {myBoolean !== null ?
+                            <LottieSuperObj objectProps={loading} />
+                            : <LottieSuperObj objectProps={obj} />
+                        }
                     </div>
                     <div className={stl.quizText}>
                         <h1>Êtes-vous une société par actions simplifiée ?</h1>

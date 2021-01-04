@@ -5,6 +5,7 @@ import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import team from '../../lotties/10073-credit-card-error.json'
 import updateToActualTurnover from '../../lib/updateActualTurnover';
 import setInvalidate from '../../utils/setInvalidate';
+import loadingAnimation from '../../lotties/loadingAnimation.json';
 
 
 
@@ -34,6 +35,14 @@ const Test2Quiz4 = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const loading = {
+        loop: true,
+        autoplay: true,
+        animationData: loadingAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     return (
         <div className={stl.container}>
             <div className={stl.progressBar}>
@@ -41,7 +50,10 @@ const Test2Quiz4 = () => {
             </div>
             <div className={stl.quizBox}>
                 <div className={stl.illustrationCard}>
-                    <LottieSuperObj objectProps={obj} />
+                    {choice !== null ?
+                        <LottieSuperObj objectProps={loading} />
+                        : <LottieSuperObj objectProps={obj} />
+                    }
                 </div>
                 <h3>Quel est le pourcentage de votre chiffre d'affaire enregistre en bank ?</h3>
                 <div className={stl.buttonSection}>

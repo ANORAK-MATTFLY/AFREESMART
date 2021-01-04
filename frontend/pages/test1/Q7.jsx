@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import stl from "../../styles/quizUI.module.scss";
 import updateToGeneratesMoney from '../../lib/updateToGeneratesMoney'
 import { motion } from "framer-motion";
-import GobackBtn from "../../components/buttons/go_back_btn";
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import quizIllustration from '../../lotties/Happy-pig.json'
+import loadingAnimation from '../../lotties/loadingAnimation.json';
+
 
 const Question7 = () => {
     const router = useRouter();
@@ -33,6 +33,14 @@ const Question7 = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const loading = {
+        loop: true,
+        autoplay: true,
+        animationData: loadingAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     return (
         <div className={stl.container}>
             <div className={stl.progressBar}>
@@ -49,7 +57,10 @@ const Question7 = () => {
                 </div>
                 <div className={stl.mainSection}>
                     <div className={stl.rocketIllustration}>
-                        <LottieSuperObj objectProps={obj} />
+                        {myBoolean !== null ?
+                            <LottieSuperObj objectProps={loading} />
+                            : <LottieSuperObj objectProps={obj} />
+                        }
                     </div>
                     <div className={stl.quizText}>
                         <h1>Le but de l’entreprise est-il de faire du profit ?</h1>

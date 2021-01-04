@@ -5,6 +5,9 @@ import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import youngBusinessMan from '../../lotties/9886-growth.json'
 import updateFundRaise from '../../lib/updateFund';
 import setInvalidate from '../../utils/setInvalidate';
+import loadingAnimation from '../../lotties/loadingAnimation.json';
+
+
 
 const Test2Quiz3 = () => {
     const router = useRouter();
@@ -32,6 +35,14 @@ const Test2Quiz3 = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const loading = {
+        loop: true,
+        autoplay: true,
+        animationData: loadingAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     return (
         <div className={stl.container}>
             <div className={stl.progressBar}>
@@ -39,7 +50,10 @@ const Test2Quiz3 = () => {
             </div>
             <div className={stl.quizBox}>
                 <div className={stl.illustrationCard}>
-                    <LottieSuperObj objectProps={obj} />
+                    {choice !== null ?
+                        <LottieSuperObj objectProps={loading} />
+                        : <LottieSuperObj objectProps={obj} />
+                    }
                 </div>
                 <h3>Quel est la somme que vous souhaitez lever en suivant notre programme ?</h3>
                 <div className={stl.buttonSection}>

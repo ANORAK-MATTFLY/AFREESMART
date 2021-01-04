@@ -6,7 +6,7 @@ import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import quizIllustration from '../../lotties/marketing-concept.json'
 import updateHasCampaign from '../../lib/updateHasCampaign';
 import setInvalidate from '../../utils/setInvalidate';
-
+import loadingAnimation from '../../lotties/loadingAnimation.json';
 
 
 
@@ -37,6 +37,14 @@ const Test2Quiz5 = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const loading = {
+        loop: true,
+        autoplay: true,
+        animationData: loadingAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     return (
         <div className={stl.container}>
             <div className={stl.progressBar}>
@@ -53,7 +61,10 @@ const Test2Quiz5 = () => {
                 </div>
                 <div className={stl.mainSection}>
                     <div className={stl.rocketIllustration}>
-                        <LottieSuperObj objectProps={obj} />
+                        {myBoolean !== null ?
+                            <LottieSuperObj objectProps={loading} />
+                            : <LottieSuperObj objectProps={obj} />
+                        }
                     </div>
                     <div className={stl.quizText}>
                         <h1>Avez-vous un plant de communication ?</h1>

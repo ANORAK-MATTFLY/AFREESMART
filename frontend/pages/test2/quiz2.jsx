@@ -5,7 +5,7 @@ import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import team from '../../lotties/EG.json'
 import updateDailyPeopleInvolved from '../../lib/updateDailyInvoled';
 import setInvalidate from '../../utils/setInvalidate';
-
+import loadingAnimation from '../../lotties/loadingAnimation.json';
 
 
 
@@ -36,6 +36,14 @@ const Test2Quiz2 = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const loading = {
+        loop: true,
+        autoplay: true,
+        animationData: loadingAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     return (
         <div className={stl.container}>
             <div className={stl.progressBar}>
@@ -43,7 +51,10 @@ const Test2Quiz2 = () => {
             </div>
             <div className={stl.quizBox}>
                 <div className={stl.illustrationCard}>
-                    <LottieSuperObj objectProps={obj} />
+                    {choice !== null ?
+                        <LottieSuperObj objectProps={loading} />
+                        : <LottieSuperObj objectProps={obj} />
+                    }
                 </div>
                 <h3>Quel est le nombre de persones implique dans le Day to Day management ?</h3>
                 <div className={stl.buttonSection}>

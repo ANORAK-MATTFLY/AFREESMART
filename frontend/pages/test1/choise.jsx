@@ -1,7 +1,6 @@
 import stl from '../../styles/choice.module.scss';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import work from '../../lotties/validated.json';
 import startUp from '../../lotties/start-up.json';

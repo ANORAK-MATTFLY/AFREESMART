@@ -11,7 +11,7 @@ import UpdateProject from '../../../components/admincmt/updateproject';
 import { useRouter } from 'next/router';
 
 
-const DetailPage = ({ project, mindset, businessMind, moneyMaker, userRole }) => {
+const DetailPage = ({ project, mindset, businessMind, moneyMaker, ProjectOwner }) => {
     const [docs, setDocs] = useState({
         turnoverGrowth: "",
         companyManagement: "",
@@ -101,7 +101,6 @@ const DetailPage = ({ project, mindset, businessMind, moneyMaker, userRole }) =>
         const req = await axios(config);
         if (req.data.data !== null) {
             setDocs(req.data.data.getProjectDocByIdButForReal);
-            console.log(req.data.data.getProjectDocByIdButForReal);
         }
     }
 
@@ -148,7 +147,15 @@ const DetailPage = ({ project, mindset, businessMind, moneyMaker, userRole }) =>
                         </div>
                     </div>
                     <div className={stl.card2}>
-                        <h2 className={stl.cardName}>{projectsName}</h2>
+                        <div className={stl.projectOwnerInfo}>
+                            <h3 className={stl.cardName}>Candidat: {ProjectOwner.name} {ProjectOwner.lastName}</h3>
+                            <Link href={`mailto:${ProjectOwner.email}?cc=munga.steve.k@gmail.com`}>
+                                <a target={'_blank'}>
+                                    <h3 className={stl.cardName}>Contact: {ProjectOwner.email}</h3>
+                                </a>
+                            </Link>
+
+                        </div>
                         <div className={stl.illust}>
                             <LottieSuperObj objectProps={projectIll} />
                         </div>
@@ -517,6 +524,11 @@ export async function getServerSideProps({ query }) {
                         passive
                         monthlyEarningMoney
                     }
+                    getUserById(id: ${id}) {
+                        name
+                        email
+                        lastName
+                    }
                 }
                 
             `
@@ -526,9 +538,10 @@ export async function getServerSideProps({ query }) {
     const mindset = await req.data.data.getMindSetById;
     const businessMind = await req.data.data.getBusinessMindById;
     const moneyMaker = await req.data.data.getAbilityToMakeMoneyById;
+    const ProjectOwner = await req.data.data.getUserById;
     return {
         props: {
-            project, mindset, businessMind, moneyMaker
+            project, mindset, businessMind, moneyMaker, ProjectOwner
         },
     }
 }

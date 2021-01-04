@@ -53,8 +53,8 @@ $black: #414040;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			height: 95%;
-			width: 40%;
+			height: 70%;
+			width: 45%;
 			cursor: pointer;
 			border-radius: 10px;
 			border: 0.2px rgb(235, 235, 235) solid;
@@ -74,6 +74,16 @@ $black: #414040;
 
 @include media(">=phone", "<=tablet") {
     .box{
+		height: 100%;
 		width: 100%;
+		border-radius: 0;
+	}
+}
+
+@include media("<phone") {
+    .box{
+		height: 100%;
+		width: 100%;
+		border-radius: 0;
 	}
 }

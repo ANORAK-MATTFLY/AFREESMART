@@ -9,7 +9,7 @@ $black: rgb(65, 64, 64);
 .container {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: center;
 	margin: 0 0 0 0;
 	height: 100vh;
@@ -29,12 +29,13 @@ $black: rgb(65, 64, 64);
     width: 50%;
     border-radius: 3rem;
     border: 2px rgba(81, 218, 218, 0.795) solid;
+    margin: 1rem;
 }
 .progressBar > div{
     height: 100%;
     float: left;
     border-radius: 3rem;
-    background: linear-gradient(to right, #35c2c2, #941378);;
+    background: linear-gradient(to right, #35c2c2, #941378);
 }
 .liquid1{
     width: 20%;
@@ -126,13 +127,14 @@ $black: rgb(65, 64, 64);
 
 .quizContainer{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
 	height: 80%;
-    width: 70%;
+    width: 100%;
     padding: 2%;
     border-radius: 10px;
     background: #ffffff;
+    
     .btn {
         align-self: flex-start;
         display: grid;
@@ -153,10 +155,10 @@ $black: rgb(65, 64, 64);
         justify-content: center;
         align-items: center;
         height: 100%;
-        width: 90%;
+        width: 100%;
         .rocketIllustration{
-            height: 13rem;
-            width: 25%;
+            width: 10rem;
+            
         }
         .btnSection{
             display: flex;
@@ -208,8 +210,7 @@ $black: rgb(65, 64, 64);
     .illustrationCard{
         display: flex;
         justify-content: center;
-        height: 50%;
-        width: 30%;
+        width: 15rem;
     }
     .buttonSection{
         display: flex;
@@ -224,7 +225,7 @@ $black: rgb(65, 64, 64);
             width: 20%;
             color: $black;
             font-weight: bold;
-            font-size: 0.9em;
+            font-size: 0.8em;
             font-family: $font;
             border: none;
             cursor: pointer;
@@ -245,8 +246,53 @@ $black: rgb(65, 64, 64);
 @include media(">=phone", "<=tablet") {
     .quizContainer{
         height: 90%;
+        width: 100vw;
+        // h1{
+            font-size: 0.5rem;
+        // }
+        .mainSection{
+            
+            .btnSection{
+                .yesBtn{
+                    height: 20%;
+                    width: 45%;
+                }
+                .noBtn{
+                    height: 20%;
+                    width: 45%;
+                }
+            }
+        }
+    }
+    
+    .quizBox{
+        height: 90%;
         width: 100%;
     }
+}
+
+@include media("<phone") {
+    .quizContainer{
+        height: 90%;
+        width: 100vw;
+        // h1{
+            font-size: 0.6rem;
+        // }
+        .mainSection{
+            
+            .btnSection{
+                .yesBtn{
+                    height: 20%;
+                    width: 45%;
+                }
+                .noBtn{
+                    height: 20%;
+                    width: 45%;
+                }
+            }
+        }
+    }
+    
     .quizBox{
         height: 90%;
         width: 100%;

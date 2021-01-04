@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 
@@ -24,9 +24,9 @@ const ValidationCheck = () => {
                             query{
                             project{
                                 isValid
-                         }
-                              }
-                  `
+                        }
+                            }
+                `
             }
         })
         let res = await req.data;
@@ -46,7 +46,6 @@ const ValidationCheck = () => {
             router.push('../test1/sorry');
         }
     }
-
     return (
         <div>
             <h1>

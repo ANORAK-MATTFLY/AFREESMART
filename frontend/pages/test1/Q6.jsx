@@ -5,6 +5,7 @@ import updateToHasAfricans from '../../lib/updateToHasAfricans';
 import { motion } from "framer-motion";
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import quizIllustration from '../../lotties/people.json'
+import loadingAnimation from '../../lotties/loadingAnimation.json';
 
 
 const Question6 = () => {
@@ -32,6 +33,14 @@ const Question6 = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+    const loading = {
+        loop: true,
+        autoplay: true,
+        animationData: loadingAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
     return (
         <div className={stl.container}>
             <div className={stl.progressBar}>
@@ -48,7 +57,10 @@ const Question6 = () => {
                 </div>
                 <div className={stl.mainSection}>
                     <div className={stl.rocketIllustration}>
-                        <LottieSuperObj objectProps={obj} />
+                        {myBoolean !== null ?
+                            <LottieSuperObj objectProps={loading} />
+                            : <LottieSuperObj objectProps={obj} />
+                        }
                     </div>
                     <div className={stl.quizText}>
                         <h1>Avez-vous des membres dans votre équipe aillant une nationalité africaine ?</h1>

@@ -60,11 +60,25 @@ $black: rgb(53, 53, 53);
             padding: 1%;
             background: #7186e421;
             border-radius: $border;
+            .projectOwnerInfo{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                width: 60%;
+                height: 100;
+                h2{
+                    font-size: 1.5rem;
+                }
+                h3{
+                    font-size: medium;
+                }
+            }
             .cardName{
                 color: #229199;
             }
             .illust{
-                width: 40%;
+                width: 35%;
+                height: 100%;
                 margin-left: auto;
             }
         }

@@ -5,6 +5,7 @@ import updateToWebSiteLink from '../../lib/updateToWebSiteLink';
 import { motion } from "framer-motion";
 import LottieSuperObj from '../../components/buttons/lottieFingerprint';
 import quizIllustration from '../../lotties/layout place holder.json'
+import loadingAnimation from '../../lotties/loadingAnimation.json';
 
 const Question3 = () => {
     const router = useRouter();
@@ -23,11 +24,18 @@ const Question3 = () => {
     useEffect(() => {
         onClickHandler()
     }, [myBoolean])
-
     const obj = {
         loop: true,
         autoplay: true,
         animationData: quizIllustration,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+    const loading = {
+        loop: true,
+        autoplay: true,
+        animationData: loadingAnimation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -48,7 +56,10 @@ const Question3 = () => {
                 </div>
                 <div className={stl.mainSection}>
                     <div className={stl.rocketIllustration}>
-                        <LottieSuperObj objectProps={obj} />
+                        {myBoolean !== null ?
+                            <LottieSuperObj objectProps={loading} />
+                            : <LottieSuperObj objectProps={obj} />
+                        }
                     </div>
                     <div className={stl.quizText}>
                         <h1>Avez-vous un site internet ?</h1>

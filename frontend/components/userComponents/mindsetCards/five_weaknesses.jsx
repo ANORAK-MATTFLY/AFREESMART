@@ -93,7 +93,6 @@ const FiveWeaknessesCard = () => {
                     <LottieSuperObj objectProps={youthPower} />
                 </div>
                 <div className={stl.cardInput}>
-                    <label className={stl.label} htmlFor="weaknesses">Decrivez vos points faible</label>
                     <input className={stl.input}
                         type="text"
                         name="weaknesses"
