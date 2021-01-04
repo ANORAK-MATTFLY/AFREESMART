@@ -874,7 +874,8 @@ $black: #535353;
 		border-radius: 10px;
 		.IllustrationContainer{
 			display: flex;
-			width: 9rem;
+			width: 13rem;
+			// border: 2px rgb(169, 233, 190) solid;
 		}
 	}
 	.cardsSection{
@@ -940,6 +941,79 @@ $black: #535353;
 		}
 	}
 }
+
+// lxjfldkj
+.cardSmallGrid{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height:17rem;
+	width: 45%;
+	margin: 1%;
+	h3{
+		font-size: 0.7rem;
+	}
+	border-radius: 10px;
+	box-shadow: 1px 1px 40px 13px rgba(204, 204, 204, 0.363);
+	// border: 1px green solid;
+	.cardIllustration{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 6rem;
+	}
+	.cardIllustration1{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 40%;
+		width: 45%;
+		border-radius: $border;
+		border: 1.9px rgb(134, 227, 250) dashed;
+	}
+	.cardInput{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		align-items: flex-start;
+		padding: 2%;
+		height: 60%;
+		width: 100%;
+		font-size: 0.7rem;
+		.Qbtn{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 40%;
+			background: #39abce13;
+			border-radius: $border;
+			border: 1px rgb(0, 225, 255) solid;
+			cursor: pointer;
+			p{
+				font-size: smaller;
+			}
+		}
+
+		.QbtnLong{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			border-radius: $border;
+			background: #39abce13;
+			border: 0.3px rgb(0, 225, 255) solid;
+			p{
+				font-size: smaller;
+			}
+			cursor: pointer;
+		}
+	}
+}
+
 
 	.mainContent >
 		.navBar >

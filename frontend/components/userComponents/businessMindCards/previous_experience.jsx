@@ -86,12 +86,11 @@ const PreviousCompaniesCard = () => {
                 </div>
             </form>
             : <form onSubmit={handleSubmit(onSubmit)} className={stl.card}>
-                <h3>Accomplissements</h3>
+                <p className={stl.label} htmlFor="companyCreated">Qu’as-tu déjà accomplis dans ta vie professionnelle dont tu es fière ?</p>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={Achieved} />
                 </div>
                 <div className={stl.cardInput}>
-                    <p className={stl.label} htmlFor="companyCreated">Qu’as-tu déjà accomplis dans ta vie professionnelle dont tu es fière ?</p>
                     <input className={stl.input}
                         type="text"
                         name="companyCreated"
