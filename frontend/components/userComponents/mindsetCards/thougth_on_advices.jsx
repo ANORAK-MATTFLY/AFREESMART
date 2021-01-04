@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import family from '../../../lotties/33300-familia.json';
+import family from '../../../lotties/avicer.json';
 import successAnimation from '../../../lotties/validated.json'
 import updateThoughtOnAdvicesUtil from '../../../utils/updateupdateThoughtOnAdvicesUtil';
 

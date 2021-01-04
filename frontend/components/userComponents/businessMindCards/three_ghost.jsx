@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import failureAnimation from '../../../lotties/21395-waffle.json';
+import failureAnimation from '../../../lotties/meet.json';
 import successAnimation from '../../../lotties/validated.json'
 import updateThreeGhostUtil from '../../../utils/updateThreeGhost';
 
@@ -78,7 +78,7 @@ const ThreeGhost = () => {
                     <input className={stl.input}
                         type="text"
                         name="failure"
-                        placeholder="Echec"
+                        placeholder=""
                         id="failure"
                         ref={register({ required: true })}
                     />
@@ -94,7 +94,7 @@ const ThreeGhost = () => {
                     <input className={stl.input}
                         type="text"
                         name="failure"
-                        placeholder="Echec"
+                        placeholder=""
                         id="failure"
                         ref={register({ required: true })}
                     />

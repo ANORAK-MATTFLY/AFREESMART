@@ -63,7 +63,7 @@ const Question6 = () => {
                         }
                     </div>
                     <div className={stl.quizText}>
-                        <h1>Avez-vous des membres dans votre équipe aillant une nationalité africaine ?</h1>
+                        <h1>Avez-vous des membres dans votre équipe aillant des origines  africaines ?</h1>
                     </div>
                     <div className={stl.btnSection}>
                         <button type='submit' onClick={() => onClickHandler(true)} className={stl.yesBtn}>Oui</button>

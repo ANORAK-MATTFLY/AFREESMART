@@ -72,7 +72,7 @@ const Question8 = () => {
                         }
                     </div>
                     <div className={stl.quizText}>
-                        <h1>Êtes-vous une société par actions simplifiée ?</h1>
+                        <h1>Êtes-vous une société avec actions simplifiée ?</h1>
                     </div>
                     <div className={stl.btnSection}>
                         <button className={stl.yesBtn} onClick={() => onClickHandler(true)}>Oui</button>

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import education from '../../../lotties/education.json';
+import education from '../../../lotties/people';
 import successAnimation from '../../../lotties/validated.json';
 import updatePplManagedUtil from '../../../utils/updatePplManged';
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import philosopher from '../../../lotties/philosophy.json';
+import philosopher from '../../../lotties/if_you_get_stuck.json';
 import successAnimation from '../../../lotties/validated.json'
 import UpdateIfYouGetStuckUtil from '../../../utils/updateIfYouGetStuck';
 

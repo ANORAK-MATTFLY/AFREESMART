@@ -296,5 +296,35 @@ $black: rgb(65, 64, 64);
     .quizBox{
         height: 90%;
         width: 100%;
+        .buttonSection{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            height: 40%;
+            width: 100%;
+            .selectBtn{
+                height: 50%;
+                width: 30%;
+
+                color: $black;
+                font-weight: bold;
+                font-size: 0.6em;
+                font-family: $font;
+                border: none;
+                cursor: pointer;
+                border-radius: 10px;
+                background-color: #1cb5e01a;
+                border: 0.2px rgb(255, 255, 255) solid;
+                box-shadow: 1px 1px 6px 2px rgba(226, 226, 226, 0.363);
+            }
+            .selectBtn:hover{
+                    background-color: rgba(71, 174, 221, 0.103);
+                    box-shadow: 1px 1px 10px 5px rgba(204, 204, 204, 0.363);
+                    border: 1px rgb(0, 238, 255) solid;
+            }
+        }
     }
+
 }

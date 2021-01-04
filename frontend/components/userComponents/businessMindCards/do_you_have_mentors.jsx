@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import education from '../../../lotties/education.json';
+import education from '../../../lotties/helpers.json';
 import successAnimation from '../../../lotties/validated.json';
 import UpdateMentorsUtil from '../../../utils/updateMentors';
 

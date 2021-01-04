@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import ambitionAnimation from '../../../lotties/ambition.json';
+import ambitionAnimation from '../../../lotties/money.json';
 import successAnimation from '../../../lotties/validated.json'
 import UpdateRelationShipWithMoneylUtil from '../../../utils/updateDealingWithMoney';
 

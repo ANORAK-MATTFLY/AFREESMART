@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import ambitionAnimation from '../../../lotties/ambition.json';
+import ambitionAnimation from '../../../lotties/youth-power';
 import successAnimation from '../../../lotties/validated.json'
 import UpdateFiveKeyStrengthUtil from '../../../utils/updateFiveKeyStrengthUtil';
 

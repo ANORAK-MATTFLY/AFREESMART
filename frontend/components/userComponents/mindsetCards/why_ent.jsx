@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import ethic from '../../../lotties/ethic.json';
+import ethic from '../../../lotties/why_ent.json';
 import successAnimation from '../../../lotties/validated.json'
 import updateEntUtil from '../../../utils/updateEnt';
 

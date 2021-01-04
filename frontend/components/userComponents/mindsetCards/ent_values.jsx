@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
-import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import family from '../../../lotties/33300-familia.json';
+import family from '../../../lotties/ent_values.json';
 import successAnimation from '../../../lotties/validated.json'
 import updateCompanyValuesUtil from '../../../utils/CompanyVal';
 
@@ -66,11 +64,11 @@ const Ent_values_Card = () => {
                     <LottieSuperObj objectProps={completedAnimation} />
                 </div>
                 <div className={stl.cardInput}>
-                    <h3 className={stl.label} >Quels sont tes valeurs entrepreneuriales ? (4 choix maximum)</h3>
+                    <h3 className={stl.label} >Quels sont tes valeurs entrepreneuriales ?</h3>
                 </div>
             </div>
             : <div className={stl.cardLargeGrid}>
-                <h3>Quels sont tes valeurs entrepreneuriales ? (4 choix maximum)</h3>
+                <h3>Quels sont tes valeurs entrepreneuriales ?</h3>
                 <div className={stl.cardIllustration}>
                     <LottieSuperObj objectProps={youthPower} />
                 </div>

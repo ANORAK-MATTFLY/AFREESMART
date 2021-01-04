@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import weaknessAnimation from '../../../lotties/weaknesses.json';
+import weaknessAnimation from '../../../lotties/sad-empty-box.json';
 import successAnimation from '../../../lotties/validated.json'
 import updateWeaknessesUtil from '../../../utils/updateWeaknesses';
 

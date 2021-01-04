@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useForm } from "react-hook-form";
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import previous from '../../../lotties/previousCreated.json';
+import previous from '../../../lotties/achievement.json';
 import successAnimation from '../../../lotties/validated.json'
 import updatePreviousExpUtil from '../../../utils/updatePreviousExp';
 
