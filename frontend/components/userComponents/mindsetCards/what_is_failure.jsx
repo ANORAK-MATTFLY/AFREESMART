@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useForm } from "react-hook-form";
-import { useRouter } from 'next/router';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import power from '../../../lotties/youth-power.json';
+import power from '../../../lotties/philosophy.json';
 import successAnimation from '../../../lotties/validated.json'
 import updateFailure from '../../../utils/updateFailure';
 

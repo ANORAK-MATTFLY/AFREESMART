@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import education from '../../../lotties/education.json';
+import education from '../../../lotties/teamWork.json';
 import successAnimation from '../../../lotties/validated.json';
 import updateThoughtOnTeamWork from '../../../utils/updateThoughtOnTeamWork';
 

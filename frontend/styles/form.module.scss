@@ -48,63 +48,39 @@ $black: rgb(53, 53, 53);
         color: rgb(231, 33, 76);
         margin-bottom: 1.5rem;
     }
-    .label {
-        display: inline-block;
-        margin-bottom: 0.8rem;
-        margin-top: 0.3rem;
-        padding-left: 1rem;
-        font-size: 1.1rem;
-        font-family: $font;
-    }
-    .bigField{
-        outline: none;
-        display: inline-block;
-        border: 0.8px rgb(90, 169, 189) solid;
-        padding: 18px;
-        border-radius: 5px;
-        margin-bottom: 1.1rem;
-    }
-    .input {
-        outline: none;
-        display: inline-block;
-        border: 0.8px rgb(90, 169, 189) solid;
-        padding: 18px;
-        height: 1.5rem;
-        width: 22rem;
-        border-radius: 5px;
-        margin-bottom: 1.1rem;
-    }
-
-    .input:focus {
-        margin-top: 5px;
-        transition: 0.2s;
-        border: 1.7px rgba(126, 13, 218, 0.411) solid;
-    }
-
-    .select{
-        width: 200px;
-        height: 30px;
-        margin-top: 0.9rem;
-        margin-left: 3.3rem;
-        margin-bottom: 2rem;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        border: 0;
-        background-color: transparent;
-        font: inherit;
-        border-radius: 0;
-        border: 0.8px rgb(90, 169, 189) solid;
-        border-radius: 4px;
-        padding-left: 2rem;
-        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMwMDAiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTAgMGw1IDUgNS01eiIvPjxwYXRoIGQ9Ik0tNy0xMGgyNHYyNEgtN3oiLz48L2c+PC9zdmc+');
-        background-repeat: no-repeat;
-        background-position: top 50% right .75rem, 0 0;
-        color: $black;
-        font-family: $font;
-    }
-    select::-ms-expand {
-        display: none;
+    .fieldSection{
+        .label {
+            display: inline-block;
+            margin-bottom: 0.8rem;
+            margin-top: 0.3rem;
+            padding-left: 1rem;
+            font-size: 1.1rem;
+            font-family: $font;
+        }
+        .bigField{
+            outline: none;
+            display: inline-block;
+            border: 0.8px rgb(90, 169, 189) solid;
+            padding: 18px;
+            border-radius: 5px;
+            margin-bottom: 1.1rem;
+        }
+        .input {
+            outline: none;
+            display: inline-block;
+            border: 0.8px rgb(90, 169, 189) solid;
+            padding: 18px;
+            height: 1.5rem;
+            width: 95%;
+            border-radius: 5px;
+            margin-bottom: 1.1rem;
+        }
+    
+        .input:focus {
+            margin-top: 5px;
+            transition: 0.2s;
+            border: 1.7px rgba(126, 13, 218, 0.411) solid;
+        }
     }
 
     .btn {
@@ -151,7 +127,19 @@ $black: rgb(53, 53, 53);
     display: none;
     }
     .form{
-        margin: 0 0 0 0;
+        height: 100%;
+        width: 100%;
+        margin: 0;
     }
+}
 
+@include media("<phone") {
+    .fingerPrintIllustration, .rocket {
+    display: none;
+    }
+    .form{
+        height: 100%;
+        width: 100%;
+        margin: 0;
+    }
 }

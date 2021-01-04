@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import achievement from '../../../lotties/achievement.json';
+import achievement from '../../../lotties/ifWrong.json';
 import successAnimation from '../../../lotties/validated.json'
 import updateIfWrongUtil from '../../../utils/updateIfWrong';
 

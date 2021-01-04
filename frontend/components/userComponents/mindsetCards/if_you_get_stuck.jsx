@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import diplomaAnimation from '../../../lotties/diploma.json';
+import diplomaAnimation from '../../../lotties/weaknesses.json';
 import successAnimation from '../../../lotties/validated.json'
 import UpdateIfYouHaveNoExpUtil from '../../../utils/updateifYouHaveNoExp';
 

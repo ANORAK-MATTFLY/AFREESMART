@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
-import motivation from '../../../lotties/motivation.json';
+import motivation from '../../../lotties/ifLate';
 import successAnimation from '../../../lotties/validated.json'
 import updateIfLateUtil from '../../../utils/updateIfLate';
 

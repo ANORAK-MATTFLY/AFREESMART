@@ -60,7 +60,7 @@ export default function Home() {
                 </div>
             </nav>
             <main className={stl.mainContent}>
-                <h1>Comment on s'y prend ?</h1>
+                <h2>Comment on s'y prend ?</h2>
                 <div className={stl.cardContainer}>
                     <motion.div className={stl.card1} initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
                         <div className={stl.roundCircle}>

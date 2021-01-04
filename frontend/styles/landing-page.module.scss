@@ -112,10 +112,12 @@ $black: rgb(53, 53, 53);
     .welcomeTextSection {
       h1 {
         font-size: 1.3rem;
+        font-family: $font;
       }
 
       p {
-        font-size: 0.7em;
+        font-size: 0.9em;
+        font-family: $font;
       }
     }
 
