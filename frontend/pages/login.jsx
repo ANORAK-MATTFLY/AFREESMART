@@ -59,10 +59,11 @@ export default function Home() {
         className={stl.form}
         onSubmit={handleSubmit(onSubmit)}
       >
+        <Link href={'/'}>
+          <div className={stl.btn}>Retour</div>
+        </Link>
         <div>
-          <Link href={'/'}>
-            <div className={btn.goBackBtn}>Retour</div>
-          </Link>
+
 
           <label className={stl.label} htmlFor="name">
             Email
