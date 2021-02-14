@@ -10,7 +10,6 @@ import loadingAnimation from '../lotties/loadingAnimation.json';
 
 import LottieSuperObj from '../components/buttons/lottieFingerprint';
 import fingerPrint from '../media/fingerprint.json';
-import loadingPage from '../pages/loading';
 
 export default function Registration() {
   const obj = {
