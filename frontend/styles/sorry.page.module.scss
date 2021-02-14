@@ -48,5 +48,6 @@ $black: #414040;
 @include media(">=phone", "<=tablet") {
     .box{
 		width: 100%;
+		flex-grow: 1;
 	}
 }

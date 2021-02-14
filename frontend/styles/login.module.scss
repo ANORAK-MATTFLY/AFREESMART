@@ -48,14 +48,14 @@ $black: rgb(53, 53, 53);
         color: rgb(231, 33, 76);
         margin-bottom: 1.5rem;
     }
-    .label {
-        display: inline-block;
-        margin-bottom: 0.8rem;
-        margin-top: 0.3rem;
-        padding-left: 1rem;
-        font-size: 1.1rem;
-        font-family: $font;
-    }
+    // .label {
+    //     display: inline-block;
+    //     margin-bottom: 0.8rem;
+    //     margin-top: 0.3rem;
+    //     padding-left: 1rem;
+    //     font-size: 1.1rem;
+    //     font-family: $font;
+    // }
     .bigField{
         outline: none;
         display: inline-block;
@@ -64,22 +64,53 @@ $black: rgb(53, 53, 53);
         border-radius: 5px;
         margin-bottom: 1.1rem;
     }
-    .input {
-        outline: none;
-        display: inline-block;
-        border: 0.8px rgb(90, 169, 189) solid;
-        padding: 18px;
-        height: 1.5rem;
-        width: 22rem;
-        border-radius: 5px;
-        margin-bottom: 1.1rem;
+    // .input {
+    //     outline: none;
+    //     display: inline-block;
+    //     border: 0.8px rgb(90, 169, 189) solid;
+    //     padding: 18px;
+    //     height: 1.5rem;
+    //     width: 22rem;
+    //     border-radius: 5px;
+    //     margin-bottom: 1.1rem;
+    // }
+
+    // .input:focus {
+    //     margin-top: 5px;
+    //     transition: 0.2s;
+    //     border: 1.7px rgba(126, 13, 218, 0.411) solid;
+    // }
+    .labelContainer{
+        display: flex;
+        flex-direction: column;
+        .label {
+            // display: inline-block;
+            margin-bottom: 0.8rem;
+            margin-top: 0.3rem;
+            padding-left: 1rem;
+            font-size: 1.1rem;
+            font-family: $font;
+        }
+
+        .input {
+            outline: none;
+            // display: inline-block;
+            border: 0.8px rgb(90, 169, 189) solid;
+            padding: 18px;
+            height: 1.5rem;
+            width: 90%;
+            border-radius: 5px;
+            margin-bottom: 1.1rem;
+        }
+    
+        .input:focus {
+            margin-top: 5px;
+            transition: 0.2s;
+            border: 1.7px rgba(126, 13, 218, 0.411) solid;
+        }
+
     }
 
-    .input:focus {
-        margin-top: 5px;
-        transition: 0.2s;
-        border: 1.7px rgba(126, 13, 218, 0.411) solid;
-    }
 
     .select{
         width: 200px;
@@ -126,6 +157,17 @@ $black: rgb(53, 53, 53);
 
 }
 
+.loadingBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50rem;
+    height: 50%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+
 .goBackBtn {
     display: flex;
     height: 40px;
@@ -135,7 +177,6 @@ $black: rgb(53, 53, 53);
     cursor: pointer;
     border-radius: 10px;
     font-family: $font;
-    margin-bottom: 3rem;
     background: linear-gradient(to right, #1293aac5, #27a6c9);
     color: $white;
     box-shadow: 0px 2px 30px rgba(39, 39, 39, 0.308);
@@ -192,14 +233,37 @@ $black: rgb(53, 53, 53);
             color: rgb(231, 33, 76);
             margin-bottom: 1.5rem;
         }
-        .label {
-            display: inline-block;
-            margin-bottom: 0.8rem;
-            margin-top: 0.3rem;
-            padding-left: 1rem;
-            font-size: 1.1rem;
-            font-family: $font;
+        .labelContainer{
+            display: flex;
+            flex-direction: column;
+            .label {
+                // display: inline-block;
+                margin-bottom: 0.8rem;
+                margin-top: 0.3rem;
+                padding-left: 1rem;
+                font-size: 1.1rem;
+                font-family: $font;
+            }
+
+            .input {
+                outline: none;
+                // display: inline-block;
+                border: 0.8px rgb(90, 169, 189) solid;
+                padding: 18px;
+                height: 1.5rem;
+                width: 90%;
+                border-radius: 5px;
+                margin-bottom: 1.1rem;
+            }
+        
+            .input:focus {
+                margin-top: 5px;
+                transition: 0.2s;
+                border: 1.7px rgba(126, 13, 218, 0.411) solid;
+            }
+
         }
+        
         .bigField{
             outline: none;
             display: inline-block;
@@ -208,22 +272,7 @@ $black: rgb(53, 53, 53);
             border-radius: 5px;
             margin-bottom: 1.1rem;
         }
-        .input {
-            outline: none;
-            display: inline-block;
-            border: 0.8px rgb(90, 169, 189) solid;
-            padding: 18px;
-            height: 1.5rem;
-            width: 90%;
-            border-radius: 5px;
-            margin-bottom: 1.1rem;
-        }
-    
-        .input:focus {
-            margin-top: 5px;
-            transition: 0.2s;
-            border: 1.7px rgba(126, 13, 218, 0.411) solid;
-        }
+        
     
         .select{
             width: 200px;
@@ -254,8 +303,8 @@ $black: rgb(53, 53, 53);
         .btn {
             display: grid;
             place-items: center;
-            margin-top: 2rem;
-            margin-bottom: 10%;
+            // margin-top: 0.3rem;
+            // margin-bottom: 5%;
             height: 45px;
             width: 130px;
             border-radius: $border;
