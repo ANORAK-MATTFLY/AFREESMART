@@ -51,3 +51,10 @@ $black: #414040;
 		flex-grow: 1;
 	}
 }
+
+@include media("<=phone",) {
+    .box{
+		width: 100%;
+		flex-grow: 1;
+	}
+}
