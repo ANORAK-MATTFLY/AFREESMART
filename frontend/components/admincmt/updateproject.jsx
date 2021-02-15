@@ -89,7 +89,7 @@ const UpdateProject = ({ id }) => {
     useEffect(() => {
         getProjectStatus();
     }, [projectStatus])
-        (projectStatus);
+    console.log(projectStatus);
     return (
         <div className={stl.updateSection}>
             <h3>Metre a jour le l'etat du projet</h3>

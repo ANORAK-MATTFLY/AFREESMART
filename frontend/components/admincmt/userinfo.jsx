@@ -7,7 +7,7 @@ const UserInfo = ({ mindset, businessMind, moneyMaker }) => {
         passive,
         monthlyEarningMoney
     } = moneyMaker;
-    (monthlyEarningMoney, "dBen");
+    console.log(monthlyEarningMoney, "dBen");
     const {
         companyValues,
         family,
