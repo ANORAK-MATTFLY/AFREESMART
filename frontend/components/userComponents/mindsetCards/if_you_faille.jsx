@@ -9,7 +9,7 @@ import UpdateIfYouGetStuckUtil from '../../../utils/updateIfYouGetStuck';
 
 const IfYouFaille = () => {
     const [isSelected, setIsSelected] = useState(false);
-    const [isStuck, setIsStuck] = useState('');
+    const [isStuck, setIsStuck] = useState(null);
 
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';

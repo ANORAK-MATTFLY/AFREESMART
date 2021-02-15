@@ -11,7 +11,7 @@ const QuestionsIndex = () => {
 	const { register, handleSubmit, watch, errors } = useForm();
 	const onSubmit = data => {
 		setSubmitting(true);
-		console.log(data);
+		(data);
 		setSubmitting(false);
 	}
 	return (

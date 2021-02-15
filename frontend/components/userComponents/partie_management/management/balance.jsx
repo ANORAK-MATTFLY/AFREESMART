@@ -106,7 +106,7 @@ const UploadBalanceSheetCard = () => {
         }
     };
 
-    console.log(docs);
+    (docs);
 
 
     return (

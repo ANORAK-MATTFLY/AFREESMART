@@ -9,7 +9,7 @@ import updateEntUtil from '../../../utils/updateEnt';
 
 const EthicCard = () => {
     const [isSelected, setIsSelected] = useState(false);
-    const [reason, setReason] = useState('');
+    const [reason, setReason] = useState(null);
 
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';

@@ -9,7 +9,7 @@ import updateMoneyUtil from '../../../utils/updateMoneyInBank';
 
 const MonthlyEarningMoney = ({ projects }) => {
     const [isSelected, setIsSelected] = useState(false);
-    const [moneyEarned, setMoneyEarned] = useState('');
+    const [moneyEarned, setMoneyEarned] = useState(null);
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({

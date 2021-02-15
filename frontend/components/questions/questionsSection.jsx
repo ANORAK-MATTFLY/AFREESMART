@@ -6,11 +6,11 @@ const Questions = () => {
     const QNode1 = useRef()
     const [choice, setChoice] = useState(null);
     const [isRequired, setIsRequired] = useState(true);
-        if(!choice){
-console.log(`Is required -> ${isRequired}`);
+    if (!choice) {
+        (`Is required -> ${isRequired}`);
     }
     useEffect(() => {
-        console.log(allNodes(QNode1));
+        (allNodes(QNode1));
     }, [choice]);
     const allNodes = (node) => {
         let nodes = node.current.childNodes;
@@ -20,13 +20,13 @@ console.log(`Is required -> ${isRequired}`);
                 isNotRequired();
                 return nodes[i].value;
             }
-            if(nodes[i].checked === true && nodes[i].value !== "Oui"){  
+            if (nodes[i].checked === true && nodes[i].value !== "Oui") {
                 isNotRequired();
                 return `Wrong answer`;
             }
             if (nodes[i].checked === false) {
                 nodeCounter = nodeCounter + 1;
-                console.log(nodeCounter);
+                (nodeCounter);
             }
             if (nodeCounter === 3) {
                 return `You need to select at least one option, is required is = ${isRequired}`;

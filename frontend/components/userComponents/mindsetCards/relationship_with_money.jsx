@@ -9,7 +9,7 @@ import UpdateRelationShipWithMoneylUtil from '../../../utils/updateDealingWithMo
 
 const RelationShipWithMoney = () => {
     const [isSelected, setIsSelected] = useState(false);
-    const [money, setMoney] = useState('');
+    const [money, setMoney] = useState(null);
 
 
     const componentDidMount = async () => {

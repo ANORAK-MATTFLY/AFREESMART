@@ -9,7 +9,7 @@ import updateThoughtOnAdvicesUtil from '../../../utils/updateupdateThoughtOnAdvi
 
 const ThoughtOnAdvices = () => {
     const [isSelected, setIsSelected] = useState(false);
-    const [thought, setThought] = useState('');
+    const [thought, setThought] = useState(null);
 
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';

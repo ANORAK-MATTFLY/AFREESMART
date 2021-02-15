@@ -49,7 +49,7 @@ const Question8 = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
-    console.log(isClicked);
+    (isClicked);
     return (
         <div className={stl.container}>
             <div className={stl.progressBar}>

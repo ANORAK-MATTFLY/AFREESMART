@@ -15,7 +15,7 @@ $black: rgb(53, 53, 53);
     margin: 0 0 0 0;
     // margin-left: 0;
     // margin-right: 0;
-    // height: 100%;
+    height: 100vh;
     background: linear-gradient(to right, #000046, #1cb5e0);
 }
 
@@ -27,7 +27,7 @@ $black: rgb(53, 53, 53);
     flex-direction: column;
     padding: 5%;
     padding-top: 4%;
-    margin: 1rem;
+    margin: 5%;
     height: 90%;
     width: 28rem;
     max-width: 100%;

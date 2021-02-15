@@ -8,7 +8,7 @@ import updateFailure from '../../../utils/updateFailure';
 
 
 const WhatIsFailureToYou = () => {
-    const [failure, setFailure] = useState('')
+    const [failure, setFailure] = useState(null)
     const [isSelected, setIsSelected] = useState(false);
 
     const componentDidMount = async () => {
@@ -57,7 +57,7 @@ const WhatIsFailureToYou = () => {
         updateFailure(x);
         setIsSelected(true);
     };
-    console.log(failure);
+    (failure);
     return (
         failure !== null || failure !== null || isSelected !== false ?
             <div className={stl.cardLong}>

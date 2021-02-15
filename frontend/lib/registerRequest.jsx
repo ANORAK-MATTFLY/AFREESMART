@@ -13,7 +13,7 @@ async function userRegister(arg_name, arg_lastName, arg_email, arg_password) {
     }
   })
   let res = await req.data;
-  console.log(res);
+  (res);
 }
 
 export default userRegister;

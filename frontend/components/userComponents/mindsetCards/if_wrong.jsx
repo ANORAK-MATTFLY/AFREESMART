@@ -9,7 +9,7 @@ import updateIfWrongUtil from '../../../utils/updateIfWrong';
 
 const IfWrong = () => {
     const [isSelected, setIsSelected] = useState(false);
-    const [wrong, setWrong] = useState('');
+    const [wrong, setWrong] = useState(null);
 
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
@@ -52,7 +52,7 @@ const IfWrong = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
-    console.log(wrong, isSelected);
+    (wrong, isSelected);
     const OnclickHandler = (x) => {
         updateIfWrongUtil(x);
         setIsSelected(true);

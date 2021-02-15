@@ -3,13 +3,14 @@ import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import motivation from '../../../lotties/ifLate';
-import successAnimation from '../../../lotties/validated.json'
+import successAnimation from '../../../lotties/validated.json';
 import updateIfLateUtil from '../../../utils/updateIfLate';
+import loadingAnimation from '../../../lotties/loadingAnimation.json'
 
 
 const IfLate = () => {
     const [isSelected, setIsSelected] = useState(false);
-    const [late, setLate] = useState('');
+    const [late, setLate] = useState(null);
 
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';
@@ -48,6 +49,7 @@ const IfLate = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+
     const completedAnimation = {
         loop: true,
         autoplay: true,
@@ -70,7 +72,6 @@ const IfLate = () => {
                 <div className={stl.cardInput}>
                     <h3 className={stl.label}>Vous allez arriver en retard à un rendez-vous que faites-vous ?
                     </h3>
-
                 </div>
             </div>
             : <div className={stl.cardLong}>

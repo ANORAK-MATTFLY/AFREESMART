@@ -7,7 +7,7 @@ import successAnimation from '../../../lotties/validated.json';
 import updateThoughtOnTeamWork from '../../../utils/updateThoughtOnTeamWork';
 
 const ThoughtOnTeamwork = () => {
-    const [thought, setThought] = useState('');
+    const [thought, setThought] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
     const componentDidMount = async () => {
         const token = await localStorage.getItem('afreesmartAcessToken') || '';
@@ -57,7 +57,7 @@ const ThoughtOnTeamwork = () => {
     };
 
     return (
-        thought !== null || isSelected !== false ?
+        thought != null || isSelected != false ?
             <div className={stl.cardLong}>
                 <h3>Completed</h3>
                 <div className={stl.cardIllustration}>

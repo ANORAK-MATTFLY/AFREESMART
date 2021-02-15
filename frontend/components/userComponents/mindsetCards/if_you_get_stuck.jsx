@@ -3,13 +3,13 @@ import axios from 'axios';
 import stl from '../../../styles/client.homepage.module.scss';
 import LottieSuperObj from '../../buttons/lottieFingerprint';
 import diplomaAnimation from '../../../lotties/weaknesses.json';
-import successAnimation from '../../../lotties/validated.json'
+import successAnimation from '../../../lotties/validated.json';
 import UpdateIfYouHaveNoExpUtil from '../../../utils/updateifYouHaveNoExp';
 
 
 const IfYouGetStuck = () => {
     const [isSelected, setIsSelected] = useState(false);
-    const [isStuck, setIsStuck] = useState('');
+    const [isStuck, setIsStuck] = useState(null);
 
     const componentDidMount = async () => {
         const token = localStorage.getItem('afreesmartAcessToken') || '';

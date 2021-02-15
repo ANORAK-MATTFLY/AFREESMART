@@ -46,7 +46,7 @@ const ValidationCheck = () => {
             router.push('./sorry');
         }
     }
-    console.log(valid);
+    (valid);
 
     return (
         <div>

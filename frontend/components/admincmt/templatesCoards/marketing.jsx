@@ -49,7 +49,7 @@ const MarketingCard = () => {
             }
             updateMarketing(res);
             setIsDropped(true);
-            console.log(res);
+            (res);
 
         });
     }, []);

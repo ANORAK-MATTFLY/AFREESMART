@@ -9,7 +9,7 @@ import updatePassiveUtil from '../../../utils/updatePassive';
 
 const Passive = ({ projects }) => {
     const [isSelected, setIsSelected] = useState(false);
-    const [passive, setPassive] = useState('');
+    const [passive, setPassive] = useState(null);
     const componentDidMount = async () => {
         const token = await localStorage.getItem('afreesmartAcessToken') || '';
         let req = await axios({
