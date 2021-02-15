@@ -67,7 +67,7 @@ export default function Home() {
   }
   return (
     <div className={stl.container}>
-      { isLoading == false ?
+      {/* { isLoading == false ?
         <motion.form
           initial={{ opacity: 0, x: 200 }}
           animate={{ opacity: 1, x: 0 }}
@@ -114,9 +114,10 @@ export default function Home() {
           <div>
             <button type="submit" disabled={submitting} className={stl.btn}>Conexion</button>
           </div>
-        </motion.form> : <div className={stl.loadingBox}>
-          <LottieSuperObj objectProps={loading} />
-        </div>}
+            </motion.form> : */}
+      <div className={stl.loadingBox}>
+        <LottieSuperObj objectProps={loading} />
+      </div>
 
     </div>
   );
